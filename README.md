@@ -216,10 +216,12 @@ Credits with links are in the tab.
 
 ## Deploy
 
-The repository root has a `Dockerfile` (nginx, about 50 MB, listens on
-`$PORT`, default 8080, with a strict content security policy in
-`deploy/default.conf.template`). It runs on any host that builds a
-Dockerfile or runs a container image.
+The site runs locally only, either way from "Run locally":
+
+- `npm run serve`, then open <http://localhost:9417/>;
+- or the container: `docker build -t outils-plantes .` and `docker run --rm -p 8080:8080 outils-plantes`, then open
+  <http://localhost:8080/>. The image is nginx with a strict content security policy
+  (`deploy/default.conf.template`) and listens on `$PORT` (default 8080).
 
 ## Layout
 

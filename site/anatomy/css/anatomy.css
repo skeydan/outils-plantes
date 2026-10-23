@@ -1,0 +1,175 @@
+/* Plant anatomy page: names, pitfall notes, drawings. The search box, tree and
+   entry layout are shared in assets/tree.css. */
+
+/* Drawing roles. Three hues only, contrast checked for all pairs
+   in both themes (blue xylem, orange phloem, aqua photosynthetic
+   tissue); everything else is neutral, and every part carries a direct label. */
+:root {
+  --an-xylem: #2a78d6;
+  --an-phloem: #eb6834;
+  --an-chl: #1baf7a;
+  --an-cork: #9c6737;
+  --an-line: #46544e;
+  --an-cell: #fdfdf9;
+  --an-tint: 26%;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    --an-xylem: #3987e5; --an-phloem: #d95926; --an-chl: #199e70; --an-cork: #aa7e5a; --an-line: #b9c6bf; --an-cell: #151d1b; --an-tint: 34%;
+  }
+}
+:root[data-theme="dark"] {
+  --an-xylem: #3987e5; --an-phloem: #d95926; --an-chl: #199e70; --an-cork: #aa7e5a; --an-line: #b9c6bf; --an-cell: #151d1b; --an-tint: 34%;
+}
+
+/* Entry */
+.a-names { display: grid; gap: 0; border: 1px solid var(--hairline); border-radius: 10px; overflow: hidden; margin-bottom: 12px; }
+.a-name { display: grid; grid-template-columns: 2.6em 1fr; gap: 10px; align-items: baseline; padding: 8px 12px; }
+.a-name + .a-name { border-top: 1px solid var(--hairline); }
+.a-name:nth-child(odd) { background: var(--surface-2); }
+.a-term { font-size: 1.12rem; font-weight: 650; }
+.a-name[data-l="la"] .a-term { font-style: italic; }
+.a-term-missing { color: var(--ink-2); font-style: italic; }
+.a-syn { color: var(--ink-2); font-size: 0.9rem; }
+.a-remark { display: block; color: var(--ink-2); font-size: 0.85rem; margin-top: 2px; }
+.a-def { font-size: 1rem; }
+.a-pitfall { margin: 12px 0; padding: 12px 14px; border-left: 4px solid var(--yellow); }
+.a-pitfall h3 { display: flex; gap: 8px; align-items: center; font-size: 0.98rem; }
+.a-pitfall p { margin: 0 0 0.6em; }
+.a-pitfall p:last-child { margin-bottom: 0; }
+.a-flag { display: inline-grid; place-items: center; width: 1.4em; height: 1.4em; border-radius: 50%; background: var(--yellow); color: #10201c; font-weight: 800; font-size: 0.85em; flex: none; }
+.a-prov th { width: 7em; font-weight: 600; color: var(--ink-2); }
+
+/* Drawings (our own SVG) */
+.a-fig { margin: 14px 0; }
+.a-fig svg { width: 100%; height: auto; display: block; max-height: 520px; }
+.a-fig figcaption { font-size: 0.85rem; color: var(--ink-2); margin-top: 6px; }
+.dr-bg { fill: var(--surface-2); }
+.dr-line { fill: none; stroke: var(--an-line); stroke-width: 1.2; stroke-linejoin: round; stroke-linecap: round; }
+.dr-thin { fill: none; stroke: var(--an-line); stroke-width: 0.7; }
+.dr-cell { fill: var(--an-cell); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-ground { fill: color-mix(in oklab, var(--g1) 30%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-xylem { fill: color-mix(in oklab, var(--an-xylem) var(--an-tint), var(--an-cell)); stroke: var(--an-xylem); stroke-width: 1.1; }
+.dr-phloem { fill: color-mix(in oklab, var(--an-phloem) var(--an-tint), var(--an-cell)); stroke: var(--an-phloem); stroke-width: 1.1; }
+.dr-chl { fill: color-mix(in oklab, var(--an-chl) var(--an-tint), var(--an-cell)); stroke: var(--an-chl); stroke-width: 1; }
+.dr-chl-solid { fill: var(--an-chl); }
+.dr-cork { fill: color-mix(in oklab, var(--an-cork) 40%, var(--an-cell)); stroke: var(--an-cork); stroke-width: 0.9; }
+.dr-dead { fill: color-mix(in oklab, var(--an-cork) 62%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-meri { fill: var(--surface-2); stroke: var(--an-line); stroke-width: 1.4; stroke-dasharray: 2 1.5; }
+.dr-water { fill: color-mix(in oklab, var(--cyan) 22%, var(--an-cell)); stroke: var(--cyan-strong); stroke-width: 0.9; }
+.dr-nucleus { fill: color-mix(in oklab, var(--ink-2) 22%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-wall { fill: color-mix(in oklab, var(--g2) 45%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-air { fill: var(--page); stroke: var(--an-line); stroke-width: 0.6; stroke-dasharray: 2 2; }
+.dr-flower { fill: color-mix(in oklab, var(--yellow) 30%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-lead { stroke: var(--ink-2); stroke-width: 0.7; fill: none; }
+.dr-lbl { font-size: 11px; fill: var(--ink); }
+.dr-lbl-sm { font-size: 9.5px; fill: var(--ink-2); }
+.dr-brace { fill: none; stroke: var(--ink); stroke-width: 1.1; }
+.dr-brace-lbl { font-size: 11px; fill: var(--ink); font-weight: 650; }
+.a-fig a text { text-decoration: underline; text-decoration-color: color-mix(in oklab, var(--ink) 35%, transparent); }
+.a-fig a:hover text, .a-fig a:focus text { fill: var(--green-ink); }
+.a-fig .is-hl text, .a-fig text.is-hl { font-weight: 750; fill: var(--ink); }
+.a-fig .dr-hl { stroke: var(--ink); stroke-width: 1.8; }
+.dr-hl-ring { fill: none; stroke: var(--mark); stroke-width: 2.4; stroke-dasharray: 5 3; }
+@media (forced-colors: active) { .a-fig svg * { forced-color-adjust: auto; } }
+
+/* Drawing parts */
+.dr-soil { fill: color-mix(in oklab, var(--g3) 18%, var(--surface)); }
+.dr-root-fill { fill: color-mix(in oklab, var(--g4) 45%, var(--an-cell)); stroke: var(--g5); stroke-width: 0.8; }
+.dr-root { fill: none; stroke: var(--g5); stroke-width: 2.2; stroke-linecap: round; }
+.dr-hair { fill: none; stroke: var(--g5); stroke-width: 1; stroke-linecap: round; }
+.dr-node { fill: var(--an-line); }
+.dr-fruit { fill: color-mix(in oklab, var(--clay) 55%, var(--an-cell)); stroke: var(--clay); stroke-width: 1.2; }
+.dr-flower-c { fill: var(--yellow); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-epi { fill: none; stroke: var(--an-line); stroke-width: 1.6; }
+.dr-exo { fill: none; stroke: var(--an-line); stroke-width: 3; stroke-opacity: 0.45; }
+.dr-sheath { fill: none; stroke: var(--an-line); stroke-width: 2; stroke-dasharray: 4 3; }
+.dr-pith { fill: color-mix(in oklab, var(--g1) 18%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-ray { fill: color-mix(in oklab, var(--g1) 45%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.6; stroke-dasharray: 2 2; }
+.dr-vessel { fill: var(--an-cell); stroke: var(--an-xylem); stroke-width: 1; }
+.dr-heart { fill: color-mix(in oklab, var(--an-xylem) 42%, var(--an-cell)); }
+.dr-late { fill: color-mix(in oklab, var(--an-xylem) 55%, var(--an-cell)); stroke: none; }
+.dr-cork-line { fill: none; stroke: var(--an-cork); stroke-width: 1.4; }
+.dr-cuticle { fill: var(--yellow); stroke: none; }
+.dr-air-strong { fill: var(--page); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-petiole { fill: none; stroke: var(--an-chl); stroke-width: 4; stroke-linecap: round; }
+.dr-vein-main { fill: none; stroke: color-mix(in oklab, var(--an-chl) 60%, var(--an-line)); stroke-width: 2.2; stroke-linecap: round; }
+.dr-vein { fill: none; stroke: color-mix(in oklab, var(--an-chl) 60%, var(--an-line)); stroke-width: 1.1; stroke-linecap: round; }
+.dr-inset { fill: var(--surface); stroke: var(--hairline); stroke-width: 1; }
+.dr-subs { fill: color-mix(in oklab, var(--ink-2) 10%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-meri-zone { fill: color-mix(in oklab, var(--ink-2) 12%, var(--an-cell)); }
+.dr-qc { fill: color-mix(in oklab, var(--ink-2) 28%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; stroke-dasharray: 2 1.5; }
+.dr-cap { fill: color-mix(in oklab, var(--g2) 35%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-amylo { fill: var(--an-line); }
+.dr-endo { fill: color-mix(in oklab, var(--ink-2) 14%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-casp { fill: var(--ink); }
+.dr-passage { fill: var(--an-cell); stroke: var(--an-line); stroke-width: 1.2; }
+.dr-peri { fill: var(--an-cell); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-filament { fill: none; stroke: var(--an-line); stroke-width: 2; stroke-linecap: round; }
+.dr-anther { fill: color-mix(in oklab, var(--yellow) 70%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-pistil { fill: color-mix(in oklab, var(--an-chl) 35%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-ovule { fill: var(--an-cell); stroke: var(--an-line); stroke-width: 1; }
+.dr-nectary { fill: color-mix(in oklab, var(--yellow) 60%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-integ { fill: color-mix(in oklab, var(--an-chl) 30%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-integ2 { fill: color-mix(in oklab, var(--an-chl) 18%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-central { fill: color-mix(in oklab, var(--cyan) 14%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-syn { fill: color-mix(in oklab, var(--ink-2) 14%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-egg { fill: color-mix(in oklab, var(--yellow) 40%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1.2; }
+.dr-anti { fill: color-mix(in oklab, var(--ink-2) 20%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-seedcoat { fill: color-mix(in oklab, var(--g3) 55%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1.2; }
+.dr-hilum { fill: color-mix(in oklab, var(--g6) 70%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-micro { fill: var(--ink); }
+.dr-coty { fill: color-mix(in oklab, var(--yellow) 28%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-axis { fill: color-mix(in oklab, var(--yellow) 55%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-endo-sperm { fill: color-mix(in oklab, var(--yellow) 18%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-scut { fill: none; stroke: var(--an-line); stroke-width: 1.2; }
+.dr-exocarp { fill: var(--clay); stroke: var(--an-line); stroke-width: 1; }
+.dr-meso { fill: color-mix(in oklab, var(--clay) 30%, var(--an-cell)); stroke: none; }
+.dr-stone { fill: color-mix(in oklab, var(--g3) 40%, var(--an-cell)); stroke: var(--an-line); stroke-width: 2.2; }
+.dr-ml { fill: none; stroke: var(--ink); stroke-width: 1.4; }
+.dr-pitfield { fill: color-mix(in oklab, var(--g2) 20%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.6; }
+.dr-pd { stroke: var(--ink); stroke-width: 1.4; }
+.dr-cyto { fill: color-mix(in oklab, var(--an-chl) 8%, var(--an-cell)); }
+.dr-pm { fill: none; stroke: var(--an-line); stroke-width: 1.2; }
+.dr-tono { fill: none; stroke: var(--cyan-strong); stroke-width: 1.4; }
+.dr-ne { fill: none; stroke: var(--an-line); stroke-width: 1.2; }
+.dr-nucleolus { fill: color-mix(in oklab, var(--ink-2) 50%, var(--an-cell)); }
+.dr-grana { stroke: var(--an-chl); stroke-width: 2; }
+.dr-mito { fill: color-mix(in oklab, var(--an-phloem) 30%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-er { fill: none; stroke: var(--an-line); stroke-width: 1.1; }
+.dr-golgi { fill: none; stroke: var(--an-line); stroke-width: 1.8; stroke-linecap: round; }
+.dr-wall2 { fill: color-mix(in oklab, var(--g3) 50%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-pitcav { fill: var(--an-cell); stroke: none; }
+.dr-margo-line { fill: none; stroke: var(--an-line); stroke-width: 0.7; }
+.dr-torus { fill: color-mix(in oklab, var(--g5) 70%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-aperture { fill: var(--page); stroke: var(--an-line); stroke-width: 0.6; }
+.dr-pitface { fill: var(--an-cell); stroke: var(--an-xylem); stroke-width: 0.8; }
+.dr-perf { fill: color-mix(in oklab, var(--an-xylem) 50%, var(--an-cell)); stroke: var(--an-xylem); stroke-width: 0.6; }
+.dr-fibre { fill: color-mix(in oklab, var(--g3) 50%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-sieve { fill: color-mix(in oklab, var(--an-phloem) 60%, var(--an-cell)); stroke: var(--an-phloem); stroke-width: 0.6; }
+.dr-companion { fill: color-mix(in oklab, var(--an-phloem) 45%, var(--an-cell)); stroke: var(--an-phloem); stroke-width: 1; }
+.dr-stroma { fill: color-mix(in oklab, var(--an-chl) 14%, var(--an-cell)); stroke: var(--an-chl); stroke-width: 0.8; }
+.dr-thyl { fill: var(--an-chl); }
+.dr-thyl-line { fill: none; stroke: var(--an-chl); stroke-width: 2; }
+.dr-starch { fill: var(--an-cell); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-globule { fill: var(--yellow); }
+
+/* Forms of organs (fruits, stems, points, pollen, meristems, roots) */
+.dr-dry { fill: color-mix(in oklab, var(--g2) 45%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-wing { fill: color-mix(in oklab, var(--g1) 30%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-tuber { fill: color-mix(in oklab, var(--g1) 55%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-bulbscale { fill: color-mix(in oklab, var(--yellow) 14%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-stem { fill: color-mix(in oklab, var(--an-cork) 45%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-stolon { fill: none; stroke: color-mix(in oklab, var(--an-chl) 70%, var(--an-line)); stroke-width: 2.4; stroke-linecap: round; }
+.dr-spine { fill: color-mix(in oklab, var(--g2) 55%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; stroke-linejoin: round; }
+.dr-prickle { fill: color-mix(in oklab, var(--clay) 40%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.9; }
+.dr-hairc { fill: var(--an-cell); stroke: var(--an-line); stroke-width: 0.9; stroke-linejoin: round; }
+.dr-gland { fill: color-mix(in oklab, var(--yellow) 45%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-exine { fill: color-mix(in oklab, var(--yellow) 60%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-intine { fill: color-mix(in oklab, var(--yellow) 18%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }
+.dr-tube { fill: color-mix(in oklab, var(--an-chl) 8%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-procambium { fill: none; stroke: var(--an-xylem); stroke-width: 2; stroke-dasharray: 4 3; }
+.dr-meri-ring { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-dasharray: 3 2; }
+.dr-sheath-g { fill: none; stroke: var(--an-chl); stroke-width: 3; stroke-linecap: round; }
+.dr-store { fill: color-mix(in oklab, var(--an-phloem) 55%, var(--an-cell)); stroke: var(--an-line); stroke-width: 1; }
+.dr-nodule { fill: color-mix(in oklab, var(--clay) 35%, var(--an-cell)); stroke: var(--an-line); stroke-width: 0.8; }

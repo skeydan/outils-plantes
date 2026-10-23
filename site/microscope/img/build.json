@@ -1,0 +1,328 @@
+[
+ {
+  "id": "leaf",
+  "um_per_px": 0.042955,
+  "size_px": [
+   3751,
+   2180
+  ],
+  "size_um": [
+   161.1,
+   93.6
+  ],
+  "spectrum_reach_cyc_per_um": 5.866,
+  "nyquist_cyc_per_um": 11.64,
+  "views": {
+   "photo": {
+    "file": "leaf-photo.jpg",
+    "um_per_px": 0.06714,
+    "w": 2400,
+    "h": 1395
+   },
+   "4x": {
+    "file": "leaf-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 234,
+    "h": 136,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   },
+   "10x": {
+    "file": "leaf-10x.jpg",
+    "um_per_px": 0.275,
+    "w": 586,
+    "h": 341,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.909
+   },
+   "40x": {
+    "file": "leaf-40x.jpg",
+    "um_per_px": 0.10577,
+    "w": 1523,
+    "h": 885,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 2.364
+   }
+  }
+ },
+ {
+  "id": "onion-root-tip",
+  "um_per_px": 0.042955,
+  "size_px": [
+   3751,
+   2180
+  ],
+  "size_um": [
+   161.1,
+   93.6
+  ],
+  "spectrum_reach_cyc_per_um": 6.866,
+  "nyquist_cyc_per_um": 11.64,
+  "views": {
+   "photo": {
+    "file": "onion-root-tip-photo.jpg",
+    "um_per_px": 0.06714,
+    "w": 2400,
+    "h": 1395
+   },
+   "4x": {
+    "file": "onion-root-tip-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 234,
+    "h": 136,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   },
+   "10x": {
+    "file": "onion-root-tip-10x.jpg",
+    "um_per_px": 0.275,
+    "w": 586,
+    "h": 341,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.909
+   },
+   "40x": {
+    "file": "onion-root-tip-40x.jpg",
+    "um_per_px": 0.10577,
+    "w": 1523,
+    "h": 885,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 2.364
+   }
+  }
+ },
+ {
+  "id": "maize-stem",
+  "um_per_px": 0.571429,
+  "size_px": [
+   3751,
+   2180
+  ],
+  "size_um": [
+   2143.4,
+   1245.7
+  ],
+  "spectrum_reach_cyc_per_um": 0.509,
+  "nyquist_cyc_per_um": 0.875,
+  "views": {
+   "photo": {
+    "file": "maize-stem-photo.jpg",
+    "um_per_px": 0.8931,
+    "w": 2400,
+    "h": 1395
+   },
+   "4x": {
+    "file": "maize-stem-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 3118,
+    "h": 1812,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   }
+  }
+ },
+ {
+  "id": "maize-bundle",
+  "um_per_px": 0.374532,
+  "size_px": [
+   2080,
+   1430
+  ],
+  "size_um": [
+   779.0,
+   535.6
+  ],
+  "spectrum_reach_cyc_per_um": 0.621,
+  "nyquist_cyc_per_um": 1.335,
+  "views": {
+   "photo": {
+    "file": "maize-bundle-photo.jpg",
+    "um_per_px": 0.37453,
+    "w": 2080,
+    "h": 1430
+   },
+   "4x": {
+    "file": "maize-bundle-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 1133,
+    "h": 779,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   }
+  }
+ },
+ {
+  "id": "broad-bean-root",
+  "um_per_px": 0.225734,
+  "size_px": [
+   3750,
+   2180
+  ],
+  "size_um": [
+   846.5,
+   492.1
+  ],
+  "spectrum_reach_cyc_per_um": 1.272,
+  "nyquist_cyc_per_um": 2.215,
+  "views": {
+   "photo": {
+    "file": "broad-bean-root-photo.jpg",
+    "um_per_px": 0.35271,
+    "w": 2400,
+    "h": 1395
+   },
+   "4x": {
+    "file": "broad-bean-root-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 1231,
+    "h": 716,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   },
+   "10x": {
+    "file": "broad-bean-root-10x.jpg",
+    "um_per_px": 0.275,
+    "w": 3078,
+    "h": 1789,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.909
+   }
+  }
+ },
+ {
+  "id": "grain",
+  "um_per_px": 0.114286,
+  "size_px": [
+   3752,
+   2180
+  ],
+  "size_um": [
+   428.8,
+   249.1
+  ],
+  "spectrum_reach_cyc_per_um": 2.41,
+  "nyquist_cyc_per_um": 4.375,
+  "views": {
+   "photo": {
+    "file": "grain-photo.jpg",
+    "um_per_px": 0.17867,
+    "w": 2400,
+    "h": 1394
+   },
+   "4x": {
+    "file": "grain-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 624,
+    "h": 362,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   },
+   "10x": {
+    "file": "grain-10x.jpg",
+    "um_per_px": 0.275,
+    "w": 1559,
+    "h": 906,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.909
+   }
+  }
+ },
+ {
+  "id": "tulip-epidermis",
+  "um_per_px": 0.114286,
+  "size_px": [
+   3749,
+   2180
+  ],
+  "size_um": [
+   428.5,
+   249.1
+  ],
+  "spectrum_reach_cyc_per_um": 2.546,
+  "nyquist_cyc_per_um": 4.375,
+  "views": {
+   "photo": {
+    "file": "tulip-epidermis-photo.jpg",
+    "um_per_px": 0.17852,
+    "w": 2400,
+    "h": 1396
+   },
+   "4x": {
+    "file": "tulip-epidermis-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 623,
+    "h": 362,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   },
+   "10x": {
+    "file": "tulip-epidermis-10x.jpg",
+    "um_per_px": 0.275,
+    "w": 1558,
+    "h": 906,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.909
+   }
+  }
+ },
+ {
+  "id": "lily-anther",
+  "um_per_px": 0.380228,
+  "size_px": [
+   2080,
+   1430
+  ],
+  "size_um": [
+   790.9,
+   543.7
+  ],
+  "spectrum_reach_cyc_per_um": 0.632,
+  "nyquist_cyc_per_um": 1.315,
+  "views": {
+   "photo": {
+    "file": "lily-anther-photo.jpg",
+    "um_per_px": 0.38023,
+    "w": 2080,
+    "h": 1430
+   },
+   "4x": {
+    "file": "lily-anther-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 1150,
+    "h": 791,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   }
+  }
+ },
+ {
+  "id": "red-onion",
+  "um_per_px": 0.560224,
+  "size_px": [
+   998,
+   585
+  ],
+  "size_um": [
+   559.1,
+   327.7
+  ],
+  "spectrum_reach_cyc_per_um": 0.387,
+  "nyquist_cyc_per_um": 0.893,
+  "views": {
+   "photo": {
+    "file": "red-onion-photo.jpg",
+    "um_per_px": 0.56022,
+    "w": 998,
+    "h": 585
+   },
+   "4x": {
+    "file": "red-onion-4x.jpg",
+    "um_per_px": 0.6875,
+    "w": 813,
+    "h": 477,
+    "source_reaches_cutoff": true,
+    "cutoff_cyc_per_um": 0.364
+   }
+  }
+ }
+]

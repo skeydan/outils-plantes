@@ -206,3 +206,16 @@ test('the seed and seedling terms of Nutzpflanzen ch. 2: found, in place, grasse
   // no Latin coined: an empty Latin slot says where we looked
   for (const id of ['mesocotyl', 'hypocotyl', 'epicotyl']) assert.ok(!e(id).names.la.term && e(id).names.la.checked.length >= 4, id);
 });
+
+test('tunica and corpus: under the shoot apex, found in every language, Schmidt 1924 cited', () => {
+  const e = (id) => index.byId.get(id);
+  for (const id of ['tunica', 'corpus']) {
+    assert.equal(e(id).parent, 'shoot-apex', id);
+    assert.ok(e(id).def.src.includes('g12-steeves2006'), id);
+    assert.equal(e(id).names.la.term, null, id);
+  }
+  for (const [q, id] of [['tunica', 'tunica'], ['Tunika', 'tunica'], ['corpus', 'corpus'], ['Corpus', 'corpus']]) assert.equal(top(q), id, q);
+  assert.ok(e('tunica').see.includes('corpus') && e('corpus').see.includes('tunica'));
+  // the outer tunica layer gives the protoderm
+  assert.ok(e('tunica').def.en.includes('{{protoderm}}'));
+});

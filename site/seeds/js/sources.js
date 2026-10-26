@@ -749,5 +749,11 @@ export const SOURCES = [
   "short": "IPNI",
   "text": "International Plant Names Index, name record 939018-1, Ribes × nidigrolaria Rud.Bauer & A.Bauer, Osnabrück. Naturwiss. Mitt. 15: 50 (1989) (read via the IPNI API).",
   "url": "https://www.ipni.org/n/939018-1"
+ },
+ {
+  "id": "prunus-dicenta2018",
+  "short": "Dicenta et al. 2018 (Penta, Makako)",
+  "text": "Dicenta F., Cremades T., Martínez-García P.J., Martínez-Gómez P., Ortega E., Rubio M., Sánchez-Pérez R., López-Alcolea J., Egea J. (2018). Penta and Makako: two extra-late flowering self-compatible almond cultivars from CEBAS-CSIC. HortScience 53(11): 1700–1702, doi:10.21273/HORTSCI13310-18 (open access). The breeders' release paper: parentage, registration years, flowering relative to Ferragnès and Nonpareil, self-compatibility and the S5Sf genotype of both cultivars.",
+  "url": "https://doi.org/10.21273/HORTSCI13310-18"
  }
 ];

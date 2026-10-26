@@ -6079,6 +6079,68 @@ export const TAXA = [
   }
  },
  {
+  "id": "prunus-amygdalus-penta",
+  "parent": "prunus-amygdalus",
+  "rank": "cultivar",
+  "name": "Prunus amygdalus 'Penta'",
+  "author": "",
+  "names_src": [],
+  "cultivar": {
+   "self": "self-compatible",
+   "s_genotype": "S5Sf",
+   "pollinizers": [],
+   "incompatible_with": [],
+   "group": "extra-late bloom: about 15 days after 'Ferragnès', 23 days after 'Nonpareil' (average of several years and sites)",
+   "origin": {
+    "en": "Spain, CEBAS-CSIC (Murcia) breeding, 'S5133' × 'Lauranne' ('S5133' is a self-incompatible late CEBAS selection from open pollination of 'Primorskyi'); registered 2007. Self-compatible, grown alone in single-cultivar plots; the breeders still advise beehives.",
+    "fr": "Espagne, sélection CEBAS-CSIC (Murcie), 'S5133' × 'Lauranne' ('S5133' est une sélection tardive autostérile du CEBAS, issue de pollinisation libre de 'Primorskyi') ; inscrite en 2007. Autofertile, cultivée seule en parcelles monovariétales ; les obtenteurs conseillent tout de même des ruches."
+   },
+   "src": [
+    {
+     "k": "prunus-dicenta2018",
+     "url": "https://doi.org/10.21273/HORTSCI13310-18",
+     "loc": "introduction (registered 2007), 'Origin', 'Tree Characteristics' (flowering time, self-compatibility, S genotype S5Sf)"
+    },
+    {
+     "k": "prunus-calle",
+     "url": "https://repositori.irta.cat/bitstream/handle/20.500.12327/3376/Calle_Review_24.pdf?sequence=1",
+     "loc": "cultivar entry 'Penta'"
+    }
+   ]
+  }
+ },
+ {
+  "id": "prunus-amygdalus-makako",
+  "parent": "prunus-amygdalus",
+  "rank": "cultivar",
+  "name": "Prunus amygdalus 'Makako'",
+  "author": "",
+  "names_src": [],
+  "cultivar": {
+   "self": "self-compatible",
+   "s_genotype": "S5Sf",
+   "pollinizers": [],
+   "incompatible_with": [],
+   "group": "extra-late bloom: about 2 days before 'Penta' (Dicenta et al.); 20 days after 'Nonpareil' (Calle et al.)",
+   "origin": {
+    "en": "Spain, CEBAS-CSIC (Murcia) breeding, 'Lauranne' × 'S5133', the reciprocal cross of 'Penta'; registered 2017. Self-compatible; the breeders offer it as a second cultivar beside 'Penta' to stagger the harvest (it ripens about 10 days later), not as a pollinizer.",
+    "fr": "Espagne, sélection CEBAS-CSIC (Murcie), 'Lauranne' × 'S5133', le croisement réciproque de 'Penta' ; inscrite en 2017. Autofertile ; les obtenteurs la proposent comme seconde variété à côté de 'Penta' pour étaler la récolte (elle mûrit environ 10 jours plus tard), non comme pollinisatrice."
+   },
+   "src": [
+    {
+     "k": "prunus-dicenta2018",
+     "url": "https://doi.org/10.21273/HORTSCI13310-18",
+     "loc": "introduction (registered 2017), 'Origin', 'Tree Characteristics' (flowering time, self-compatibility, S genotype S5Sf)"
+    },
+    {
+     "k": "prunus-calle",
+     "url": "https://repositori.irta.cat/bitstream/handle/20.500.12327/3376/Calle_Review_24.pdf?sequence=1",
+     "loc": "cultivar entry 'Makako'"
+    }
+   ]
+  }
+ },
+ {
   "id": "prunus-webbii",
   "parent": "prunus",
   "rank": "species",

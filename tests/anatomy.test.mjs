@@ -240,3 +240,22 @@ test('leaf zones: Oberblatt over petiole and blade, Unterblatt over the leaf bas
   // French texts never show the English fallback name of the zones
   for (const x of ENTRIES) assert.ok(!/\{\{(upper|lower)-leaf\}\}/.test(x.def.fr), `${x.id}: French link to a zone needs its own text`);
 });
+
+test('cataphyll, phyllode and sporophyll among the modified leaves; stamen and carpel read as sporophylls', () => {
+  const e = (id) => index.byId.get(id);
+  for (const id of ['cataphyll', 'phyllode', 'sporophyll']) assert.equal(e(id).parent, 'leaf-modified', id);
+  for (const [q, id] of [['Niederblatt', 'cataphyll'], ['Kataphylla', 'cataphyll'], ['cataphylle', 'cataphyll'], ['Phyllodium', 'phyllode'], ['Blattstielblatt', 'phyllode'],
+    ['phyllode', 'phyllode'], ['Sporophyll', 'sporophyll'], ['Sporenblatt', 'sporophyll'], ['Mikrosporophyll', 'stamen'], ['microsporophyll', 'stamen'],
+    ['Megasporophyll', 'carpel'], ['mégasporophylle', 'carpel'], ['Karpell', 'carpel'], ['Stamen', 'stamen'], ['Perianth', 'perianth'], ['Blütenhülle', 'perianth'],
+    ['Tegmente', 'bud-scale'], ['Tegment', 'bud-scale'], ['tegmentum', 'bud-scale'], ['perula', 'bud-scale']]) assert.equal(top(q), id, q);
+  // floral leaves link back to the sporophyll, and the sporophyll to them
+  for (const id of ['stamen', 'carpel', 'perianth']) {
+    assert.ok(e(id).see.includes('sporophyll'), id);
+    assert.ok(e('sporophyll').see.includes(id), id);
+  }
+  // bud scales are mostly cataphylls; a phyllode is a petiole, not a flattened stem
+  assert.ok(e('bud-scale').def.en.includes('{{cataphyll}}') && e('cataphyll').see.includes('bud-scale'));
+  assert.ok(e('phyllode').def.en.includes('{{petiole}}') && e('phyllode').see.includes('cladode'));
+  // the zones of a cataphyll: often only the lower one
+  assert.ok(e('cataphyll').def.en.includes('{{lower-leaf}}') && e('lower-leaf').see.includes('cataphyll'));
+});

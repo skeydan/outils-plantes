@@ -9,7 +9,7 @@ a cited source, listed at the bottom of each tab.
 ## The four tabs
 
 - **Anatomy** (`#anatomy`, code in `site/anatomy/`): a drill-down tree from
-  the whole plant to organs, tissues, cells and cell parts (284 entries),
+  the whole plant to organs, tissues, cells and cell parts (287 entries),
   names in Latin, French, German and English with the source of each name,
   search in all four (accents, umlauts, one typo forgiven), a link per entry
   (`#anatomy/bordered-pit`), translation-pitfall notes (Tüpfel and its

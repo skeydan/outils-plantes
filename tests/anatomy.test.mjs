@@ -219,3 +219,24 @@ test('tunica and corpus: under the shoot apex, found in every language, Schmidt 
   // the outer tunica layer gives the protoderm
   assert.ok(e('tunica').def.en.includes('{{protoderm}}'));
 });
+
+test('leaf zones: Oberblatt over petiole and blade, Unterblatt over the leaf base, ligule and rachis in place', () => {
+  const e = (id) => index.byId.get(id);
+  for (const id of ['upper-leaf', 'lower-leaf']) {
+    assert.equal(e(id).parent, 'leaf', id);
+    assert.ok(e(id).def.src.includes('g14-ye2024'), id);
+    // no French word for the two zones: say so, never coin one
+    assert.equal(e(id).names.fr.term, null, id);
+    assert.ok(e(id).names.fr.checked.length >= 3, id);
+  }
+  for (const id of ['lamina', 'petiole']) assert.equal(e(id).parent, 'upper-leaf', id);
+  assert.equal(e('leaf-base').parent, 'lower-leaf');
+  for (const id of ['stipule', 'leaf-sheath', 'ligule']) assert.equal(e(id).parent, 'leaf-base', id);
+  assert.equal(e('rachis').parent, 'leaf-compound');
+  for (const [q, id] of [['Oberblatt', 'upper-leaf'], ['Unterblatt', 'lower-leaf'], ['upper leaf zone', 'upper-leaf'], ['hypophyll', 'lower-leaf'],
+    ['Blattstiel', 'petiole'], ['Petiolus', 'petiole'], ['Blattspreite', 'lamina'], ['Lamina', 'lamina'], ['Blattscheide', 'leaf-sheath'],
+    ['Stipel', 'stipule'], ['Nebenblatt', 'stipule'], ['Ligula', 'ligule'], ['Blatthäutchen', 'ligule'], ['ligule', 'ligule'],
+    ['Rhachis', 'rachis'], ['Blattspindel', 'rachis'], ['rachis', 'rachis']]) assert.equal(top(q), id, q);
+  // French texts never show the English fallback name of the zones
+  for (const x of ENTRIES) assert.ok(!/\{\{(upper|lower)-leaf\}\}/.test(x.def.fr), `${x.id}: French link to a zone needs its own text`);
+});

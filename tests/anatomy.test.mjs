@@ -259,3 +259,17 @@ test('cataphyll, phyllode and sporophyll among the modified leaves; stamen and c
   // the zones of a cataphyll: often only the lower one
   assert.ok(e('cataphyll').def.en.includes('{{lower-leaf}}') && e('lower-leaf').see.includes('cataphyll'));
 });
+
+test('floral leaves in German: perigone apart from the double perianth, corona apart from the corolla', () => {
+  const e = (id) => index.byId.get(id);
+  assert.equal(e('perigone').parent, 'perianth');
+  assert.equal(e('tepal').parent, 'perigone');
+  for (const id of ['calyx', 'corolla', 'corona']) assert.equal(e(id).parent, 'perianth', id);
+  // Perigon is no longer a synonym of the whole perianth
+  for (const l of ['de', 'fr', 'en']) assert.ok(!(e('perianth').names[l].syn ?? []).some((s) => /^p[ée]rigon/i.test(s)), l);
+  for (const [q, id] of [['Staubblatt', 'stamen'], ['Fruchtblatt', 'carpel'], ['Kronblatt', 'petal'], ['Petalen', 'petal'], ['Kelchblatt', 'sepal'],
+    ['Sepalen', 'sepal'], ['Calyx', 'calyx'], ['Kelch', 'calyx'], ['Corolla', 'corolla'], ['Krone', 'corolla'], ['Rezeptakulum', 'receptacle'],
+    ['Blütenboden', 'receptacle'], ['Perigon', 'perigone'], ['périgone', 'perigone'], ['Tepalen', 'tepal'], ['Perianth', 'perianth'],
+    ['Corona', 'corona'], ['Nebenkrone', 'corona'], ['Paracorolla', 'corona'], ['paracorolle', 'corona']]) assert.equal(top(q), id, q);
+  assert.ok(e('corona').see.includes('corolla') && e('corolla').see.includes('corona'));
+});

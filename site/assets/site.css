@@ -169,10 +169,11 @@ main { max-width: 1180px; margin: 0 auto; padding: 4px 20px 48px; }
 .tab-icon { flex: none; }
 @media (max-width: 560px) {
   :root { --tabs-h: 58px; }
-  .tabs { padding: 0 8px; gap: 2px; }
-  .tabs [role="tab"] { flex: 1 1 0; flex-direction: column; gap: 2px; padding: 6px 4px 3px; font-size: 0.8rem; text-align: center; line-height: 1.15; min-width: 0; }
+  .tabs { padding: 0 4px; gap: 0; }
+  .tabs [role="tab"] { flex: 1 1 0; flex-direction: column; gap: 2px; padding: 6px 1px 3px; font-size: 0.7rem; text-align: center; line-height: 1.15; min-width: 0; letter-spacing: -0.01em; hyphens: auto; }
   .tab-icon { width: 20px; height: 20px; }
 }
+@media (max-width: 380px) { .tabs [role="tab"] { font-size: 0.64rem; } }
 @media (forced-colors: active) { .tabs [role="tab"][aria-selected="true"] { border-bottom-color: Highlight; } }
 [role="tabpanel"]:focus { outline: none; }
 [role="tabpanel"] [id] { scroll-margin-top: calc(var(--tabs-h) + 12px); }

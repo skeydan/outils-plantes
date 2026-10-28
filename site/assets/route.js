@@ -1,7 +1,7 @@
 // Routes of the single page: #<tab>[/<sub>]. No side effects, so the tools
 // and the unit tests can import it.
 
-export const TAB_IDS = ['anatomy', 'water', 'seeds', 'microscope'];
+export const TAB_IDS = ['anatomy', 'water', 'seeds', 'graft', 'microscope'];
 export const DEFAULT_TAB = 'anatomy';
 
 /** Parse a hash into {tab, sub}. Unknown or empty hashes give the default tab. */

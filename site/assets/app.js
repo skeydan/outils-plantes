@@ -1,4 +1,4 @@
-// The single page: a tab bar (ARIA tabs) over four tools, hash routing and
+// The single page: a tab bar (ARIA tabs) over five tools, hash routing and
 // lazy loading. The route is the hash: #<tab>[/<sub>], for example
 // #anatomy/pit, #water/compartments, #seeds/prunus-amygdalus. Each tool is an
 // ES module loaded the first time its tab opens; it exports
@@ -15,6 +15,8 @@ const TABS = [
     label: { en: 'Water potential', fr: 'Potentiel hydrique' }, long: { en: 'How water moves in plants', fr: 'Comment l’eau circule dans les plantes' } },
   { id: 'seeds', load: () => import('../seeds/js/app.js'),
     label: { en: 'Breeding', fr: 'Hybridation' }, long: { en: 'Pollination, crosses and seeds', fr: 'Fécondation, croisements et graines' } },
+  { id: 'graft', load: () => import('../graft/js/app.js'),
+    label: { en: 'Grafting', fr: 'Greffe' }, long: { en: 'Scions, rootstocks and how to choose them', fr: 'Greffons, porte-greffes et comment les choisir' } },
   { id: 'microscope', load: () => import('../microscope/js/app.js'),
     label: { en: 'Microscope', fr: 'Microscope' }, long: { en: 'What a student microscope really shows', fr: 'Ce que montre vraiment un microscope d’élève' } },
 ];

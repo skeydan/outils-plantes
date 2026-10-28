@@ -1,0 +1,29 @@
+/* Grafting page. Search box, tree and entry layout come from assets/tree.css,
+   names, blocks, tables and cards from the breeding page (seeds.css). The
+   practice and compatibility marks always come with words: colour is never
+   the only cue. */
+
+.gf-mark { font-weight: 800; }
+.gf-practice, .gf-compat { font-weight: 650; white-space: normal; }
+.gf-p-standard { color: var(--green-ink); }
+.gf-p-common, .gf-p-standards { color: var(--green-ink); }
+.gf-p-occasional { color: var(--ink-2); }
+.gf-p-not { color: var(--ink-2); }
+.gf-c-good { color: var(--green-ink); }
+.gf-c-variable, .gf-c-interstock { color: var(--ink); }
+.gf-c-poor { color: var(--danger); }
+.a-row a .gf-mark { font-size: 0.85em; }
+.gf-group-label { font-style: italic; color: var(--ink-2); }
+.gf-stock-name { font-weight: 600; }
+.a-head .gf-stock-name { font-weight: inherit; }
+.gf-legend { margin: 4px 0 8px; line-height: 1.5; }
+
+.gf-stocks { min-width: 520px; margin-top: 4px; }
+.gf-stocks thead th { font-size: 0.8rem; color: var(--ink-2); font-weight: 650; }
+.gf-stocks td, .gf-stocks th { font-size: 0.9rem; }
+.gf-traits th { width: 11em; color: var(--ink-2); font-weight: 600; vertical-align: top; }
+.gf-traits th a { color: inherit; }
+.gf-traits td { font-size: 0.93rem; }
+.gf-link { border: 1px solid var(--hairline); border-radius: 10px; padding: 10px 12px; }
+.gf-table { min-width: 560px; }
+@media (max-width: 600px) { .gf-traits th { width: 7.5em; } }

@@ -20,7 +20,7 @@ const devices = {
   desktop: { viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 },
   phone: { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
 };
-const TABS = ['anatomy', 'water', 'seeds', 'microscope'];
+const TABS = ['anatomy', 'water', 'seeds', 'graft', 'microscope'];
 
 const browser = await chromium.launch();
 const problems = [];
@@ -52,7 +52,7 @@ for (const device of Object.keys(devices)) {
       await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
       await opened(page, 'anatomy');
       ok((await page.getAttribute('html', 'lang')) === lang, `browser language ${lang} not picked up`);
-      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['microscope', null]]) {
+      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['graft', 'prunus-amygdalus'], ['microscope', null]]) {
         await page.evaluate((h) => { location.hash = h; }, sub ? `${tab}/${sub}` : tab);
         await opened(page, tab);
         await page.waitForLoadState('networkidle');
@@ -75,7 +75,7 @@ for (const device of Object.keys(devices)) {
   await opened(page, 'anatomy');
   // Lazy loading: only the open tab's code and data are fetched.
   ok(requested.some((u) => u.endsWith('/anatomy/js/entries.js')), 'anatomy data loaded on the anatomy tab');
-  ok(!requested.some((u) => u.endsWith('/seeds/js/taxa.js') || u.endsWith('/plant-water/js/app.js') || /\/microscope\/(js|img)\//.test(u)), `other tabs not loaded yet: ${requested.filter((u) => /seeds|plant-water|microscope\/(js|img)/.test(u)).join(', ')}`);
+  ok(!requested.some((u) => u.endsWith('/seeds/js/taxa.js') || u.endsWith('/graft/js/graft.js') || u.endsWith('/plant-water/js/app.js') || /\/microscope\/(js|img)\//.test(u)), `other tabs not loaded yet: ${requested.filter((u) => /seeds|plant-water|microscope\/(js|img)/.test(u)).join(', ')}`);
   // ARIA structure.
   const aria = await page.evaluate(() => {
     const tabs = [...document.querySelectorAll('[role="tablist"] [role="tab"]')];
@@ -88,9 +88,9 @@ for (const device of Object.keys(devices)) {
       visible: [...document.querySelectorAll('[role="tabpanel"]')].filter((p) => !p.hidden).map((p) => p.id),
     };
   });
-  ok(aria.n === 4, `four tabs: ${aria.n}`);
+  ok(aria.n === 5, `five tabs: ${aria.n}`);
   ok(aria.selected.join() === 'tab-anatomy', `anatomy selected: ${aria.selected}`);
-  ok(aria.tabindex.join() === '0,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
+  ok(aria.tabindex.join() === '0,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
   ok(aria.controls && aria.labelled, 'tabs and panels point at each other');
   ok(aria.visible.join() === 'panel-anatomy', `one panel visible: ${aria.visible}`);
   // Keyboard: arrows move and open, Home and End, focus stays on the tab.
@@ -108,6 +108,9 @@ for (const device of Object.keys(devices)) {
   ok((await page.evaluate(() => document.activeElement.id)) === 'tab-anatomy', 'ArrowRight wraps to the first tab');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'microscope');
+  await page.keyboard.press('ArrowLeft');
+  await opened(page, 'graft');
+  ok(requested.some((u) => u.endsWith('/graft/js/app.js')), 'grafting code loaded on demand');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'seeds');
   await page.keyboard.press('Home');
@@ -319,6 +322,43 @@ for (const device of Object.keys(devices)) {
   await ctx.close();
 }
 
+// ---------------------------------------------------------------- grafting
+{
+  const { ctx, page } = await newPage('desktop', 'light', 'en');
+  await page.goto(`${BASE}/#graft`, { waitUntil: 'networkidle' });
+  await opened(page, 'graft');
+  ok(hashOf(page) === '#graft' && /Prunus amygdalus/.test(await page.textContent('#a-title')), 'graft: almond by default');
+  ok((await page.locator('#a-entry .gf-stocks tbody tr').count()) >= 8, 'graft: almond rootstock table');
+  // A rootstock name finds the rootstock under its plant.
+  await page.fill('#a-search', 'GF 677');
+  await page.keyboard.press('Enter');
+  await waitCurrent(page, 'prunus-amygdalus--gf-677');
+  ok((await page.textContent('.a-crumbs')).includes('rootstocks'), 'graft: rootstock under the plant’s rootstocks');
+  ok((await page.locator('.gf-traits tr[data-c="lime"]').count()) === 1, 'graft: GF 677 has its lime row');
+  // Plants not grafted say so.
+  await page.evaluate(() => { location.hash = 'graft/rubus-idaeus'; });
+  await waitCurrent(page, 'rubus-idaeus');
+  ok(/Not grafted/.test(await page.textContent('#a-entry .sd-glance')), 'graft: raspberry is not grafted');
+  // A criterion link scrolls to its card and keeps the route.
+  await page.evaluate(() => { location.hash = 'graft/prunus-amygdalus--marianna-2624'; });
+  await waitCurrent(page, 'prunus-amygdalus--marianna-2624');
+  await page.locator('.gf-traits a[href="#c-wet"]').click();
+  ok(hashOf(page) === '#graft/prunus-amygdalus--marianna-2624', `graft: criterion link keeps the route: ${page.url()}`);
+  ok((await page.locator('.sd-concept.is-target').count()) === 1, 'graft: criterion card marked');
+  await page.screenshot({ path: `${SHOTS}/interact-5-graft-marianna.png`, fullPage: true });
+  // Every node opens.
+  const nids = await page.evaluate(async () => {
+    const [{ TAXA }, g, { graftNodes }] = await Promise.all([import('./seeds/js/taxa.js'), import('./graft/js/graft.js'), import('./graft/js/grafting.js')]);
+    return graftNodes(TAXA, g.SCIONS, g.ROOTSTOCKS).map((n) => n.id);
+  });
+  for (const id of nids) {
+    await page.evaluate((id) => { location.hash = `graft/${id}`; }, id);
+    await waitCurrent(page, id);
+  }
+  ok(nids.length > 150, `graft: ${nids.length} nodes rendered`);
+  await ctx.close();
+}
+
 // ---------------------------------------------------------------- microscope
 {
   const { ctx, page } = await newPage('desktop', 'light', 'en');
@@ -386,14 +426,14 @@ for (const device of Object.keys(devices)) {
 // ---------------------------------------------------------------- phone
 {
   const { ctx, page } = await newPage('phone', 'dark', 'fr');
-  for (const route of ['anatomy/bordered-pit', 'anatomy/fruit-types', 'water/compartments', 'seeds/prunus-amygdalus', 'microscope']) {
+  for (const route of ['anatomy/bordered-pit', 'anatomy/fruit-types', 'water/compartments', 'seeds/prunus-amygdalus', 'graft/prunus-amygdalus--gf-677', 'microscope']) {
     await page.goto(`${BASE}/#${route}`, { waitUntil: 'networkidle' });
     await opened(page, route.split('/')[0]);
     const overflow = await overflowOf(page);
     ok(overflow <= 0, `${route} phone: horizontal overflow ${overflow}px`);
     await page.screenshot({ path: `${SHOTS}/phone-${route.replace('/', '-')}.png`, fullPage: true });
   }
-  // The four tabs fit side by side, are big enough to tap and stay reachable while scrolling.
+  // The five tabs fit side by side, are big enough to tap and stay reachable while scrolling.
   const boxes = await page.$$eval('[role="tab"]', (ts) => ts.map((t) => t.getBoundingClientRect()).map((r) => ({ top: r.top, right: r.right, h: r.height })));
   ok(boxes.every((b) => Math.abs(b.top - boxes[0].top) < 1) && boxes.at(-1).right <= 390, `phone: tabs on one row: ${JSON.stringify(boxes)}`);
   ok(boxes.every((b) => b.h >= 44), 'phone: tabs are at least 44 px tall');

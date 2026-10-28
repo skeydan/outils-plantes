@@ -273,3 +273,25 @@ test('floral leaves in German: perigone apart from the double perianth, corona a
     ['Corona', 'corona'], ['Nebenkrone', 'corona'], ['Paracorolla', 'corona'], ['paracorolle', 'corona']]) assert.equal(top(q), id, q);
   assert.ok(e('corona').see.includes('corolla') && e('corolla').see.includes('corona'));
 });
+
+test('chalaza under the ovule; microphyll and megaphyll as leaf types, Makrophyll apart from the size class macrophylle', () => {
+  const e = (id) => index.byId.get(id);
+  assert.equal(e('chalaza').parent, 'ovule');
+  for (const id of ['microphyll', 'megaphyll']) {
+    assert.equal(e(id).parent, 'leaf', id);
+    assert.ok(e(id).notes.includes('phyll-type-size'), id);
+  }
+  assert.ok(e('mesophyll').notes.includes('phyll-type-size'));
+  assert.ok(e('microphyll').see.includes('megaphyll') && e('megaphyll').see.includes('microphyll'));
+  for (const [q, id] of [['chalaze', 'chalaza'], ['Chalaza', 'chalaza'], ['Nabelfleck', 'chalaza'], ['Hagelfleck', 'chalaza'],
+    ['microphylle', 'microphyll'], ['Mikrophyll', 'microphyll'], ['lycophyll', 'microphyll'], ['mégaphylle', 'megaphyll'], ['Makrophyll', 'megaphyll'],
+    ['Megaphyll', 'megaphyll'], ['Großblatt', 'megaphyll'], ['makrohyll', 'megaphyll'],
+    // the terms that were already in the tree
+    ['Androeceum', 'androecium'], ['Gynoeceum', 'gynoecium'], ['anthère', 'anther'], ['Anthere', 'anther'], ['thèque', 'theca'], ['Theka', 'theca'],
+    ['Filament', 'filament'], ['sac pollinique', 'pollen-sac'], ['Pollensack', 'pollen-sac'], ['grain de pollen', 'pollen'], ['Pollenkorn', 'pollen'],
+    ['ovaire', 'ovary'], ['Ovar', 'ovary'], ['Fruchtknoten', 'ovary'], ['Pistill', 'pistil'], ['stigmate', 'stigma'], ['Narbe', 'stigma'],
+    ['Synergiden', 'synergid'], ['Griffel', 'style'], ['stylus', 'style'], ['nucelle', 'nucellus'], ['Integument', 'integument'],
+    ['funicule', 'funiculus'], ['Funiculus', 'funiculus']]) assert.equal(top(q), id, q);
+  assert.ok(ids('tégument').includes('integument') && ids('tégument').includes('seed-coat'));
+  assert.equal(e('megaphyll').names.la.term, null);
+});

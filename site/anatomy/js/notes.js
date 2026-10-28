@@ -310,6 +310,22 @@ export const NOTES = {
     },
     src: ['spektrum', 'wpde', 'g9-duden', 'wpen'],
   },
+  'phyll-type-size': {
+    title: { en: 'Microphyll, megaphyll, macrophyll: leaf types or leaf sizes', fr: 'Microphylle, mégaphylle, macrophylle : types ou tailles de feuilles' },
+    body: {
+      en: [
+        'As leaf types, a {{microphyll}} has one unbranched vein (the clubmosses and their relatives) and a {{megaphyll}} has several or branched veins (ferns and seed plants). German says [[de:Makrophyll]] or [[de:Megaphyll]] for the second, as the same word. ^spektrum,openstax,wpen^',
+        'Ecologists also sort leaves by blade area, after Raunkiær (1934): leptophyll, nanophyll, microphyll, mesophyll, macrophyll, megaphyll. There a microphyll is a blade of roughly 2 to 20 cm² and a macrophyll of roughly 2 to 16–20 dm² (the limits differ a little between Raunkiær and Wolfe’s 1993 revision). So French [[fr:macrophylle]] and English “macrophyll” are usually size classes, not the megaphyll type, and [[fr:mésophylle]] can be a size class as well as the leaf tissue {{mesophyll}}. Read the context: anatomy and evolution, or leaf size. ^wpfr,wpen^',
+        'The line between the two types is drawn differently. Spektrum counts conifer needles and horsetail leaves, which have one vein, among the [[de:Mikrophylle]]. English Wikipedia notes that these one-veined leaves come from ancestors with larger, many-veined leaves, so they are read as reduced megaphylls, and the word microphyll is kept for the lycophytes. ^spektrum,g15-spektrum-geo,wpen^',
+      ],
+      fr: [
+        'Comme types de feuilles, la {{microphyll}} a une seule nervure non ramifiée (les lycopodes et leurs parents) et la {{megaphyll}} plusieurs nervures ou des nervures ramifiées (fougères et plantes à graines). L’allemand dit [[de:Makrophyll]] ou [[de:Megaphyll]] pour la seconde, comme un seul et même mot. ^spektrum,openstax,wpen^',
+        'Les écologues classent aussi les feuilles par surface du limbe, d’après Raunkiær (1934) : leptophylle, nanophylle, microphylle, mésophylle, macrophylle, mégaphylle. Une microphylle y est un limbe d’environ 2 à 20 cm², une macrophylle d’environ 2 à 16–20 dm² (les limites diffèrent un peu entre Raunkiær et la révision de Wolfe, 1993). En français, [[fr:macrophylle]] (comme l’anglais « macrophyll ») désigne donc en général une classe de taille, pas le type mégaphylle, et [[fr:mésophylle]] peut être une classe de taille autant que le tissu de la feuille, le {{mesophyll}}. Lisez le contexte : anatomie et évolution, ou taille des feuilles. ^wpfr,wpen^',
+        'La limite entre les deux types n’est pas tracée partout au même endroit. Le Spektrum range les aiguilles des conifères et les feuilles des prêles, à une seule nervure, parmi les [[de:Mikrophylle]]. Wikipédia en anglais rappelle que ces feuilles à une nervure descendent d’ancêtres à feuilles plus grandes et à plusieurs nervures : on les lit donc comme des mégaphylles réduites, et le mot microphylle est réservé aux lycophytes. ^spektrum,g15-spektrum-geo,wpen^',
+      ],
+    },
+    src: ['spektrum', 'g15-spektrum-geo', 'openstax', 'wpfr', 'wpen'],
+  },
 };
 
 /** Which entries show which notes. */
@@ -336,4 +352,5 @@ export const NOTE_ENTRIES = {
   'primary-meristem': ['protoderm', 'ground-meristem', 'procambium', 'apical-meristem'],
   'secondary-meristem': ['lateral-meristem', 'cambium', 'vascular-cambium', 'fascicular-cambium', 'interfascicular-cambium', 'shoot-cambium', 'root-cambium', 'phellogen'],
   bast: ['secondary-phloem', 'inner-bark', 'phloem-fibre', 'phloem'],
+  'phyll-type-size': ['microphyll', 'megaphyll', 'mesophyll'],
 };

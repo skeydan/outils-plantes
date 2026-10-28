@@ -9,15 +9,16 @@ a cited source, listed at the bottom of each tab.
 ## The four tabs
 
 - **Anatomy** (`#anatomy`, code in `site/anatomy/`): a drill-down tree from
-  the whole plant to organs, tissues, cells and cell parts (289 entries),
+  the whole plant to organs, tissues, cells and cell parts (292 entries),
   names in Latin, French, German and English with the source of each name,
   search in all four (accents, umlauts, one typo forgiven), a link per entry
   (`#anatomy/bordered-pit`), translation-pitfall notes (Tüpfel and its
   family, Protoplast vs Protoplasma, Rinde/Borke/Bast, écorce and liber,
-  cortex vs bark, Porus, Aleuron, Trachee, albumen...) and 24 drawings of
-  our own, labelled in the chosen language, covering 225 entries: the
-  plant, stem, bark, periderm, leaf, stoma, root tip and section, flower,
-  ovule, seed, drupe, cell, pits, conducting cells, ground tissues,
+  cortex vs bark, Porus, Aleuron, Trachee, albumen, microphyll and
+  macrophyll...) and 24 drawings of our own, labelled in the chosen
+  language, covering 226 entries: the plant, stem, bark, periderm, leaf,
+  stoma, root tip and section, flower, ovule, seed, drupe, cell, pits,
+  conducting cells, ground tissues,
   chloroplast, fruit types, modified stems, thorn/spine/prickle and hairs,
   anther and pollen, meristems, kinds of roots. Latin is given only when a source gives it.
 - **Water potential** (`#water`, code in `site/plant-water/`):

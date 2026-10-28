@@ -537,6 +537,8 @@ function ovule(ctx) {
   c.s('path', { d: `M${cx - 8},40 C${cx - 120},50 ${cx - 120},322 ${cx},322 C${cx + 120},322 ${cx + 120},50 ${cx + 8},40 L${cx + 8},52 C${cx + 100},64 ${cx + 100},306 ${cx},306 C${cx - 100},306 ${cx - 100},64 ${cx - 8},52 Z`, class: 'dr-integ' }, 'integument');
   c.s('path', { d: `M${cx - 8},58 C${cx - 96},70 ${cx - 96},300 ${cx},300 C${cx + 96},300 ${cx + 96},70 ${cx + 8},58 L${cx + 8},70 C${cx + 80},82 ${cx + 80},286 ${cx},286 C${cx - 80},286 ${cx - 80},82 ${cx - 8},70 Z`, class: 'dr-integ2' }, 'integument');
   c.s('path', { d: `M${cx},72 C${cx - 78},84 ${cx - 78},284 ${cx},284 C${cx + 78},284 ${cx + 78},84 ${cx},72 Z`, class: 'dr-ground' }, 'nucellus');
+  // Chalaza: the base, where nucellus and integuments join the funicle
+  c.s('path', { d: `M${cx - 30},298 C${cx - 22},322 ${cx + 22},322 ${cx + 30},298 C${cx + 16},288 ${cx - 16},288 ${cx - 30},298 Z`, class: 'dr-hilum' }, 'chalaza');
   // Embryo sac: egg apparatus at the micropylar end, central cell, antipodals
   c.s('path', { d: `M${cx},92 C${cx - 44},96 ${cx - 46},262 ${cx},266 C${cx + 46},262 ${cx + 44},96 ${cx},92 Z`, class: 'dr-cell' }, 'embryo-sac');
   c.s('path', { d: `M${cx - 30},140 C${cx - 30},200 ${cx + 30},200 ${cx + 30},140 C${cx + 34},190 ${cx + 34},236 ${cx},236 C${cx - 34},236 ${cx - 34},190 ${cx - 30},140 Z`, class: 'dr-central' }, 'central-cell');
@@ -556,6 +558,7 @@ function ovule(ctx) {
   c.label('nucellus', 330, 292, { to: [cx + 56, 262] });
   c.label('funiculus', 330, 350, { to: [cx + 11, 350] });
   c.label('integument', 70, 120, { anchor: 'end', to: [cx - 92, 140] });
+  c.label('chalaza', 90, 330, { anchor: 'end', to: [cx - 24, 306] });
   return c.root;
 }
 
@@ -1235,8 +1238,8 @@ export const DRAWINGS = {
     caption: { en: 'In a young root the xylem forms a star in the centre with the phloem between its arms. The Casparian strip in the endodermis walls forces water and salts to cross a living membrane on their way in.', fr: 'Dans une jeune racine, le xylème forme une étoile au centre, le phloème entre ses branches. Le cadre de Caspary, dans les parois de l’endoderme, oblige l’eau et les sels à traverser une membrane vivante pour entrer.' }, src: ['po', 'openstax'] },
   flower: { render: flower, for: ['flower', 'pedicel', 'receptacle', 'perianth', 'calyx', 'sepal', 'corolla', 'petal', 'androecium', 'stamen', 'filament', 'anther', 'gynoecium', 'carpel', 'pistil', 'ovary', 'placenta', 'style', 'stigma', 'nectary', 'ovule'],
     caption: { en: 'From the outside in: sepals (calyx), petals (corolla), stamens (androecium) and the pistil, made of one or more carpels (gynoecium).', fr: 'De l’extérieur vers l’intérieur : sépales (calice), pétales (corolle), étamines (androcée) et le pistil, formé d’un ou plusieurs carpelles (gynécée).' }, src: ['po', 'openstax'] },
-  ovule: { render: ovule, for: ['funiculus', 'integument', 'micropyle', 'nucellus', 'embryo-sac', 'egg-cell', 'synergid', 'central-cell', 'antipodal'],
-    caption: { en: 'Drawn straight for clarity. The embryo sac shown is the common seven-celled, eight-nucleate type: egg cell and two synergids at the micropyle, a central cell with two polar nuclei, three antipodal cells.', fr: 'Dessiné droit pour plus de clarté. Le sac embryonnaire montré est le type courant à sept cellules et huit noyaux : oosphère et deux synergides côté micropyle, une cellule centrale à deux noyaux polaires, trois antipodes.' }, src: ['po', 'openstax'] },
+  ovule: { render: ovule, for: ['funiculus', 'chalaza', 'integument', 'micropyle', 'nucellus', 'embryo-sac', 'egg-cell', 'synergid', 'central-cell', 'antipodal'],
+    caption: { en: 'Drawn straight for clarity. The embryo sac shown is the common seven-celled, eight-nucleate type: egg cell and two synergids at the micropyle, a central cell with two polar nuclei, three antipodal cells. At the base, the chalaza, where nucellus and integuments join the funicle.', fr: 'Dessiné droit pour plus de clarté. Le sac embryonnaire montré est le type courant à sept cellules et huit noyaux : oosphère et deux synergides côté micropyle, une cellule centrale à deux noyaux polaires, trois antipodes. À la base, la chalaze, où nucelle et téguments rejoignent le funicule.' }, src: ['po', 'openstax'] },
   seed: { render: seed, for: ['seed', 'seed-coat', 'hilum', 'seed-micropyle', 'embryo', 'radicle', 'hypocotyl', 'cotyledon', 'epicotyl', 'plumule', 'endosperm', 'caryopsis'],
     caption: { en: 'In the bean the food reserves are in the two cotyledons; in a cereal grain they are in the endosperm, and the fruit wall is fused with the seed coat.', fr: 'Chez le haricot, les réserves sont dans les deux cotylédons ; dans un grain de céréale, elles sont dans l’albumen, et la paroi du fruit est soudée au tégument de la graine.' }, src: ['po', 'openstax'] },
   drupe: { render: drupe, for: ['fruit', 'pericarp', 'exocarp', 'mesocarp', 'endocarp', 'drupe'],

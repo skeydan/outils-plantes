@@ -1,12 +1,12 @@
 # outils-plantes
 
-One page, four tabs, for gardeners and for anyone learning how plants are
+One page, five tabs, for gardeners and for anyone learning how plants are
 built and how they live. French and English (follows the browser language,
 with a switch), light and dark, works on phones and with the keyboard. A
 static site: no backend, no build step, no tracking. Every number comes from
 a cited source, listed at the bottom of each tab.
 
-## The four tabs
+## The five tabs
 
 - **Anatomy** (`#anatomy`, code in `site/anatomy/`): a drill-down tree from
   the whole plant to organs, tissues, cells and cell parts (292 entries),
@@ -42,6 +42,22 @@ a cited source, listed at the bottom of each tab.
   pair check from published S-genotypes; the words (var., cultivar, the
   seed-trade « variété ») explained. Names follow POWO and WFO, with their
   disagreements.
+- **Grafting** (`#graft`, code in `site/graft/`): the same plants as the
+  breeding tab, from family to cultivar (the taxa are read from
+  `site/seeds/js/taxa.js`), each grafted plant branching into the
+  rootstocks it is grafted on: almond (almond and peach seedlings, Hansen,
+  GF 677, Garnem, Rootpac, Krymsk 86, Marianna 2624, Viking), European,
+  damson and Japanese plums (myrobalan, St Julien, Pixy, Brompton, Wavit,
+  Krymsk 1, Marianna, Torinel, Ishtara, Citation), kiwifruit (Bruno,
+  Bounty 71, Kaimai), yellow pitaya on S. undatus, currant and gooseberry
+  standards on Ribes aureum. For each pair, how well they get on
+  (compatible, depends on the variety, interstock needed, incompatible)
+  and for each rootstock what it is chosen for: vigour, soil, lime, drought,
+  wet soil, salinity, cold, heat, diseases, anchorage, suckers, cropping.
+  Plants that are not grafted (raspberries and blackberries, kiwiberry,
+  sea buckthorn, rainbow eucalyptus) say so and how they are propagated
+  instead. Search on plant, variety or rootstock names; a link per node
+  (`#graft/prunus-amygdalus--gf-677`).
 - **Microscope** (`#microscope`, code in `site/microscope/`): a simulated
   student microscope (the objectives, eyepieces and Barlow lens of the
   Bresser Biorit SE 1600x: 4x, 10x, 40x; WF10x, WF20x; 40× to 1600×) on
@@ -60,7 +76,7 @@ their own repository, outils-sols.
 
 ## How the page works
 
-`site/index.html` holds the header, the tab bar and four empty panels.
+`site/index.html` holds the header, the tab bar and five empty panels.
 `site/assets/app.js` reads the route from the hash, `#<tab>[/<entry or
 section>]` (`site/assets/route.js`), and loads a tab's code the first time
 it opens (`import()`), so the 435 KB anatomy data is only fetched for the
@@ -139,6 +155,10 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
   taxa are where they should be, search on old names and common names,
   italics of scientific names, the S-allele rule against the published
   self-compatibility of almond cultivars, who needs a partner.
+- `tests/graft.test.mjs`: the grafting data are valid and sourced, the
+  tree is the breeding tab's with the rootstocks under their plants, every
+  species has a grafting answer (own or inherited), plants grown from
+  cuttings or seed say so, every criterion has its card.
 - `tests/route.test.mjs`: parsing and writing the routes.
 - `tests/microscope.test.mjs`: resolution and useful magnification against
   the MicroscopyU tables and Bresser's 650× example, the screen scale, every
@@ -148,7 +168,7 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
 - `python3 -I scripts/microscope/check_optics.py`: the transfer function and
   the Airy pattern are a Fourier pair, first dark ring at 0.61 λ/NA, a
   blurred point matches the Airy pattern.
-- `scripts/e2e.mjs`: screenshots of the four tabs (desktop and phone,
+- `scripts/e2e.mjs`: screenshots of the five tabs (desktop and phone,
   light and dark, French and English, into `/tmp/plantes-shots`); the tab
   bar (ARIA, keyboard, lazy loading, history, language switch keeps the
   route, old addresses, no request to another site); every anatomy entry
@@ -228,7 +248,7 @@ The site runs locally only, either way from "Run locally":
 
 ```
 site/
-  index.html              the page: header, tab bar, four panels
+  index.html              the page: header, tab bar, five panels
   assets/app.js           tabs, hash routing, lazy loading, in-page anchors
   assets/route.js         routes (#tab/sub), no side effects
   assets/site.js          language and theme shell
@@ -238,6 +258,7 @@ site/
   anatomy/                anatomy tab (js/entries.js, notes.js, drawings.js, sources.js, tree.js)
   plant-water/            water tab (js/physics.js, sources.js)
   seeds/                  breeding tab (js/taxa.js, concepts.js, breeding.js, sources.js)
+  graft/                  grafting tab (js/graft.js data, grafting.js logic, sources.js; reuses seeds/js/taxa.js)
   microscope/             microscope tab (js/optics.js, specimens.js, structures.js, sources.js; img/)
   */index.html            redirects from the old addresses
 deploy/default.conf.template   nginx config

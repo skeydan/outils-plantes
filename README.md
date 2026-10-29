@@ -279,3 +279,12 @@ Colours are checked for contrast and colour-vision deficiency: three hues
 in the drawings (blue xylem, orange phloem, aqua photosynthetic tissue),
 everything else neutral with direct labels; status colours (the almond pair
 check) always come with a symbol and a sentence.
+
+## Licence and credits
+
+Code: MIT, see [LICENSE](LICENSE). Text, data tables and our own drawings:
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), unless
+stated otherwise. Third-party images keep their own licence as credited.
+The microscope tab's photographs are by Josef Reischig and by Jon Houseman and Matthew Ford (Wikimedia Commons, CC BY-SA 3.0 or 4.0). Our blurred, cropped and resampled versions are shared under the same CC BY-SA licence as each original; the tab's credits list gives author, licence and changes for every photograph.
+
+Built with the help of AI coding tools; every fact is checked against the cited sources.

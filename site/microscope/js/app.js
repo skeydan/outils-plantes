@@ -360,7 +360,7 @@ function build(main) {
       h('a', { href: sp.photo.page, rel: 'noopener', target: '_blank', text: sp.photo.title }), `, ${sp.photo.author}, `,
       h('a', { href: sp.photo.licenceUrl, rel: 'noopener license', target: '_blank', text: sp.photo.licence }), '. ',
       L(sp.photo.about), ' ', T('Scale: ', 'Échelle : '), L(sp.scaleNote), ' ', T('Taken with: ', 'Prise avec : '), L(sp.takenWith), ' ',
-      T('Changes: cropped (labels and scale bar left out), blurred and resampled as described above; our images are under the same licence as the original.', 'Modifications : recadrée (légendes et barre d’échelle retirées), floutée et rééchantillonnée comme décrit plus haut ; nos images sont sous la même licence que l’originale.')))));
+      T(`Modified: cropped (labels and scale bar left out), blurred and resampled as described above; our versions are shared under ${sp.photo.licence}.`, `Modifiée : recadrée (légendes et barre d’échelle retirées), floutée et rééchantillonnée comme décrit plus haut ; nos versions sont partagées sous ${sp.photo.licence}.`)))));
 
   const sources = h('section', { class: 'card wide sources' }, h('h2', { text: 'Sources' }), list(),
     h('p', { class: 'small muted', text: T('Texts are our own. The images are the photographs credited above, changed only by the blur and resampling described in section 4 (scripts/microscope/ in the repository).', 'Les textes sont les nôtres. Les images sont les photographies créditées ci-dessus, modifiées seulement par le flou et le rééchantillonnage décrits en partie 4 (scripts/microscope/ dans le dépôt).') }));

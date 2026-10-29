@@ -292,6 +292,9 @@ test('chalaza under the ovule; microphyll and megaphyll as leaf types, Makrophyl
     ['ovaire', 'ovary'], ['Ovar', 'ovary'], ['Fruchtknoten', 'ovary'], ['Pistill', 'pistil'], ['stigmate', 'stigma'], ['Narbe', 'stigma'],
     ['Synergiden', 'synergid'], ['Griffel', 'style'], ['stylus', 'style'], ['nucelle', 'nucellus'], ['Integument', 'integument'],
     ['funicule', 'funiculus'], ['Funiculus', 'funiculus']]) assert.equal(top(q), id, q);
+  for (const [q, id] of [['ovaire infère', 'inferior-ovary'], ['unterständig', 'inferior-ovary'], ['ovarium inferum', 'inferior-ovary'],
+    ['ovaire supère', 'superior-ovary'], ['oberständig', 'superior-ovary'], ['ovarium superum', 'superior-ovary'],
+    ['Karyopse', 'caryopsis'], ['Achäne', 'achene'], ['akène', 'achene']]) assert.equal(top(q), id, q);
   assert.ok(ids('tégument').includes('integument') && ids('tégument').includes('seed-coat'));
   assert.equal(e('megaphyll').names.la.term, null);
 });

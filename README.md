@@ -237,7 +237,10 @@ Credits with links are in the tab.
 
 ## Deploy
 
-The site runs locally only, either way from "Run locally":
+Published at <https://plantes.divergences.xyz/>: every push to `main` publishes `site/` on GitHub Pages
+(`.github/workflows/publish.yml`, no build step).
+
+Locally, either way from "Run locally":
 
 - `npm run serve`, then open <http://localhost:9417/>;
 - or the container: `docker build -t outils-plantes .` and `docker run --rm -p 8080:8080 outils-plantes`, then open

@@ -295,3 +295,26 @@ test('chalaza under the ovule; microphyll and megaphyll as leaf types, Makrophyl
   assert.ok(ids('tégument').includes('integument') && ids('tégument').includes('seed-coat'));
   assert.equal(e('megaphyll').names.la.term, null);
 });
+
+test('fruit and seed terms: raphe on ovule and seed, caruncle beside the aril, fruit wall layers under the pericarp', () => {
+  const e = (id) => index.byId.get(id);
+  assert.equal(e('raphe').parent, 'ovule');
+  assert.equal(e('seed-raphe').parent, 'seed-coat');
+  assert.equal(e('caruncle').parent, 'seed');
+  for (const id of ['exocarp', 'mesocarp', 'endocarp']) assert.equal(e(id).parent, 'pericarp', id);
+  assert.equal(e('pericarp').parent, 'fruit');
+  assert.equal(e('legume').parent, 'fruit-types');
+  for (const id of ['endosperm', 'perisperm', 'aril']) assert.equal(e(id).parent, 'seed', id);
+  assert.ok(e('raphe').see.includes('seed-raphe') && e('seed-raphe').see.includes('raphe'));
+  assert.ok(e('caruncle').see.includes('aril') && e('aril').see.includes('caruncle'));
+  for (const [q, id] of [['caruncula', 'caruncle'], ['caroncule', 'caruncle'], ['Caruncula', 'caruncle'], ['Samenschwiele', 'caruncle'],
+    ['caruncle', 'caruncle'], ['seed raphe', 'seed-raphe'],
+    // the terms that were already in the tree
+    ['Perikarp', 'pericarp'], ['péricarpe', 'pericarp'], ['pericarpium', 'pericarp'], ['Fruchtwand', 'pericarp'],
+    ['Exokarp', 'exocarp'], ['épicarpe', 'exocarp'], ['exocarpium', 'exocarp'], ['Mesokarp', 'mesocarp'], ['mésocarpe', 'mesocarp'],
+    ['mesocarpium', 'mesocarp'], ['Endokarp', 'endocarp'], ['endocarpe', 'endocarp'], ['endocarpium', 'endocarp'],
+    ['Hülse', 'legume'], ['legumen', 'legume'], ['gousse', 'legume'], ['pod', 'legume'], ['arillus', 'aril'], ['arille', 'aril'],
+    ['Samenmantel', 'aril'], ['nucellus', 'nucellus'], ['nucelle', 'nucellus'], ['périsperme', 'perisperm'], ['Perisperm', 'perisperm'],
+    ['perispermium', 'perisperm'], ['endosperm', 'endosperm'], ['Endosperm', 'endosperm'], ['albumen', 'endosperm']]) assert.equal(top(q), id, q);
+  for (const q of ['raphe', 'raphé', 'Raphe', 'Samennaht', 'rhaphe']) assert.ok(ids(q, 2).includes('raphe') && ids(q, 2).includes('seed-raphe'), q);
+});

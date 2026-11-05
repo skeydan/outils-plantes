@@ -17,6 +17,8 @@ const TABS = [
     label: { en: 'Breeding', fr: 'Hybridation' }, long: { en: 'Pollination, crosses and seeds', fr: 'Fécondation, croisements et graines' } },
   { id: 'graft', load: () => import('../graft/js/app.js'),
     label: { en: 'Grafting', fr: 'Greffe' }, long: { en: 'Scions, rootstocks and how to choose them', fr: 'Greffons, porte-greffes et comment les choisir' } },
+  { id: 'taxonomy', load: () => import('../taxonomy/js/app.js'),
+    label: { en: 'Taxonomy', fr: 'Taxonomie' }, long: { en: 'Orders, families, and the flower of each species', fr: 'Ordres, familles, et la fleur de chaque espèce' } },
   { id: 'microscope', load: () => import('../microscope/js/app.js'),
     label: { en: 'Microscope', fr: 'Microscope' }, long: { en: 'What a student microscope really shows', fr: 'Ce que montre vraiment un microscope d’élève' } },
 ];

@@ -1,5 +1,5 @@
 // Browser checks of the single page: screenshots (desktop/phone x light/dark
-// x fr/en x the four tabs), the tab bar (ARIA, keyboard, hash routing,
+// x fr/en x the six tabs), the tab bar (ARIA, keyboard, hash routing,
 // history, lazy loading), and scripted use of each tab. Fails on any console
 // error or warning and on horizontal overflow.
 //
@@ -20,7 +20,7 @@ const devices = {
   desktop: { viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 },
   phone: { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
 };
-const TABS = ['anatomy', 'water', 'seeds', 'graft', 'microscope'];
+const TABS = ['anatomy', 'water', 'seeds', 'graft', 'taxonomy', 'microscope'];
 
 const browser = await chromium.launch();
 const problems = [];
@@ -52,7 +52,7 @@ for (const device of Object.keys(devices)) {
       await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
       await opened(page, 'anatomy');
       ok((await page.getAttribute('html', 'lang')) === lang, `browser language ${lang} not picked up`);
-      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['graft', 'prunus-amygdalus'], ['microscope', null]]) {
+      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['graft', 'prunus-amygdalus'], ['taxonomy', 'prunus-dulcis'], ['microscope', null]]) {
         await page.evaluate((h) => { location.hash = h; }, sub ? `${tab}/${sub}` : tab);
         await opened(page, tab);
         await page.waitForLoadState('networkidle');
@@ -75,7 +75,7 @@ for (const device of Object.keys(devices)) {
   await opened(page, 'anatomy');
   // Lazy loading: only the open tab's code and data are fetched.
   ok(requested.some((u) => u.endsWith('/anatomy/js/entries.js')), 'anatomy data loaded on the anatomy tab');
-  ok(!requested.some((u) => u.endsWith('/seeds/js/taxa.js') || u.endsWith('/graft/js/graft.js') || u.endsWith('/plant-water/js/app.js') || /\/microscope\/(js|img)\//.test(u)), `other tabs not loaded yet: ${requested.filter((u) => /seeds|plant-water|microscope\/(js|img)/.test(u)).join(', ')}`);
+  ok(!requested.some((u) => u.endsWith('/seeds/js/taxa.js') || u.endsWith('/graft/js/graft.js') || u.endsWith('/plant-water/js/app.js') || /\/microscope\/(js|img)\//.test(u) || u.endsWith('/taxonomy/js/taxa.js')), `other tabs not loaded yet: ${requested.filter((u) => /seeds|plant-water|microscope\/(js|img)|taxonomy\/js\//.test(u)).join(', ')}`);
   // ARIA structure.
   const aria = await page.evaluate(() => {
     const tabs = [...document.querySelectorAll('[role="tablist"] [role="tab"]')];
@@ -88,9 +88,9 @@ for (const device of Object.keys(devices)) {
       visible: [...document.querySelectorAll('[role="tabpanel"]')].filter((p) => !p.hidden).map((p) => p.id),
     };
   });
-  ok(aria.n === 5, `five tabs: ${aria.n}`);
+  ok(aria.n === 6, `six tabs: ${aria.n}`);
   ok(aria.selected.join() === 'tab-anatomy', `anatomy selected: ${aria.selected}`);
-  ok(aria.tabindex.join() === '0,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
+  ok(aria.tabindex.join() === '0,-1,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
   ok(aria.controls && aria.labelled, 'tabs and panels point at each other');
   ok(aria.visible.join() === 'panel-anatomy', `one panel visible: ${aria.visible}`);
   // Keyboard: arrows move and open, Home and End, focus stays on the tab.
@@ -108,6 +108,9 @@ for (const device of Object.keys(devices)) {
   ok((await page.evaluate(() => document.activeElement.id)) === 'tab-anatomy', 'ArrowRight wraps to the first tab');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'microscope');
+  await page.keyboard.press('ArrowLeft');
+  await opened(page, 'taxonomy');
+  ok(requested.some((u) => u.endsWith('/taxonomy/js/app.js')), 'taxonomy code loaded on demand');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'graft');
   ok(requested.some((u) => u.endsWith('/graft/js/app.js')), 'grafting code loaded on demand');
@@ -356,6 +359,32 @@ for (const device of Object.keys(devices)) {
     await waitCurrent(page, id);
   }
   ok(nids.length > 150, `graft: ${nids.length} nodes rendered`);
+  await ctx.close();
+}
+
+// ---------------------------------------------------------------- taxonomy
+{
+  const { ctx, page } = await newPage('desktop', 'light', 'en');
+  await page.goto(`${BASE}/#taxonomy`, { waitUntil: 'networkidle' });
+  await opened(page, 'taxonomy');
+  // Bread wheat by default: a flower figure and the counts table.
+  ok(/Triticum aestivum/.test(await page.textContent('.taxo-name')), 'taxonomy: bread wheat by default');
+  ok(await page.isVisible('.taxo-fig svg'), 'taxonomy: a flower figure is drawn');
+  ok((await page.locator('.taxo-table tr').count()) >= 7, 'taxonomy: the counts table (four whorls plus symmetry, ovary, sex)');
+  // Search a common name, the species opens with its flower.
+  await page.fill('.taxo-search', 'amandier');
+  await page.keyboard.press('Enter');
+  await page.waitForFunction(() => /Prunus dulcis/.test(document.querySelector('.taxo-name')?.textContent ?? ''));
+  ok(hashOf(page) === '#taxonomy/prunus-dulcis', `taxonomy: search route: ${page.url()}`);
+  ok(await page.isVisible('.taxo-fig svg'), 'taxonomy: almond flower drawn');
+  await page.screenshot({ path: `${SHOTS}/interact-4-taxonomy-almond.png`, fullPage: true });
+  // Every taxon (order, family, genus, species) opens with its name.
+  const taxa = await page.evaluate(async () => (await import('./taxonomy/js/taxa.js')).TAXA.map((t) => ({ id: t.id, name: t.name })));
+  for (const { id, name } of taxa) {
+    await page.evaluate((id) => { location.hash = `taxonomy/${id}`; }, id);
+    await page.waitForFunction((n) => (document.querySelector('.taxo-name')?.textContent ?? '').includes(n), name);
+  }
+  ok(taxa.length >= 8, `taxonomy: ${taxa.length} taxa rendered`);
   await ctx.close();
 }
 

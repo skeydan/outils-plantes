@@ -1,12 +1,12 @@
 # outils-plantes
 
-One page, five tabs, for gardeners and for anyone learning how plants are
+One page, six tabs, for gardeners and for anyone learning how plants are
 built and how they live. French and English (follows the browser language,
 with a switch), light and dark, works on phones and with the keyboard. A
 static site: no backend, no build step, no tracking. Every number comes from
 a cited source, listed at the bottom of each tab.
 
-## The five tabs
+## The six tabs
 
 - **Anatomy** (`#anatomy`, code in `site/anatomy/`): a drill-down tree from
   the whole plant to organs, tissues, cells and cell parts (297 entries),
@@ -58,6 +58,16 @@ a cited source, listed at the bottom of each tab.
   sea buckthorn, rainbow eucalyptus) say so and how they are propagated
   instead. Search on plant, variety or rootstock names; a link per node
   (`#graft/prunus-amygdalus--gf-677`).
+- **Taxonomy** (`#taxonomy`, code in `site/taxonomy/`): a small, growing
+  classification from order to family to genus to species (starters: bread
+  wheat, buckwheat, quinoa, amaranth, white horehound, almond, blackberry,
+  kiwifruit). For each species a schematic flower of our own showing the
+  sepals, petals, stamens and carpels and their count (∞ for "many", 0 for
+  "absent"), the floral formula, symmetry, ovary position, sexuality, leaf
+  arrangement (phyllotaxy), inflorescence and fruit; the author of each
+  name. Names and placement follow POWO/WCVP and WFO; the flower facts are
+  per-species from regional floras. Search on Latin, common and German
+  names; a link per node (`#taxonomy/prunus-dulcis`).
 - **Microscope** (`#microscope`, code in `site/microscope/`): a simulated
   student microscope (the objectives, eyepieces and Barlow lens of the
   Bresser Biorit SE 1600x: 4x, 10x, 40x; WF10x, WF20x; 40× to 1600×) on
@@ -76,7 +86,7 @@ their own repository, outils-sols.
 
 ## How the page works
 
-`site/index.html` holds the header, the tab bar and five empty panels.
+`site/index.html` holds the header, the tab bar and six empty panels.
 `site/assets/app.js` reads the route from the hash, `#<tab>[/<entry or
 section>]` (`site/assets/route.js`), and loads a tab's code the first time
 it opens (`import()`), so the 435 KB anatomy data is only fetched for the
@@ -159,6 +169,11 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
   tree is the breeding tab's with the rootstocks under their plants, every
   species has a grafting answer (own or inherited), plants grown from
   cuttings or seed say so, every criterion has its card.
+- `tests/taxonomy.test.mjs`: the taxonomy tree is valid and sourced, the
+  starter species are under their genus at four levels, each has a complete
+  and consistent flower (parts per whorl, symmetry, ovary, sexuality,
+  formula, phyllotaxy, inflorescence, fruit), and search reaches them by
+  Latin, common and German name.
 - `tests/route.test.mjs`: parsing and writing the routes.
 - `tests/microscope.test.mjs`: resolution and useful magnification against
   the MicroscopyU tables and Bresser's 650× example, the screen scale, every
@@ -168,7 +183,7 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
 - `python3 -I scripts/microscope/check_optics.py`: the transfer function and
   the Airy pattern are a Fourier pair, first dark ring at 0.61 λ/NA, a
   blurred point matches the Airy pattern.
-- `scripts/e2e.mjs`: screenshots of the five tabs (desktop and phone,
+- `scripts/e2e.mjs`: screenshots of the six tabs (desktop and phone,
   light and dark, French and English, into `/tmp/plantes-shots`); the tab
   bar (ARIA, keyboard, lazy loading, history, language switch keeps the
   route, old addresses, no request to another site); every anatomy entry
@@ -251,7 +266,7 @@ Locally, either way from "Run locally":
 
 ```
 site/
-  index.html              the page: header, tab bar, five panels
+  index.html              the page: header, tab bar, six panels
   assets/app.js           tabs, hash routing, lazy loading, in-page anchors
   assets/route.js         routes (#tab/sub), no side effects
   assets/site.js          language and theme shell
@@ -262,6 +277,7 @@ site/
   plant-water/            water tab (js/physics.js, sources.js)
   seeds/                  breeding tab (js/taxa.js, concepts.js, breeding.js, sources.js)
   graft/                  grafting tab (js/graft.js data, grafting.js logic, sources.js; reuses seeds/js/taxa.js)
+  taxonomy/               taxonomy tab (js/taxa.js, flower.js, sources.js)
   microscope/             microscope tab (js/optics.js, specimens.js, structures.js, sources.js; img/)
   */index.html            redirects from the old addresses
 deploy/default.conf.template   nginx config

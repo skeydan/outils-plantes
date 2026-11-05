@@ -1,0 +1,57 @@
+/* Taxonomy tab: a browsable order -> family -> genus -> species tree with a
+   species panel (schematic flower + counts). Reuses the shared tree styles. */
+
+.taxo-head h1 { margin: 0 0 .35rem; }
+.taxo-head .lead { margin: 0 0 1rem; color: var(--muted); max-width: 60em; }
+
+.taxo-searchwrap { position: relative; margin: 0 0 1rem; max-width: 34rem; }
+.taxo-search { width: 100%; box-sizing: border-box; font: inherit; padding: .55rem .8rem;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--ink); }
+.taxo-results { position: absolute; z-index: 5; left: 0; right: 0; margin: .3rem 0 0; padding: .3rem;
+  list-style: none; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); max-height: 20rem; overflow: auto; }
+.taxo-results li { padding: .4rem .6rem; border-radius: 8px; cursor: pointer; display: flex; gap: .7rem; align-items: baseline; }
+.taxo-results li[aria-selected="true"] { background: var(--cyan-wash); }
+.taxo-msg { margin: .4rem 0 0; color: var(--muted); font-size: .9rem; }
+
+.taxo-body { display: grid; grid-template-columns: minmax(16rem, 30%) 1fr; gap: 1.25rem; align-items: start; }
+.taxo-tree-card { position: sticky; top: 4rem; max-height: calc(100vh - 6rem); overflow: auto; }
+.taxo-tree-box { padding: .25rem 0; }
+
+.taxo-lat { font-style: italic; }
+.taxo-rank { font-weight: 600; }
+.taxo-path { color: var(--muted); font-size: .92rem; margin: 0 0 .4rem; }
+.taxo-arrow { color: var(--muted); margin: 0 .2rem; }
+.taxo-name { margin: 0 0 .25rem; font-size: 1.5rem; }
+.taxo-author { font-weight: 400; font-size: .85em; color: var(--muted); }
+.taxo-common { margin: 0 0 .8rem; color: var(--muted); }
+.taxo-rankline { color: var(--muted); font-size: .9rem; margin: 0 0 .6rem; }
+
+.taxo-fig { max-width: 22rem; margin: .5rem 0 1rem; }
+.taxo-fig svg { width: 100%; height: auto; }
+
+.taxo-table { border-collapse: collapse; margin: 0 0 1rem; }
+.taxo-table caption { text-align: left; font-weight: 600; margin-bottom: .35rem; }
+.taxo-table th, .taxo-table td { text-align: left; padding: .3rem .9rem .3rem 0; border-bottom: 1px solid var(--hairline); }
+.taxo-table th { font-weight: 500; color: var(--muted); white-space: nowrap; }
+
+.taxo-facts { margin: 0 0 1rem; }
+.taxo-facts dt { font-weight: 600; margin-top: .5rem; }
+.taxo-facts dd { margin: 0 0 .5rem; }
+.taxo-facts code { font-size: .95em; background: var(--cyan-wash); padding: .05em .4em; border-radius: 5px; }
+
+.taxo-note { background: var(--note); border-radius: var(--radius); padding: .7rem .9rem; }
+.taxo-src { color: var(--muted); font-size: .9rem; margin: .8rem 0 0; }
+
+.taxo-children { margin: .4rem 0 0; padding-left: 1.3rem; }
+.taxo-dim { color: var(--muted); font-size: .9rem; }
+
+.taxo-sources { margin-top: 1.5rem; border-top: 1px solid var(--hairline); padding-top: .8rem; }
+.taxo-sources h2 { font-size: 1.05rem; }
+.taxo-sources ol { padding-left: 1.3rem; margin: .4rem 0 0; color: var(--muted); font-size: .92rem; }
+.taxo-sources li { margin: .3rem 0; }
+
+@media (max-width: 720px) {
+  .taxo-body { grid-template-columns: 1fr; }
+  .taxo-tree-card { position: static; max-height: none; }
+}

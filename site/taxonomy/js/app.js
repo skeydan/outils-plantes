@@ -5,7 +5,7 @@ import { lang } from '../../assets/site.js';
 import { routeHref } from '../../assets/route.js';
 import { h, citer } from '../../assets/ui.js';
 import { renderTree, wireSearch } from '../../assets/tree-ui.js';
-import { buildIndex, search } from '../../assets/tree.js';
+import { buildIndex, search, descendantCount } from '../../assets/tree.js';
 import { TAXA } from './taxa.js';
 import { SOURCES } from './sources.js';
 import { flowerSVG } from './flower.js';
@@ -174,6 +174,8 @@ export function mount(panel, sub) {
 
 export function show(sub) {
   if (sub && index.byId.has(sub)) S.id = sub;
-  renderTree(treeBox, { index, current: S.id, open: S.open, label, href, T });
+  renderTree(treeBox, { index, current: S.id, open: S.open, label, href, T,
+    count: (id) => descendantCount(index, id, (e) => e.rank === 'species'),
+    countTitle: T('species below', 'espèces en dessous') });
   detailEl.replaceChildren(detail(S.id));
 }

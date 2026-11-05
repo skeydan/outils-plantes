@@ -8,7 +8,7 @@ import { pathTo, descendantCount } from './tree.js';
  * expanded ids, updated in place), label(id) -> text or node, labelLang (lang
  * attribute of the labels), href(id) -> link of an entry, T(en, fr).
  */
-export function renderTree(box, { index, current, open, label, labelLang = null, href, T }) {
+export function renderTree(box, { index, current, open, label, labelLang = null, href, T, count = descendantCount, countTitle = null }) {
   for (const id of pathTo(index, current).slice(0, -1)) open.add(id);
   const text = (id) => { const l = label(id); return typeof l === 'string' ? l : l.textContent; };
   const node = (id) => {
@@ -28,7 +28,7 @@ export function renderTree(box, { index, current, open, label, labelLang = null,
           sub.hidden = !now;
           if (now && !sub.childElementCount) sub.append(...kids.map(node));
         } });
-      li.append(h('div', { class: 'a-row' }, btn, link, h('span', { class: 'a-count', title: T('entries below', 'entrées en dessous'), text: String(descendantCount(index, id)) })), sub);
+      li.append(h('div', { class: 'a-row' }, btn, link, h('span', { class: 'a-count', title: countTitle ?? T('entries below', 'entrées en dessous'), text: String(count(index, id)) })), sub);
     } else {
       li.append(h('div', { class: 'a-row' }, h('span', { class: 'a-leaf', 'aria-hidden': 'true' }), link));
     }

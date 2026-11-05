@@ -67,10 +67,13 @@ export function pathTo(index, id) {
   return out;
 }
 
-/** Number of entries below `id`. */
-export function descendantCount(index, id) {
+/** Number of entries below `id`, optionally only those matching `pred`. */
+export function descendantCount(index, id, pred) {
   let n = 0;
-  for (const c of index.children.get(id) ?? []) n += 1 + descendantCount(index, c);
+  for (const c of index.children.get(id) ?? []) {
+    if (!pred || pred(index.byId.get(c))) n += 1;
+    n += descendantCount(index, c, pred);
+  }
   return n;
 }
 

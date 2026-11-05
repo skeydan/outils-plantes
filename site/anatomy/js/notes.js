@@ -326,6 +326,22 @@ export const NOTES = {
     },
     src: ['spektrum', 'g15-spektrum-geo', 'openstax', 'wpfr', 'wpen'],
   },
+  'bluetenstand-fruchtstand': {
+    title: { en: 'Blütenstand and Fruchtstand: the same axis, in flower or in fruit', fr: 'Blütenstand et Fruchtstand : le même axe, en fleur ou en fruit' },
+    body: {
+      en: [
+        'German [[de:Blütenstand]] (Latin inflorescentia, French [[fr:inflorescence]]) is the whole flowering shoot: the {{flower}}s of a plant arranged together on a common axis — a raceme, spike, panicle, cyme or capitulum. The word is built from Blüte ({{flower}}) and Stand (standing, arrangement): how the flowers stand. The stalk of a single flower is the {{pedicel}}; the stalk of a whole inflorescence is the peduncle. ^wpde,spektrum,wpfr^',
+        'German [[de:Fruchtstand]] (French [[fr:infrutescence]]) is the same axis later, when each flower has become a {{fruit}}: the fruiting stage of an inflorescence, built from Frucht ({{fruit}}) and Stand. A bramble’s cluster of open flowers is a Blütenstand; the same cluster once each flower has turned into a small drupe is a Fruchtstand. So the pair names one structure at two moments, not two structures. ^wpde,spektrum,wpfr^',
+        'The one trap: Fruchtstand is also used narrowly for a {{multiple-fruit}} (German [[de:Fruchtverband]]), where the fruits of the inflorescence fuse or crowd into one unit (pineapple, mulberry, fig). In that narrow sense not every Fruchtstand is a multiple fruit — the broad sense “infructescence” is the safe reading. ^wpde,spektrum,wpfr,wpen^',
+      ],
+      fr: [
+        'L’allemand [[de:Blütenstand]] (latin inflorescentia, français [[fr:inflorescence]]) est toute la pousse fleurie : les {{flower}}s d’une plante disposées ensemble sur un axe commun — grappe, épi, panicule, cyme ou capitule. Le mot se construit sur Blüte ({{flower}}) et Stand (position, disposition) : la façon dont les fleurs se tiennent. La tige d’une seule fleur est le {{pedicel}} ; la tige de toute une inflorescence est le pédoncule. ^wpde,spektrum,wpfr^',
+        'L’allemand [[de:Fruchtstand]] (français [[fr:infrutescence]]) est le même axe plus tard, quand chaque fleur est devenue un {{fruit}} : le stade fructifère d’une inflorescence, construit sur Frucht ({{fruit}}) et Stand. La grappe de fleurs ouvertes d’une ronce est un Blütenstand ; la même grappe une fois que chaque fleur s’est changée en petite drupe est un Fruchtstand. La paire nomme donc une seule structure à deux moments, pas deux structures. ^wpde,spektrum,wpfr^',
+        'Le seul piège : Fruchtstand s’emploie aussi, au sens étroit, pour un {{multiple-fruit}} (allemand [[de:Fruchtverband]]), où les fruits de l’inflorescence se soudent ou se serrent en une seule unité (ananas, mûre du mûrier, figue). Dans ce sens étroit, tout Fruchtstand n’est pas un fruit multiple — le sens large « infrutescence » est la lecture sûre. ^wpde,spektrum,wpfr,wpen^',
+      ],
+    },
+    src: ['wpde', 'spektrum', 'wpfr', 'wpen'],
+  },
 };
 
 /** Which entries show which notes. */
@@ -341,6 +357,7 @@ export const NOTE_ENTRIES = {
   albumen: ['endosperm', 'perisperm'],
   'graine-semence': ['seed', 'achene', 'caryopsis'],
   'berry-fruit': ['berry', 'aggregate-fruit', 'multiple-fruit', 'accessory-fruit'],
+  'bluetenstand-fruchtstand': ['flower', 'fruit'],
   'ovule-fr': ['ovule', 'egg-cell'],
   'pistil-carpel': ['pistil', 'carpel', 'gynoecium'],
   'stoma-ostiole': ['stoma', 'stomatal-pore'],

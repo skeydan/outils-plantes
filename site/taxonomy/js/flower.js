@@ -67,10 +67,10 @@ export function flowerSVG(f, S) {
   ].join('');
 
   const legend = [
-    [W[0].color, `${S.sepals} ×${nTxt(f.sepals.n)}`],
-    [W[1].color, `${S.petals} ×${nTxt(f.petals.n)}`],
-    [W[2].color, `${S.stamens} ×${nTxt(f.stamens.n)}`],
-    [carpelsColor, `${S.carpels} ×${nTxt(f.carpels.n)}`],
+    [W[0].color, `${S.sepals} ${nTxt(f.sepals.n)}`],
+    [W[1].color, `${S.petals} ${nTxt(f.petals.n)}`],
+    [W[2].color, `${S.stamens} ${nTxt(f.stamens.n)}`],
+    [carpelsColor, `${S.carpels} ${nTxt(f.carpels.n)}`],
   ].map(([c, txt], i) => {
     const y = 34 + i * 34;
     return `<circle cx="196" cy="${y - 4}" r="6" fill="${c}"/><text x="210" y="${y}" font-size="13" fill="var(--ink)">${txt}</text>`;

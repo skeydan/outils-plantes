@@ -48,6 +48,8 @@ test('the starter species are present under their genus', () => {
     'prunus-dulcis': 'prunus',
     'rubus-fruticosus': 'rubus',
     'actinidia-deliciosa': 'actinidia',
+    'selenicereus-undatus': 'selenicereus',
+    'hippophae-rhamnoides': 'hippophae',
   };
   for (const [sp, gen] of Object.entries(species)) under(sp, gen);
   // Each species sits under family and order too (four levels).
@@ -81,7 +83,12 @@ test('search reaches species by Latin, common and German name', () => {
   assert.equal(top('amandier'), 'prunus-dulcis');
   assert.equal(top('kiwi'), 'actinidia-deliciosa');
   assert.equal(top('mûre'), 'rubus-fruticosus');
+  assert.equal(top('pitaya'), 'selenicereus-undatus');
+  assert.equal(top('fruit du dragon'), 'selenicereus-undatus');
   // German common names reach the species too (genus and species share some).
   assert.ok(search(index, 'Buchweizen').some((r) => r.id === 'fagopyrum-esculentum'));
   assert.ok(search(index, 'Weizen').some((r) => r.id === 'triticum'));
+  assert.ok(search(index, 'argousier').some((r) => r.id === 'hippophae-rhamnoides'));
+  assert.ok(search(index, 'Sanddorn').some((r) => r.id === 'hippophae-rhamnoides'));
+  assert.ok(search(index, 'Drachenfrucht').some((r) => r.id === 'selenicereus-undatus'));
 });

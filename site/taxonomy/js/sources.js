@@ -27,5 +27,65 @@ export const SOURCES = [
   "short": "Standard floras and morphology texts",
   "text": "Floral part counts, symmetry, ovary position, phyllotaxy, inflorescence and fruit type are standard morphological facts for these widely described species, as given in regional floras (e.g. Flora of China, Flora of North America) and plant-morphology textbooks. Checked against the per-species page named in each flower_src before publication.",
   "url": "http://www.efloras.org/"
+ },
+ {
+  "id": "photo-prunus",
+  "short": "Photo : CC0, ManuelB701",
+  "text": "Photo of an almond blossom, CC0, ManuelB701, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Bodenheim_-_Bl%C3%BCte_eines_Mandelbaums.jpg"
+ },
+ {
+  "id": "photo-rubus",
+  "short": "Photo : CC0, MargaretAndArmand",
+  "text": "Photo of a bramble (Rubus fruticosus) flower, CC0, MargaretAndArmand, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Rubus_fruticosus_flower_in_Maastricht.jpg"
+ },
+ {
+  "id": "photo-actinidia",
+  "short": "Photo : public domain, Wouter Hagens",
+  "text": "Photo of a kiwifruit flower, public domain, Wouter Hagens, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Actinidia_chinensis_A.jpg"
+ },
+ {
+  "id": "photo-hippophae",
+  "short": "Photo : CC BY-SA 2.0 de, Jürgen Howaldt",
+  "text": "Photo of sea buckthorn berries, CC BY-SA 2.0 de, Jürgen Howaldt, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Hippophae_rhamnoides_051012.jpg"
+ },
+ {
+  "id": "photo-selenicereus",
+  "short": "Photo : CC BY 3.0, Forest & Kim Starr",
+  "text": "Photo of a dragon-fruit (Selenicereus undatus) flower, CC BY 3.0, Forest & Kim Starr, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Starr_030702-0001_Hylocereus_undatus.jpg"
+ },
+ {
+  "id": "photo-triticum",
+  "short": "Photo : CC BY-SA 2.5, Andreas Trepte",
+  "text": "Photo of wheat ears, CC BY-SA 2.5, Andreas Trepte, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Triticum_aestivum.jpg"
+ },
+ {
+  "id": "photo-fagopyrum",
+  "short": "Photo : CC BY-SA 4.0, V.Boldychev",
+  "text": "Photo of a buckwheat flower, CC BY-SA 4.0, V.Boldychev, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Buckwheat_flower_macroA.jpg"
+ },
+ {
+  "id": "photo-chenopodium",
+  "short": "Photo : CC BY-SA 4.0, Michael Hermann",
+  "text": "Photo of red quinoa plants, CC BY-SA 4.0, Michael Hermann, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Red_quinoa_plants.JPG"
+ },
+ {
+  "id": "photo-amaranthus",
+  "short": "Photo : CC BY-SA 4.0, Stefan.lefnaer",
+  "text": "Photo of love-lies-bleeding (Amaranthus caudatus) inflorescences, CC BY-SA 4.0, Stefan.lefnaer, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Amaranthus_caudatus_sl7.jpg"
+ },
+ {
+  "id": "photo-marrubium",
+  "short": "Photo : CC BY-SA 4.0, Kenraiz",
+  "text": "Photo of a white horehound plant in flower, CC BY-SA 4.0, Krzysztof Ziarnek (Kenraiz), Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Marrubium_vulgare_kz16.jpg"
  }
 ];

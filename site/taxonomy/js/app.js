@@ -29,7 +29,17 @@ const STR = {
   phyllotaxy: { en: 'Leaf arrangement (phyllotaxy)', fr: 'Disposition des feuilles (phyllotaxie)' },
   inflorescence: { en: 'Inflorescence', fr: 'Inflorescence' },
   fruit: { en: 'Fruit', fr: 'Fruit' },
+  inAnatomy: { en: 'in Anatomy', fr: 'dans Anatomie' },
+  inFruits: { en: 'fruit types in Fruits', fr: 'types de fruits dans Fruits' },
+  inDevelopment: { en: 'flower → fruit in Development', fr: 'fleur → fruit dans Développement' },
   sources: { en: 'Sources', fr: 'Sources' },
+};
+
+// Fruit-type category on the Fruits tab for each fruit type in the Anatomy tab.
+const FRUIT_CAT = {
+  drupe: 'drupe', berry: 'berry', 'aggregate-fruit': 'aggregate', 'accessory-fruit': 'accessory', pome: 'accessory',
+  achene: 'dry', caryopsis: 'dry', capsule: 'dry', nut: 'dry', legume: 'dry', follicle: 'dry', silique: 'dry',
+  samara: 'dry', schizocarp: 'dry',
 };
 
 const RANK = {
@@ -81,31 +91,43 @@ function speciesDetail(e) {
     stamens: T('stamens', 'étamines'), carpels: T('carpels', 'carpelles'),
     diagram: T('floral diagram', 'schéma floral'),
   };
+  const alink = (id, txt) => h('a', { href: routeHref('anatomy', id), class: 'taxo-link' }, txt);
   const rows = [
-    [SFL.sepals, `${nTxt(f.sepals.n)}${wNote(f.sepals)}`],
-    [SFL.petals, `${nTxt(f.petals.n)}${wNote(f.petals)}`],
-    [SFL.stamens, `${nTxt(f.stamens.n)}${wNote(f.stamens)}`],
-    [SFL.carpels, `${nTxt(f.carpels.n)}${wNote(f.carpels)}`],
+    [alink('sepal', SFL.sepals), `${nTxt(f.sepals.n)}${wNote(f.sepals)}`],
+    [alink('petal', SFL.petals), `${nTxt(f.petals.n)}${wNote(f.petals)}`],
+    [alink('stamen', SFL.stamens), `${nTxt(f.stamens.n)}${wNote(f.stamens)}`],
+    [alink('carpel', SFL.carpels), `${nTxt(f.carpels.n)}${wNote(f.carpels)}`],
   ];
   const table = h('table', { class: 'taxo-table' },
     h('caption', {}, L(STR.flowerParts)),
     ...rows.map(([k, v]) => h('tr', {}, h('th', { scope: 'row' }, k), h('td', {}, v))),
     h('tr', {}, h('th', { scope: 'row' }, L(STR.symmetry)), h('td', {}, L(SYMMETRY[f.symmetry]))),
-    h('tr', {}, h('th', { scope: 'row' }, L(STR.ovary)), h('td', {}, L(OVARY[f.ovary]))),
+    h('tr', {}, h('th', { scope: 'row' }, L(STR.ovary)), h('td', {},
+      alink(f.ovary === 'superior' ? 'superior-ovary' : 'inferior-ovary', L(OVARY[f.ovary])))),
     h('tr', {}, h('th', { scope: 'row' }, L(STR.sex)), h('td', {}, L(SEX[f.sex]))),
   );
 
   const fig = h('div', { class: 'taxo-fig' });
   fig.innerHTML = flowerSVG(f, SFL);
 
+  const photo = e.photo ? h('figure', { class: 'taxo-photo' },
+    h('img', { src: `taxonomy/img/${e.photo.file}`, alt: L(e.photo.cap), loading: 'lazy' }),
+    h('figcaption', {}, L(e.photo.cap),
+      h('span', { class: 'taxo-credit' }, ' — ', T('Photo', 'Photo'), ' ', cite(e.photo.credit)))) : null;
+
+  const fruitLinks = (e.fruit_anatomy || e.process) ? h('span', { class: 'taxo-see' },
+    e.fruit_anatomy ? h('a', { class: 'taxo-chip', href: routeHref('anatomy', e.fruit_anatomy) }, L(STR.inAnatomy)) : null,
+    e.fruit_anatomy ? h('a', { class: 'taxo-chip', href: routeHref('fruits', FRUIT_CAT[e.fruit_anatomy] ?? 'dry') }, L(STR.inFruits)) : null,
+    e.process ? h('a', { class: 'taxo-chip', href: routeHref('development', e.process) }, L(STR.inDevelopment)) : null) : null;
+
   const facts = h('dl', { class: 'taxo-facts' },
     h('dt', {}, L(STR.formula)), h('dd', {}, h('code', {}, f.formula)),
     h('dt', {}, L(STR.phyllotaxy)), h('dd', {}, L(e.phyllotaxy)),
     h('dt', {}, L(STR.inflorescence)), h('dd', {}, L(e.inflorescence)),
-    h('dt', {}, L(STR.fruit)), h('dd', {}, L(e.fruit)),
+    h('dt', {}, L(STR.fruit)), h('dd', {}, L(e.fruit), fruitLinks),
   );
 
-  return h('div', {}, fig, table, facts,
+  return h('div', {}, fig, photo, table, facts,
     f.note ? h('p', { class: 'taxo-note' }, L(f.note)) : null,
     h('p', { class: 'taxo-src' }, T('Names', 'Noms'), ' ', cite(...e.names_src.map((s) => s.k)),
       ' · ', T('flower', 'fleur'), ' ', cite(...e.flower_src.map((s) => s.k))));

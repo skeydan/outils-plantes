@@ -118,6 +118,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate (distichous, in two ranks)', fr: 'alterne (distique, sur deux rangs)' },
    inflorescence: { en: 'a compound spike of spikelets (the ear)', fr: 'un épi composé d’épillets (l’épi)' },
    fruit: { en: 'caryopsis (the grain)', fr: 'caryopse (le grain)' },
+   fruit_anatomy: 'caryopsis',
+
+   photo: { file: 'triticum-aestivum.jpg', credit: 'photo-triticum',
+     cap: { en: 'The photo shows only the ear (the inflorescence): the tiny florets and the future grains (caryopses) are hidden inside the spikelets.', fr: 'La photo ne montre que l’épi (l’inflorescence) : les fleurs minuscules et les futurs grains (caryopses) sont cachés dans les épillets.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200025446', loc: 'Flora of China description' }] },
 
  { id: 'fagopyrum-esculentum', parent: 'fagopyrum', rank: 'species', name: 'Fagopyrum esculentum', author: 'Moench',
@@ -131,6 +135,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate', fr: 'alterne' },
    inflorescence: { en: 'a cymose cluster (a branched, terminal raceme of cymes)', fr: 'une inflorescence cymeuse (grappe ramifiée terminale de cymes)' },
    fruit: { en: 'a three-sided achene', fr: 'un akène triangulaire' },
+   fruit_anatomy: 'achene',
+
+   photo: { file: 'fagopyrum-esculentum.jpg', credit: 'photo-fagopyrum',
+     cap: { en: 'The photo shows only the flower, about 7 mm across: five tepals, eight stamens, three styles. The fruit (achene) forms only after fertilisation.', fr: 'La photo ne montre que la fleur, d’environ 7 mm : cinq tépales, huit étamines, trois styles. Le fruit (akène) ne se forme qu’après fécondation.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=200006709', loc: 'Flora of North America description' }] },
 
  { id: 'chenopodium-quinoa', parent: 'chenopodium', rank: 'species', name: 'Chenopodium quinoa', author: 'Willd.',
@@ -144,6 +152,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate', fr: 'alterne' },
    inflorescence: { en: 'a terminal panicle of dense glomerules', fr: 'une panicule terminale de glomérules denses' },
    fruit: { en: 'an achene wrapped in the persistent perianth', fr: 'un akène enveloppé dans le périanthe persistant' },
+   fruit_anatomy: 'achene',
+
+   photo: { file: 'chenopodium-quinoa.jpg', credit: 'photo-chenopodium',
+     cap: { en: 'The photo shows the plants and their bright red panicles, covered with glomerules of tiny flowers; the seeds (achenes) are small and wrapped in the perianth.', fr: 'La photo montre les plantes et leurs panicules rouge vif, couvertes de glomérules de fleurs minuscules ; les graines (akènes) sont petites et enveloppées dans le périanthe.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=200006702', loc: 'Flora of North America description' }] },
 
  { id: 'amaranthus-caudatus', parent: 'amaranthus', rank: 'species', name: 'Amaranthus caudatus', author: 'L.',
@@ -157,6 +169,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate', fr: 'alterne' },
    inflorescence: { en: 'a dense, drooping terminal spike or panicle', fr: 'un épi ou une panicule terminale dense et retombante' },
    fruit: { en: 'a circumscissile capsule (opens like a lid)', fr: 'une capsule circumscissile (s’ouvre comme un couvercle)' },
+   fruit_anatomy: 'capsule',
+
+   photo: { file: 'amaranthus-caudatus.jpg', credit: 'photo-amaranthus',
+     cap: { en: 'The photo shows only the drooping, dark-red inflorescences, made of tiny male and female flowers mixed together; the fruits (capsules) open like a lid.', fr: 'La photo ne montre que les inflorescences retombantes rouge foncé, faites de fleurs minuscules mâles et femelles mêlées ; les fruits (capsules) s’ouvrent comme un couvercle.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=200006659', loc: 'Flora of North America description' }] },
 
  { id: 'marrubium-vulgare', parent: 'marrubium', rank: 'species', name: 'Marrubium vulgare', author: 'L.',
@@ -170,6 +186,10 @@ export const TAXA = [
    phyllotaxy: { en: 'opposite', fr: 'opposée' },
    inflorescence: { en: 'dense whorls in the leaf axils (verticillasters)', fr: 'verticilles denses à l’aisselle des feuilles (verticillastres)' },
    fruit: { en: 'four small nutlets', fr: 'quatre petits nucules (akènes)' },
+   fruit_anatomy: 'nut',
+
+   photo: { file: 'marrubium-vulgare.jpg', credit: 'photo-marrubium',
+     cap: { en: 'The photo shows the plant in flower: square stems, crinkled leaves, white two-lipped flowers in whorls in the leaf axils; the fruits (nutlets) are not visible.', fr: 'La photo montre la plante en fleurs : tiges carrées, feuilles gaufrées, fleurs blanches bilabiées en verticilles à l’aisselle des feuilles ; les fruits (nucules) ne sont pas visibles.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=200019238', loc: 'Flora of North America description' }] },
 
  { id: 'prunus-dulcis', parent: 'prunus', rank: 'species', name: 'Prunus dulcis', author: '(Mill.) D.A.Webb',
@@ -184,6 +204,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate (spiral, 2/5)', fr: 'alterne (spiralée, 2/5)' },
    inflorescence: { en: 'flowers solitary or in pairs, on last year’s wood', fr: 'fleurs solitaires ou par paires, sur le bois de l’année précédente' },
    fruit: { en: 'a drupe; the almond is the seed inside the stone', fr: 'une drupe ; l’amande est la graine à l’intérieur du noyau' },
+   fruit_anatomy: 'drupe',   process: 'drupe',
+
+   photo: { file: 'prunus-dulcis.jpg', credit: 'photo-prunus',
+     cap: { en: 'The photo shows only the flower: five petals, many stamens, one carpel in the middle. The fruit (drupe) and the almond (seed) form only after fertilisation.', fr: 'La photo ne montre que la fleur : cinq pétales, de nombreuses étamines, un seul carpelle au centre. Le fruit (drupe) et l’amande (graine) ne se forment qu’après fécondation.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200010713', loc: 'Flora of China description' }] },
 
  { id: 'rubus-fruticosus', parent: 'rubus', rank: 'species', name: 'Rubus fruticosus', author: 'L.',
@@ -197,6 +221,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate (compound leaf, 3–5 leaflets)', fr: 'alterne (feuille composée, 3 à 5 folioles)' },
    inflorescence: { en: 'a cyme or short panicle', fr: 'une cyme ou une petite panicule' },
    fruit: { en: 'an aggregate of drupelets', fr: 'un agrégat de drupéoles (fruit composé)' },
+   fruit_anatomy: 'aggregate-fruit',   process: 'aggregate',
+
+   photo: { file: 'rubus-fruticosus.jpg', credit: 'photo-rubus',
+     cap: { en: 'The photo shows only the flower: five petals, many stamens and many free carpels in the middle. Each carpel will become one drupelet; together they make the blackberry.', fr: 'La photo ne montre que la fleur : cinq pétales, de nombreuses étamines et de nombreux carpelles libres au centre. Chaque carpelle deviendra une drupéole ; ensemble, elles forment la mûre.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=242345424', loc: 'Flora of North America description' }] },
 
  { id: 'actinidia-deliciosa', parent: 'actinidia', rank: 'species', name: 'Actinidia deliciosa', author: '(A.Chev.) C.F.Liang & A.R.Ferguson',
@@ -211,6 +239,10 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate', fr: 'alterne' },
    inflorescence: { en: 'a cyme of one to a few flowers', fr: 'une cyme d’une à quelques fleurs' },
    fruit: { en: 'a many-seeded berry', fr: 'une baie à nombreuses graines' },
+   fruit_anatomy: 'berry',   process: 'berry',
+
+   photo: { file: 'actinidia-deliciosa.jpg', credit: 'photo-actinidia',
+     cap: { en: 'The photo shows only the flower: five white petals and many stamens; the inferior ovary sits under the petals. The berry forms only after fertilisation.', fr: 'La photo ne montre que la fleur : cinq pétales blancs et de nombreuses étamines ; l’ovaire infère est sous les pétales. La baie ne se forme qu’après fécondation.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200013990', loc: 'Flora of China description' }] },
 
  { id: 'selenicereus-undatus', parent: 'selenicereus', rank: 'species', name: 'Selenicereus undatus', author: '(Haw.) D.R.Hunt',
@@ -225,6 +257,10 @@ export const TAXA = [
    phyllotaxy: { en: 'leaves reduced to spines; the green, jointed stems do the photosynthesizing', fr: 'feuilles réduites à des épines ; les tiges vertes et articulées font la photosynthèse' },
    inflorescence: { en: 'a single flower, opening at night', fr: 'une fleur solitaire, nocturne' },
    fruit: { en: 'a berry with a scaly skin and many black seeds in white pulp', fr: 'une baie à peau écailleuse et de nombreuses graines noires dans une pulpe blanche' },
+   fruit_anatomy: 'berry',
+
+   photo: { file: 'selenicereus-undatus.jpg', credit: 'photo-selenicereus',
+     cap: { en: 'The photo shows only the flower, huge and white, which opens for a single night; the dragon fruit forms only after fertilisation, from the inferior ovary.', fr: 'La photo ne montre que la fleur, énorme et blanche, qui ne s’ouvre qu’une seule nuit ; le pitaya ne se forme qu’après fécondation, à partir de l’ovaire infère.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=242413402', loc: 'Flora of China description' }] },
 
  { id: 'hippophae-rhamnoides', parent: 'hippophae', rank: 'species', name: 'Hippophae rhamnoides', author: 'L.',
@@ -239,5 +275,9 @@ export const TAXA = [
    phyllotaxy: { en: 'alternate, narrow silvery leaves', fr: 'alterne, feuilles étroites argentées' },
    inflorescence: { en: 'male flowers in small catkin-like spikes; female flowers in small clusters in the leaf axils', fr: 'fleurs mâles en petits épis ressemblant à des chatons ; fleurs femelles en petits groupes à l’aisselle des feuilles' },
    fruit: { en: 'an achene wrapped in the fleshy, orange calyx tube (drupe-like)', fr: 'un akène enveloppé dans le tube charnu et orange du calice (comme une drupe)' },
+   fruit_anatomy: 'accessory-fruit',
+
+   photo: { file: 'hippophae-rhamnoides.jpg', credit: 'photo-hippophae',
+     cap: { en: 'The photo shows only fruits: each orange “berry” is an achene wrapped in the fleshy calyx tube. The tiny flowers open before the leaves, in spring.', fr: 'La photo ne montre que des fruits : chaque « baie » orange est un akène enveloppé dans le tube charnu du calice. Les fleurs minuscules s’ouvrent avant les feuilles, au printemps.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=200014616', loc: 'Flora of China description' }] },
 ];

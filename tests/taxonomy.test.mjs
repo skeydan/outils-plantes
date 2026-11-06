@@ -29,6 +29,7 @@ test('every name, text and flower fact is sourced; every source is cited and lin
     for (const s of e.names_src) used.add(s.k);
     if (e.taxonomy?.src) for (const s of e.taxonomy.src) used.add(s.k);
     if (e.flower) { for (const s of e.flower.src) used.add(s.k); for (const s of e.flower_src) used.add(s.k); }
+    if (e.photo) used.add(e.photo.credit);
   }
   for (const s of SOURCES) {
     assert.ok(used.has(s.id), `${s.id} listed but never cited`);

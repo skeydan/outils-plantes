@@ -1217,6 +1217,166 @@ function rootForms(ctx) {
   return c.root;
 }
 
+function ovaryPosition(ctx) {
+  const c = canvas(ctx, 500, 360, ctx.T('Three flowers cut lengthwise: ovary superior, half-inferior, inferior', 'Trois fleurs coupées en long : ovaire supère, semi-infère, infère'));
+  const T = ctx.T;
+  const flowerHalf = (cx, kind) => {
+    c.s('rect', { x: cx - 2.5, y: 172, width: 5, height: 38, class: 'dr-chl' }, 'pedicel');
+    c.s('path', { d: `M${cx - 13},172 Q${cx - 15},165 ${cx},165 Q${cx + 15},165 ${cx + 13},172 Z`, class: 'dr-ground' }, 'receptacle');
+    const stigma = (y) => c.s('path', { d: `M${cx - 7},${y} C${cx - 8},${y - 6} ${cx - 3},${y - 8} ${cx},${y - 4} C${cx + 3},${y - 8} ${cx + 8},${y - 6} ${cx + 7},${y} Z`, class: 'dr-pistil' }, 'stigma');
+    const sepalAt = (x, y) => c.s('path', { d: `M${cx + x},${y} C${cx + x * 2.6},${y - 6} ${cx + x * 4.6},${y - 18} ${cx + x * 5.4},${y - 30} C${cx + x * 3.9},${y - 28} ${cx + x * 1.9},${y - 12} ${cx + x * 0.6},${y - 4} Z`, class: 'dr-chl' }, 'sepal');
+    const petalAt = (x, y) => c.s('path', { d: `M${cx + x},${y} C${cx + x * 4.6},${y - 20} ${cx + x * 9.6},${y - 56} ${cx + x * 9},${y - 80} C${cx + x * 6.4},${y - 70} ${cx + x * 2.8},${y - 32} ${cx + x * 0.6},${y - 4} Z`, class: 'dr-flower' }, 'petal');
+    const stamenAt = (x, y, top) => {
+      c.s('path', { d: `M${cx + x},${y} Q${cx + x * 2.2},${y - 22} ${cx + x * 3},${top}`, class: 'dr-filament' }, 'filament');
+      c.s('ellipse', { cx: cx + x * 3.2, cy: top - 4, rx: 4, ry: 8, class: 'dr-anther' }, 'anther');
+    };
+    if (kind === 'hypo') {
+      c.s('path', { d: `M${cx},86 C${cx - 16},88 ${cx - 16},138 ${cx},140 C${cx + 16},138 ${cx + 16},88 ${cx},86 Z`, class: 'dr-pistil' }, 'superior-ovary');
+      c.s('path', { d: `M${cx},94 C${cx - 9},96 ${cx - 9},132 ${cx},134 C${cx + 9},132 ${cx + 9},96 ${cx},94 Z`, class: 'dr-air' });
+      c.s('path', { d: `M${cx},96 V132`, class: 'dr-line' }, 'placenta');
+      for (const [dx, y] of [[-4, 106], [4, 114], [-4, 122]]) c.s('ellipse', { cx: cx + dx, cy: y, rx: 3.4, ry: 2.8, class: 'dr-ovule' }, 'ovule');
+      c.s('path', { d: `M${cx - 2},66 L${cx - 2},86 L${cx + 2},86 L${cx + 2},66 Z`, class: 'dr-pistil' }, 'style');
+      stigma(66);
+      sepalAt(-6, 162); sepalAt(6, 162);
+      petalAt(-5, 160); petalAt(5, 160);
+      stamenAt(-3, 161, 122); stamenAt(3, 161, 122);
+    } else if (kind === 'peri') {
+      c.s('path', { d: `M${cx - 20},172 Q${cx - 13},168 ${cx - 12},160 L${cx - 15},126 Q${cx - 22},112 ${cx - 14},108 L${cx + 14},108 Q${cx + 22},112 ${cx + 15},126 L${cx + 12},160 Q${cx + 13},168 ${cx + 20},172 Z`, class: 'dr-ground' }, 'hypanthium');
+      c.s('path', { d: `M${cx},84 C${cx - 14},86 ${cx - 14},152 ${cx},154 C${cx + 14},152 ${cx + 14},86 ${cx},84 Z`, class: 'dr-pistil' }, 'half-inferior-ovary');
+      c.s('path', { d: `M${cx},92 C${cx - 7},94 ${cx - 7},146 ${cx},148 C${cx + 7},146 ${cx + 7},94 ${cx},92 Z`, class: 'dr-air' });
+      c.s('path', { d: `M${cx},94 V146`, class: 'dr-line' }, 'placenta');
+      for (const [dx, y] of [[-3, 104], [3, 112], [-3, 120], [3, 128]]) c.s('ellipse', { cx: cx + dx, cy: y, rx: 3, ry: 2.6, class: 'dr-ovule' }, 'ovule');
+      c.s('path', { d: `M${cx - 2},64 L${cx - 2},84 L${cx + 2},84 L${cx + 2},64 Z`, class: 'dr-pistil' }, 'style');
+      stigma(64);
+      sepalAt(-9, 108); sepalAt(9, 108);
+      petalAt(-8, 106); petalAt(8, 106);
+      stamenAt(-6, 107, 72); stamenAt(6, 107, 72);
+    } else {
+      c.s('path', { d: `M${cx - 18},172 Q${cx - 12},168 ${cx - 11},158 L${cx - 13},104 Q${cx - 20},92 ${cx - 13},88 L${cx + 13},88 Q${cx + 20},92 ${cx + 13},104 L${cx + 11},158 Q${cx + 12},168 ${cx + 18},172 Z`, class: 'dr-ground' }, 'hypanthium');
+      c.s('path', { d: `M${cx},96 C${cx - 13},98 ${cx - 13},160 ${cx},162 C${cx + 13},160 ${cx + 13},98 ${cx},96 Z`, class: 'dr-pistil' }, 'inferior-ovary');
+      c.s('path', { d: `M${cx},104 C${cx - 6},106 ${cx - 6},154 ${cx},156 C${cx + 6},154 ${cx + 6},106 ${cx},104 Z`, class: 'dr-air' });
+      c.s('path', { d: `M${cx},106 V154`, class: 'dr-line' }, 'placenta');
+      for (const [dx, y] of [[-3, 114], [3, 122], [-3, 130], [3, 138]]) c.s('ellipse', { cx: cx + dx, cy: y, rx: 3, ry: 2.6, class: 'dr-ovule' }, 'ovule');
+      c.s('path', { d: `M${cx - 2},72 L${cx - 2},96 L${cx + 2},96 L${cx + 2},72 Z`, class: 'dr-pistil' }, 'style');
+      stigma(72);
+      sepalAt(-8, 90); sepalAt(8, 90);
+      petalAt(-7, 88); petalAt(7, 88);
+      stamenAt(-5, 89, 56); stamenAt(5, 89, 56);
+    }
+  };
+  const ring = (cx) => c.s('path', { d: `M${cx - 62},36 h124 a8,8 0 0 1 8,8 v144 a8,8 0 0 1 -8,8 h-124 a8,8 0 0 1 -8,-8 v-144 a8,8 0 0 1 8,-8 Z`, class: 'dr-hl-ring' });
+  const PANELS = [['hypo', 85, 'hypogynous'], ['peri', 250, 'perigynous'], ['epi', 415, 'epigynous']];
+  for (const [kind, cx, id] of PANELS) { flowerHalf(cx, kind); if (ctx.hl === id) ring(cx); }
+  c.text(T('parts below the ovary', 'pièces au-dessous de l’ovaire'), 85, 240, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('hypogynous', 85, 264, { anchor: 'middle' });
+  c.label('superior-ovary', 85, 290, { to: [97, 110], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('receptacle', 85, 316, { to: [70, 172], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('parts around the ovary', 'pièces autour de l’ovaire'), 250, 240, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('perigynous', 250, 264, { anchor: 'middle' });
+  c.label('hypanthium', 250, 290, { to: [272, 150], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('half-inferior-ovary', 250, 316, { to: [262, 112], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('parts above the ovary', 'pièces au-dessus de l’ovaire'), 415, 240, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('epigynous', 415, 264, { anchor: 'middle' });
+  c.label('hypanthium', 415, 290, { to: [433, 150], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('inferior-ovary', 415, 316, { to: [427, 120], anchor: 'middle', cls: 'dr-lbl-sm' });
+  return c.root;
+}
+
+function carpelFusion(ctx) {
+  const c = canvas(ctx, 500, 290, ctx.T('Gynoecia in cross-section: carpels free, fused at the margins, folded in', 'Gynécées en coupe : carpelles libres, soudés par les bords, repliés vers l’intérieur'));
+  const T = ctx.T, cy = 96, R = 52;
+  const carpel = (cx, cy2, r, fx, fy, part) => {
+    const a = (Math.atan2(fy - cy2, fx - cx) * 180) / Math.PI;
+    const [sx, sy] = polar(cx, cy2, r, a);
+    const [ox, oy] = polar(cx, cy2, r * 0.45, a);
+    c.s('circle', { cx, cy: cy2, r, class: 'dr-pistil' }, part);
+    c.s('path', { d: `M${sx},${sy} L${ox},${oy}`, class: 'dr-line' });
+    c.s('ellipse', { cx: ox, cy: oy, rx: 3, ry: 2.6, class: 'dr-ovule' }, 'ovule');
+  };
+  // Apocarpous: five free carpels on the receptacle
+  c.s('circle', { cx: 90, cy, r: R + 6, class: 'dr-ground' }, 'receptacle');
+  for (let i = 0; i < 5; i++) { const [x, y] = polar(90, cy, 30, i * 72 - 90); carpel(x, y, 13, 90, cy, 'carpel'); }
+  if (ctx.hl === 'apocarpous') c.s('circle', { cx: 90, cy, r: R + 10, class: 'dr-hl-ring' });
+  // Paracarpous: one locule, placentas on the wall
+  c.s('circle', { cx: 250, cy, r: R, class: 'dr-pistil' }, 'ovary');
+  for (const a of [-90, 30, 150]) {
+    const [x1, y1] = polar(250, cy, R, a), [x2, y2] = polar(250, cy, R - 8, a);
+    c.s('path', { d: `M${x1},${y1} L${x2},${y2}`, class: 'dr-line' }, 'placenta');
+    for (const da of [-12, 12]) { const [ox, oy] = polar(250, cy, R - 7, a + da); c.s('ellipse', { cx: ox, cy: oy, rx: 3, ry: 2.6, class: 'dr-ovule' }, 'ovule'); }
+  }
+  if (ctx.hl === 'paracarpous') c.s('circle', { cx: 250, cy, r: R + 6, class: 'dr-hl-ring' });
+  // Eusyncarpous: septa meet in the centre, ovules on the central axis
+  c.s('circle', { cx: 410, cy, r: R, class: 'dr-pistil' }, 'ovary');
+  for (const a of [-90, 30, 150]) { const [x1, y1] = polar(410, cy, R, a); c.s('path', { d: `M410,96 L${x1},${y1}`, class: 'dr-line' }); }
+  c.s('circle', { cx: 410, cy, r: 6, class: 'dr-ground' }, 'placenta');
+  for (const a of [0, 120, 240]) { const [ox, oy] = polar(410, cy, 16, a); c.s('ellipse', { cx: ox, cy: oy, rx: 3, ry: 2.6, class: 'dr-ovule' }, 'ovule'); }
+  if (ctx.hl === 'eusyncarpous') c.s('circle', { cx: 410, cy, r: R + 6, class: 'dr-hl-ring' });
+  if (ctx.hl === 'syncarpous') { c.s('circle', { cx: 250, cy, r: R + 6, class: 'dr-hl-ring' }); c.s('circle', { cx: 410, cy, r: R + 6, class: 'dr-hl-ring' }); }
+  c.text(T('free carpels', 'carpelles libres'), 90, 190, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('apocarpous', 90, 214, { anchor: 'middle' });
+  c.label('carpel', 90, 238, { to: [104, 86], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placentation-marginal', 90, 262, { to: [78, 118], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('fused at the margins', 'soudés par les bords'), 250, 190, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('paracarpous', 250, 214, { anchor: 'middle' });
+  c.label('placentation-parietal', 250, 238, { to: [262, 84], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placenta', 250, 262, { to: [276, 92], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('folded in, several locules', 'repliés, plusieurs loges'), 410, 190, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('eusyncarpous', 410, 214, { anchor: 'middle' });
+  c.label('placentation-axile', 410, 238, { to: [424, 78], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placenta', 410, 262, { to: [414, 100], anchor: 'middle', cls: 'dr-lbl-sm' });
+  return c.root;
+}
+
+function placentationDrawing(ctx) {
+  const c = canvas(ctx, 500, 270, ctx.T('Four ovary cross-sections: marginal, parietal, axile, free-central placentation', 'Quatre coupes d’ovaire : placentations marginale, pariétale, axile, centrale'));
+  const T = ctx.T, cy = 90, R = 44;
+  const ovary = (cx, part) => c.s('circle', { cx, cy, r: R, class: 'dr-pistil' }, part);
+  const ovuleAt = (cx2, cy2, r, a) => { const [ox, oy] = polar(cx2, cy2, r, a); c.s('ellipse', { cx: ox, cy: oy, rx: 3, ry: 2.6, class: 'dr-ovule' }, 'ovule'); };
+  // Marginal: one free carpel, folded, ovules on its two margins
+  ovary(70, 'carpel');
+  const [w1x, w1y] = polar(70, cy, R, -24), [w2x, w2y] = polar(70, cy, R, 24);
+  c.s('path', { d: `M70,90 L${w1x},${w1y} A${R},${R} 0 0 1 ${w2x},${w2y} Z`, class: 'dr-air' });
+  for (const a of [-24, 24]) { const [x1, y1] = polar(70, cy, R, a), [x2, y2] = polar(70, cy, R * 0.5, a); c.s('path', { d: `M${x1},${y1} L${x2},${y2}`, class: 'dr-line' }, 'placenta'); }
+  for (const a of [-24, 24]) ovuleAt(70, cy, R * 0.6, a);
+  if (ctx.hl === 'placentation-marginal') c.s('circle', { cx: 70, cy, r: R + 6, class: 'dr-hl-ring' });
+  // Parietal: one locule, placentas on the wall
+  ovary(190, 'ovary');
+  for (const a of [-90, 30, 150]) {
+    const [x1, y1] = polar(190, cy, R, a), [x2, y2] = polar(190, cy, R - 8, a);
+    c.s('path', { d: `M${x1},${y1} L${x2},${y2}`, class: 'dr-line' }, 'placenta');
+    for (const da of [-12, 12]) ovuleAt(190, cy, R - 7, a + da);
+  }
+  if (ctx.hl === 'placentation-parietal') c.s('circle', { cx: 190, cy, r: R + 6, class: 'dr-hl-ring' });
+  // Axile: septa meet in the centre, ovules on the central axis
+  ovary(310, 'ovary');
+  for (const a of [-90, 30, 150]) { const [x1, y1] = polar(310, cy, R, a); c.s('path', { d: `M310,90 L${x1},${y1}`, class: 'dr-line' }); }
+  c.s('circle', { cx: 310, cy, r: 6, class: 'dr-ground' }, 'placenta');
+  for (const a of [0, 120, 240]) ovuleAt(310, cy, 16, a);
+  if (ctx.hl === 'placentation-axile') c.s('circle', { cx: 310, cy, r: R + 6, class: 'dr-hl-ring' });
+  // Free-central: a column that does not touch the wall
+  ovary(430, 'ovary');
+  c.s('circle', { cx: 430, cy, r: 13, class: 'dr-ground' }, 'placenta');
+  for (const a of [-40, 40, 140, 220]) ovuleAt(430, cy, 9, a);
+  if (ctx.hl === 'placentation-central') c.s('circle', { cx: 430, cy, r: R + 6, class: 'dr-hl-ring' });
+  c.text(T('one free carpel', 'un carpelle libre'), 70, 176, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placentation-marginal', 70, 200, { anchor: 'middle' });
+  c.label('carpel', 70, 224, { to: [90, 64], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placenta', 70, 248, { to: [56, 72], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('on the wall, paracarpous', 'sur la paroi, paracarpe'), 190, 176, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placentation-parietal', 190, 200, { anchor: 'middle' });
+  c.label('paracarpous', 190, 224, { to: [206, 58], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placenta', 190, 248, { to: [168, 74], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('on the central axis, eusyncarpous', 'sur l’axe central, eusyncarpe'), 310, 176, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placentation-axile', 310, 200, { anchor: 'middle' });
+  c.label('eusyncarpous', 310, 224, { to: [326, 58], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placenta', 310, 248, { to: [310, 104], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.text(T('on a free central column', 'sur une colonne centrale libre'), 430, 176, { anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('placentation-central', 430, 200, { anchor: 'middle' });
+  c.label('placenta', 430, 224, { to: [440, 78], anchor: 'middle', cls: 'dr-lbl-sm' });
+  c.label('ovule', 430, 248, { to: [442, 96], anchor: 'middle', cls: 'dr-lbl-sm' });
+  return c.root;
+}
+
 export const DRAWINGS = {
   plant: { render: plant, for: ['plant', 'stem', 'root', 'node', 'internode', 'bud', 'terminal-bud', 'primary-root', 'lateral-root'],
     caption: { en: 'The organs of a flowering plant: the shoot (stem, leaves, buds, flowers, fruits) and the roots.', fr: 'Les organes d’une plante à fleurs : la partie aérienne (tige, feuilles, bourgeons, fleurs, fruits) et les racines.' }, src: ['po', 'openstax'] },
@@ -1266,6 +1426,12 @@ export const DRAWINGS = {
     caption: { en: 'Apical meristems at the tips of shoots and roots make them longer; below the shoot apex, procambium strands become the first xylem and phloem. Lateral meristems, the vascular cambium and the cork cambium (phellogen), make stems and roots thicker. In grasses an intercalary meristem at the base of the internodes keeps them growing from below.', fr: 'Les méristèmes apicaux, au bout des tiges et des racines, les allongent ; sous l’apex, les cordons de procambium deviennent le premier xylème et le premier phloème. Les méristèmes latéraux, le cambium et le phellogène, épaississent tiges et racines. Chez les graminées, un méristème intercalaire à la base des entre-nœuds les fait croître par le bas.' }, src: ['po', 'openstax', 'spektrum'] },
   'root-forms': { render: rootForms, for: ['root-types', 'adventitious-root', 'storage-root', 'root-nodule'],
     caption: { en: 'Adventitious roots grow from a stem, here at the nodes of a cutting. A storage root is swollen with reserves (carrot). Root nodules house nitrogen-fixing bacteria (Rhizobium in legumes, Frankia in alder and sea buckthorn).', fr: 'Les racines adventives naissent d’une tige, ici aux nœuds d’une bouture. Une racine de réserve est gonflée de réserves (carotte). Les nodosités abritent des bactéries fixatrices d’azote (Rhizobium chez les légumineuses, Frankia chez l’aulne et l’argousier).' }, src: ['po', 'spektrum', 'openstax'] },
+  'ovary-position': { render: ovaryPosition, for: ['hypogynous', 'perigynous', 'epigynous', 'superior-ovary', 'inferior-ovary', 'half-inferior-ovary', 'hypanthium'],
+    caption: { en: 'Three flowers cut lengthwise. Hypogynous: the parts are attached below the ovary, which is superior (cherry). Perigynous: they sit on the rim of a cup, the hypanthium, around the ovary — here half-inferior (gooseberry). Epigynous: they are attached above the ovary, which is inferior and fused to the hypanthium (apple, kiwifruit).', fr: 'Trois fleurs coupées en long. Hypogyne : les pièces s’attachent au-dessous de l’ovaire, qui est supère (cerisier). Périgyne : elles s’attachent sur le bord d’une coupe, l’hypanthe, autour de l’ovaire — ici semi-infère (groseillier). Épigyne : elles s’attachent au-dessus de l’ovaire, qui est infère et soudé à l’hypanthe (pommier, kiwi).' }, src: ['wpen', 'wpde'] },
+  'carpel-fusion': { render: carpelFusion, for: ['apocarpous', 'syncarpous', 'paracarpous', 'eusyncarpous'],
+    caption: { en: 'Ovaries in cross-section, seen from above. Apocarpous: free carpels (buttercup), each folded, with marginal placentation. Paracarpous: carpels fused only at their margins, one locule, ovules on the wall (poppy). Eusyncarpous: folded in, the inner edges meeting in the centre as septa, several locules, ovules on the central axis (tomato).', fr: 'Ovaires en coupe transversale, vus de dessus. Apocarpe : carpelles libres (bouton-d’or), chacun replié, à placentation marginale. Paracarpe : carpelles soudés seulement par leurs bords, une seule loge, ovules sur la paroi (pavot). Eusyncarpe : repliés vers l’intérieur, les bords internes se rejoignant au centre en cloisons, plusieurs loges, ovules sur l’axe central (tomate).' }, src: ['wpen', 'wpde'] },
+  placentation: { render: placentationDrawing, for: ['placentation', 'placentation-marginal', 'placentation-parietal', 'placentation-axile', 'placentation-central'],
+    caption: { en: 'Four ovary cross-sections, the ovules shown as small ovals. Marginal: one free carpel, ovules on its folded margins. Parietal: on the wall of a paracarpous ovary. Axile: on the central axis of an eusyncarpous ovary, in the inner angle of each locule. Free-central: on a column that does not touch the ovary wall.', fr: 'Quatre coupes d’ovaire, les ovules dessinés en petits ovales. Marginale : un carpelle libre, ovules sur ses bords repliés. Pariétale : sur la paroi d’un ovaire paracarpe. Axile : sur l’axe central d’un ovaire eusyncarpe, dans l’angle interne de chaque loge. Centrale : sur une colonne qui ne touche pas la paroi de l’ovaire.' }, src: ['wpen', 'wpde'] },
 };
 
 /** The drawing to show for an entry, or null. */

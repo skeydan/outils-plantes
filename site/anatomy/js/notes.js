@@ -342,6 +342,18 @@ export const NOTES = {
     },
     src: ['wpde', 'spektrum', 'wpfr', 'wpen'],
   },
+  'frucht-samenreife': {
+    title: { en: 'The shortest definition: the fruit is the flower at seed-ripeness', fr: 'La définition la plus courte : le fruit, c’est la fleur à maturité des graines' },
+    body: {
+      en: [
+        'German botany has a famous one-liner for the {{fruit}}: [[de:Frucht]] ist „die Blüte im Zustand der Samenreife“ — “the flower in the state of seed-ripeness”. Everything follows from it: the fruit is the same flower, later, once the {{seed}}s inside are ripe. The {{ovary}} has grown into the {{pericarp}} (its wall, the Fruchtwand), the {{ovule}}s have become the {{seed}}s; the {{calyx}}, the {{receptacle}} or the {{hypanthium}} may join in as well — hence the {{accessory-fruit}}s. ^wpde,spektrum^',
+      ],
+      fr: [
+        'La botanique allemande a une formule célèbre pour le {{fruit}} : [[de:Frucht]] ist „die Blüte im Zustand der Samenreife“ — « la fleur au stade de la maturité des graines ». Tout en découle : le fruit, c’est la même fleur, plus tard, une fois que les {{seed}}s du dedans sont mûres. L’{{ovary|ovaire}} est devenu le {{pericarp}} (sa paroi, la Fruchtwand), les {{ovule}}s sont devenus les {{seed}}s ; le {{calyx|calice}}, le {{receptacle|réceptacle}} ou l’{{hypanthium|hypanthe}} peuvent s’y ajouter — d’où les {{accessory-fruit|faux-fruits}}. ^wpde,spektrum^',
+      ],
+    },
+    src: ['wpde', 'spektrum'],
+  },
 };
 
 /** Which entries show which notes. */
@@ -357,7 +369,8 @@ export const NOTE_ENTRIES = {
   albumen: ['endosperm', 'perisperm'],
   'graine-semence': ['seed', 'achene', 'caryopsis'],
   'berry-fruit': ['berry', 'aggregate-fruit', 'multiple-fruit', 'accessory-fruit'],
-  'bluetenstand-fruchtstand': ['flower', 'fruit'],
+  'bluetenstand-fruchtstand': ['flower', 'fruit', 'inflorescence'],
+  'frucht-samenreife': ['fruit'],
   'ovule-fr': ['ovule', 'egg-cell'],
   'pistil-carpel': ['pistil', 'carpel', 'gynoecium'],
   'stoma-ostiole': ['stoma', 'stomatal-pore'],

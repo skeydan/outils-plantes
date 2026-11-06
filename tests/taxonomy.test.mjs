@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { TAXA } from '../site/taxonomy/js/taxa.js';
 import { SOURCES } from '../site/taxonomy/js/sources.js';
-import { buildIndex, search, pathTo } from '../site/assets/tree.js';
+import { buildIndex, search, pathTo, descendantCount } from '../site/assets/tree.js';
 import { keysOf } from '../site/taxonomy/js/app.js';
 
 const index = buildIndex(TAXA, keysOf);
@@ -91,4 +91,17 @@ test('search reaches species by Latin, common and German name', () => {
   assert.ok(search(index, 'argousier').some((r) => r.id === 'hippophae-rhamnoides'));
   assert.ok(search(index, 'Sanddorn').some((r) => r.id === 'hippophae-rhamnoides'));
   assert.ok(search(index, 'Drachenfrucht').some((r) => r.id === 'selenicereus-undatus'));
+});
+
+test('species counts below each node match the displayed numbers', () => {
+  const count = (id) => descendantCount(index, id, (e) => e.rank === 'species');
+  assert.equal(count('poales'), 1);
+  assert.equal(count('caryophyllales'), 4);
+  assert.equal(count('lamiales'), 1);
+  assert.equal(count('rosales'), 3);
+  assert.equal(count('ericales'), 1);
+  assert.equal(count('rosaceae'), 2);
+  assert.equal(count('prunus'), 1);
+  assert.equal(count('rubus'), 1);
+  assert.equal(count('poaceae'), 1);
 });

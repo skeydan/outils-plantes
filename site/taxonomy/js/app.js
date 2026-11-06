@@ -134,8 +134,9 @@ function detail(id) {
 
   const head = h('h2', { class: 'taxo-name' }, h('span', { class: 'taxo-lat' }, e.name),
     e.author ? h('span', { class: 'taxo-author' }, ` ${e.author}`) : null);
+  const langs = ['fr', 'en', 'de'];
   const common = h('p', { class: 'taxo-common' },
-    [lang(), 'en', 'fr', 'de'].map((l) => (e.common?.[l] ?? []).join(' · ')).filter(Boolean).join(' · '));
+    [lang(), ...langs.filter((l) => l !== lang())].map((l) => (e.common?.[l] ?? []).join(' · ')).filter(Boolean).join(' · '));
 
   return h('article', {}, path, head, common,
     e.rank === 'species' ? speciesDetail(e) : taxonDetail(e));
@@ -175,7 +176,7 @@ export function mount(panel, sub) {
 export function show(sub) {
   if (sub && index.byId.has(sub)) S.id = sub;
   renderTree(treeBox, { index, current: S.id, open: S.open, label, href, T,
-    count: (id) => descendantCount(index, id, (e) => e.rank === 'species'),
+    count: (_i, id) => descendantCount(index, id, (e) => e.rank === 'species'),
     countTitle: T('species below', 'espèces en dessous') });
   detailEl.replaceChildren(detail(S.id));
 }

@@ -19,6 +19,10 @@ const TABS = [
     label: { en: 'Grafting', fr: 'Greffe' }, long: { en: 'Scions, rootstocks and how to choose them', fr: 'Greffons, porte-greffes et comment les choisir' } },
   { id: 'taxonomy', load: () => import('../taxonomy/js/app.js'),
     label: { en: 'Taxonomy', fr: 'Taxonomie' }, long: { en: 'Orders, families, and the flower of each species', fr: 'Ordres, familles, et la fleur de chaque espèce' } },
+  { id: 'fruits', load: () => import('../fruits/js/app.js'),
+    label: { en: 'Fruits', fr: 'Fruits' }, long: { en: 'Fruit types, with our species as examples', fr: 'Les types de fruits, avec nos espèces en exemples' } },
+  { id: 'development', load: () => import('../development/js/app.js'),
+    label: { en: 'Development', fr: 'Développement' }, long: { en: 'From flower to fruit and seed, stage by stage', fr: 'De la fleur au fruit et à la graine, étape par étape' } },
   { id: 'microscope', load: () => import('../microscope/js/app.js'),
     label: { en: 'Microscope', fr: 'Microscope' }, long: { en: 'What a student microscope really shows', fr: 'Ce que montre vraiment un microscope d’élève' } },
 ];

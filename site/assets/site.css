@@ -157,21 +157,27 @@ main { max-width: 1180px; margin: 0 auto; padding: 4px 20px 48px; }
   position: sticky; top: 0; z-index: 20; background: color-mix(in oklab, var(--page) 92%, transparent);
   backdrop-filter: blur(6px); border-bottom: 1px solid var(--hairline); margin-bottom: 10px;
 }
-.tabs { display: flex; gap: 4px; max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+.tabs { display: flex; gap: 3px; max-width: 1180px; margin: 0 auto; padding: 0 20px; }
 .tabs [role="tab"] {
-  flex: 0 1 auto; display: inline-flex; align-items: center; gap: 8px; min-height: var(--tabs-h);
-  padding: 6px 14px 4px; color: var(--ink-2); text-decoration: none; font-weight: 600;
+  flex: 0 1 auto; display: inline-flex; align-items: center; gap: 7px; min-height: var(--tabs-h);
+  padding: 6px 10px 4px; color: var(--ink-2); text-decoration: none; font-weight: 600;
   border-bottom: 3px solid transparent; border-radius: 8px 8px 0 0;
 }
 .tabs [role="tab"]:hover { color: var(--ink); background: var(--surface-2); }
 .tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--cyan); background: var(--surface); }
 .tabs [role="tab"]:focus-visible { outline-offset: -3px; }
-.tab-icon { flex: none; }
+.tab-icon { flex: none; width: 20px; height: 20px; }
+/* Below the full row, the eight tabs go compact: equal width, icon over the
+   label. Keeps one row (and the sticky bar) at every width. */
+@media (max-width: 1180px) {
+  :root { --tabs-h: 56px; }
+  .tabs { padding: 0 8px; gap: 2px; }
+  .tabs [role="tab"] { flex: 1 1 0; flex-direction: column; gap: 2px; padding: 6px 2px 4px; font-size: 0.8rem; text-align: center; line-height: 1.15; min-width: 0; }
+}
 @media (max-width: 560px) {
   :root { --tabs-h: 58px; }
   .tabs { padding: 0 4px; gap: 0; }
-  .tabs [role="tab"] { flex: 1 1 0; flex-direction: column; gap: 2px; padding: 6px 1px 3px; font-size: 0.7rem; text-align: center; line-height: 1.15; min-width: 0; letter-spacing: -0.01em; hyphens: auto; }
-  .tab-icon { width: 20px; height: 20px; }
+  .tabs [role="tab"] { padding: 6px 1px 3px; font-size: 0.7rem; letter-spacing: -0.01em; hyphens: auto; }
 }
 @media (max-width: 380px) { .tabs [role="tab"] { font-size: 0.64rem; } }
 @media (forced-colors: active) { .tabs [role="tab"][aria-selected="true"] { border-bottom-color: Highlight; } }

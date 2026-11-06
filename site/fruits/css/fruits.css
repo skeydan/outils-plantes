@@ -1,0 +1,45 @@
+/* Fruits: master table, per-type sections with schematic drawings. */
+
+.fv-head { max-width: 52rem; }
+
+.fv-table { width: 100%; max-width: 56rem; margin: 0 0 2.5rem; border-collapse: collapse; }
+.fv-table caption { text-align: left; font-weight: 600; color: var(--ink); margin-bottom: .5rem; }
+.fv-table th, .fv-table td { border-bottom: 1px solid var(--hairline); padding: .55rem .7rem; vertical-align: top; }
+.fv-table thead th { border-bottom: 2px solid var(--border); color: var(--muted); font-weight: 600; }
+.fv-table tbody th { text-align: left; font-weight: 600; white-space: nowrap; }
+.fv-table td { font-size: .92rem; line-height: 1.45; }
+
+.fv-cat { margin: 2.5rem 0; padding-top: 1rem; border-top: 1px solid var(--hairline); scroll-margin-top: 5rem; }
+.fv-cat-title { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.fv-cat-grid { display: grid; grid-template-columns: minmax(320px, 26rem) 1fr; gap: 1.5rem; align-items: start; }
+@media (max-width: 780px) { .fv-cat-grid { grid-template-columns: 1fr; } }
+
+.fv-fig { margin: 0; }
+.fv-fig figcaption { font-size: .85rem; color: var(--muted); margin-bottom: .4rem; }
+.fv-fig svg { max-width: 100%; height: auto; border: 1px solid var(--hairline); border-radius: var(--radius); background: var(--surface); }
+
+.fv-lbl { font-size: 12.5px; fill: var(--ink); }
+.fv-lbl.fv-link { fill: var(--green); cursor: pointer; }
+.fv-lbl.fv-link:hover { text-decoration: underline; }
+.fv-lead { stroke: var(--ink-2); stroke-width: 1; fill: none; }
+
+.fv-seed { fill: var(--yellow-wash); stroke: var(--yellow); stroke-width: 1.4; }
+.fv-skin { fill: none; stroke: var(--green); stroke-width: 2.2; }
+.fv-meso { fill: var(--clay); fill-opacity: .55; stroke: var(--clay); stroke-width: 1.4; }
+.fv-stone { fill: var(--silt); stroke: var(--sand); stroke-width: 1.4; }
+.fv-core { fill: var(--sand); fill-opacity: .8; stroke: var(--sand); stroke-width: 1.2; }
+.fv-thin { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+
+.fv-examples { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .9rem; }
+.fv-example { border-left: 3px solid var(--cyan-wash); padding: .4rem .8rem; display: flex; flex-direction: column; gap: .2rem; }
+.fv-example-head .taxo-lat { font-style: italic; font-weight: 600; }
+.fv-example-fruit { font-size: .9rem; }
+.fv-example-links { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .2rem; }
+
+.fv-chip { display: inline-block; font-size: .8rem; padding: .15rem .55rem; border: 1px solid var(--border); border-radius: 999px; color: var(--green); background: var(--surface); }
+.fv-chip:hover { border-color: var(--green); }
+.fv-cat-title .fv-chip { margin-left: .2rem; }
+
+a.fv-link { color: var(--green); }
+.fv-src { font-size: .82rem; color: var(--muted); margin-top: .8rem; }
+.fv-sources { margin-top: 3rem; border-top: 1px solid var(--hairline); padding-top: 1rem; }

@@ -20,7 +20,7 @@ const devices = {
   desktop: { viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 },
   phone: { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
 };
-const TABS = ['anatomy', 'water', 'seeds', 'graft', 'taxonomy', 'microscope'];
+const TABS = ['anatomy', 'water', 'seeds', 'graft', 'taxonomy', 'fruits', 'development', 'microscope'];
 
 const browser = await chromium.launch();
 const problems = [];
@@ -52,7 +52,7 @@ for (const device of Object.keys(devices)) {
       await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
       await opened(page, 'anatomy');
       ok((await page.getAttribute('html', 'lang')) === lang, `browser language ${lang} not picked up`);
-      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['graft', 'prunus-amygdalus'], ['taxonomy', 'prunus-dulcis'], ['microscope', null]]) {
+      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['graft', 'prunus-amygdalus'], ['taxonomy', 'prunus-dulcis'], ['fruits', 'drupe'], ['development', 'berry'], ['microscope', null]]) {
         await page.evaluate((h) => { location.hash = h; }, sub ? `${tab}/${sub}` : tab);
         await opened(page, tab);
         await page.waitForLoadState('networkidle');
@@ -88,9 +88,9 @@ for (const device of Object.keys(devices)) {
       visible: [...document.querySelectorAll('[role="tabpanel"]')].filter((p) => !p.hidden).map((p) => p.id),
     };
   });
-  ok(aria.n === 6, `six tabs: ${aria.n}`);
+  ok(aria.n === 8, `eight tabs: ${aria.n}`);
   ok(aria.selected.join() === 'tab-anatomy', `anatomy selected: ${aria.selected}`);
-  ok(aria.tabindex.join() === '0,-1,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
+  ok(aria.tabindex.join() === '0,-1,-1,-1,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
   ok(aria.controls && aria.labelled, 'tabs and panels point at each other');
   ok(aria.visible.join() === 'panel-anatomy', `one panel visible: ${aria.visible}`);
   // Keyboard: arrows move and open, Home and End, focus stays on the tab.
@@ -108,6 +108,12 @@ for (const device of Object.keys(devices)) {
   ok((await page.evaluate(() => document.activeElement.id)) === 'tab-anatomy', 'ArrowRight wraps to the first tab');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'microscope');
+  await page.keyboard.press('ArrowLeft');
+  await opened(page, 'development');
+  ok(requested.some((u) => u.endsWith('/development/js/app.js')), 'development code loaded on demand');
+  await page.keyboard.press('ArrowLeft');
+  await opened(page, 'fruits');
+  ok(requested.some((u) => u.endsWith('/fruits/js/app.js')), 'fruits code loaded on demand');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'taxonomy');
   ok(requested.some((u) => u.endsWith('/taxonomy/js/app.js')), 'taxonomy code loaded on demand');
@@ -388,6 +394,38 @@ for (const device of Object.keys(devices)) {
   await ctx.close();
 }
 
+// ---------------------------------------------------------------- fruits and development
+{
+  const { ctx, page } = await newPage('desktop', 'light', 'en');
+  await page.goto(`${BASE}/#fruits`, { waitUntil: 'networkidle' });
+  await opened(page, 'fruits');
+  // The master table with its five categories, and a section per category.
+  ok(await page.isVisible('.fv-table'), 'fruits: the category table is drawn');
+  ok((await page.locator('.fv-cat').count()) === 5, 'fruits: one section per category (5)');
+  ok(await page.isVisible('.fv-cat svg'), 'fruits: each category has a drawing');
+  await page.evaluate(() => { location.hash = 'fruits/drupe'; });
+  await page.waitForFunction(() => document.getElementById('drupe')?.getBoundingClientRect().top < window.innerHeight);
+  // Chips from the category to Anatomy and Development.
+  ok((await page.getAttribute('#drupe .fv-chip[href^="#anatomy"]', 'href')) === '#anatomy/drupe', 'fruits: chip to the drupe entry');
+  ok((await page.getAttribute('#drupe .fv-chip[href^="#development"]', 'href')) === '#development/drupe', 'fruits: chip to the drupe process');
+  ok(/Prunus dulcis/.test(await page.textContent('#drupe')), 'fruits: the almond is a drupe example');
+  // Development: a slider and four stage buttons per process; a stage switch rebuilds the box.
+  await page.evaluate(() => { location.hash = 'development/drupe'; });
+  await opened(page, 'development');
+  const sliders = await page.locator('#drupe .dv-slider').count();
+  ok(sliders === 1, 'development: one slider per process');
+  ok((await page.locator('#drupe .dv-step').count()) === 4, 'development: four stages per process');
+  const before = await page.textContent('#drupe .dv-stage svg title');
+  await page.click('#drupe .dv-step:nth-child(4)');
+  await page.waitForFunction(() => document.querySelector('#drupe .dv-slider').value === '3');
+  const after = await page.textContent('#drupe .dv-stage svg title');
+  ok(before !== after, `development: the stage drawing changes (${before} -> ${after})`);
+  ok(await page.isVisible('#drupe .dv-stage svg'), 'development: a stage drawing is shown');
+  // The processes cover the three categories we draw.
+  ok((await page.locator('#panel-development section[id] h2').count()) === 3, 'development: three processes (drupe, berry, aggregate)');
+  await ctx.close();
+}
+
 // ---------------------------------------------------------------- microscope
 {
   const { ctx, page } = await newPage('desktop', 'light', 'en');
@@ -462,7 +500,7 @@ for (const device of Object.keys(devices)) {
     ok(overflow <= 0, `${route} phone: horizontal overflow ${overflow}px`);
     await page.screenshot({ path: `${SHOTS}/phone-${route.replace('/', '-')}.png`, fullPage: true });
   }
-  // The five tabs fit side by side, are big enough to tap and stay reachable while scrolling.
+  // The eight tabs fit side by side, are big enough to tap and stay reachable while scrolling.
   const boxes = await page.$$eval('[role="tab"]', (ts) => ts.map((t) => t.getBoundingClientRect()).map((r) => ({ top: r.top, right: r.right, h: r.height })));
   ok(boxes.every((b) => Math.abs(b.top - boxes[0].top) < 1) && boxes.at(-1).right <= 390, `phone: tabs on one row: ${JSON.stringify(boxes)}`);
   ok(boxes.every((b) => b.h >= 44), 'phone: tabs are at least 44 px tall');

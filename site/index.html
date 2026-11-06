@@ -14,6 +14,8 @@
   <link rel="stylesheet" href="seeds/css/seeds.css">
   <link rel="stylesheet" href="graft/css/graft.css">
   <link rel="stylesheet" href="taxonomy/css/taxonomy.css">
+  <link rel="stylesheet" href="fruits/css/fruits.css">
+  <link rel="stylesheet" href="development/css/development.css">
   <link rel="stylesheet" href="microscope/css/microscope.css">
   <script>
     try { const t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch (e) {}
@@ -58,6 +60,14 @@
         <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="var(--cyan)" opacity="0.9"><ellipse cx="12" cy="5.8" rx="2.6" ry="3.6" transform="rotate(0 12 12)"/><ellipse cx="12" cy="5.8" rx="2.6" ry="3.6" transform="rotate(72 12 12)"/><ellipse cx="12" cy="5.8" rx="2.6" ry="3.6" transform="rotate(144 12 12)"/><ellipse cx="12" cy="5.8" rx="2.6" ry="3.6" transform="rotate(216 12 12)"/><ellipse cx="12" cy="5.8" rx="2.6" ry="3.6" transform="rotate(288 12 12)"/></g><circle cx="12" cy="12" r="2.6" fill="var(--yellow)"/></svg>
         <span class="tab-label">Taxonomy</span>
       </a>
+      <a role="tab" id="tab-fruits" href="#fruits" aria-controls="panel-fruits" aria-selected="false" tabindex="-1">
+        <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21 C6.5 21 3.5 16 3.5 10.5 C3.5 6.5 6.5 4 9.5 3.5 C11 3.2 13 3.2 14.5 3.5 C17.5 4 20.5 6.5 20.5 10.5 C20.5 16 17.5 21 12 21 Z" fill="var(--clay)" fill-opacity=".6" stroke="currentColor" stroke-width="1.6"/><ellipse cx="12" cy="12.5" rx="3" ry="4.2" fill="var(--silt)" stroke="currentColor" stroke-width="1.1"/></svg>
+        <span class="tab-label">Fruits</span>
+      </a>
+      <a role="tab" id="tab-development" href="#development" aria-controls="panel-development" aria-selected="false" tabindex="-1">
+        <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="17" r="2" fill="var(--cyan-wash)" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="13" r="3" fill="var(--yellow-wash)" stroke="currentColor" stroke-width="1.4"/><path d="M19 8 C19 6.5 17.5 5.5 15.5 6 C13.5 6.5 12.5 8.5 12 10 C14 8.5 16 8 17.5 8.5 C18.5 8.7 19.3 8.4 19 8 Z" fill="var(--cyan-wash)" stroke="currentColor" stroke-width="1.4"/><path d="M5 15 C5.5 13 7 11 9.5 10" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M13 11.5 C14.5 10.5 16.5 9.8 18 9" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span class="tab-label">Development</span>
+      </a>
       <a role="tab" id="tab-microscope" href="#microscope" aria-controls="panel-microscope" aria-selected="false" tabindex="-1">
         <svg class="tab-icon" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 2.5 L13 4.5 L9.2 11 L5.7 9 Z" fill="var(--cyan-wash)" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M7.4 10 L6.6 11.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12.5 8.5 A6 6 0 0 1 14 19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4.5 21 H19.5 M8 17 H14 M10.5 19 V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
         <span class="tab-label">Microscope</span>
@@ -70,6 +80,8 @@
     <section role="tabpanel" id="panel-seeds" aria-labelledby="tab-seeds" tabindex="-1" hidden></section>
     <section role="tabpanel" id="panel-graft" aria-labelledby="tab-graft" tabindex="-1" hidden></section>
     <section role="tabpanel" id="panel-taxonomy" aria-labelledby="tab-taxonomy" tabindex="-1" hidden></section>
+    <section role="tabpanel" id="panel-fruits" aria-labelledby="tab-fruits" tabindex="-1" hidden></section>
+    <section role="tabpanel" id="panel-development" aria-labelledby="tab-development" tabindex="-1" hidden></section>
     <section role="tabpanel" id="panel-microscope" aria-labelledby="tab-microscope" tabindex="-1" hidden></section>
     <noscript><p>This page needs JavaScript. / Cette page nécessite JavaScript.</p></noscript>
   </main>

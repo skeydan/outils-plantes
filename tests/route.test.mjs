@@ -3,8 +3,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseRoute, routeHref, TAB_IDS, DEFAULT_TAB } from '../site/assets/route.js';
 
-test('six tabs, anatomy first', () => {
-  assert.deepEqual(TAB_IDS, ['anatomy', 'water', 'seeds', 'graft', 'taxonomy', 'microscope']);
+test('eight tabs, anatomy first', () => {
+  assert.deepEqual(TAB_IDS, ['anatomy', 'water', 'seeds', 'graft', 'taxonomy', 'fruits', 'development', 'microscope']);
   assert.equal(DEFAULT_TAB, 'anatomy');
 });
 

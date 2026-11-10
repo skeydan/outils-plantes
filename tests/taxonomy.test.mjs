@@ -5,12 +5,12 @@ import assert from 'node:assert/strict';
 import { TAXA } from '../site/taxonomy/js/taxa.js';
 import { SOURCES } from '../site/taxonomy/js/sources.js';
 import { buildIndex, search, pathTo, descendantCount } from '../site/assets/tree.js';
-import { keysOf } from '../site/taxonomy/js/app.js';
+import { keysOf, cultivarParts, countBelow } from '../site/taxonomy/js/app.js';
 
 const index = buildIndex(TAXA, keysOf);
 const top = (q) => search(index, q)[0]?.id;
 const WHORLS = ['sepals', 'petals', 'stamens', 'carpels'];
-const RANKS = ['order', 'family', 'genus', 'species'];
+const RANKS = ['order', 'family', 'genus', 'species', 'variety', 'cultivar'];
 
 test('the tree is valid: unique ids, parents exist, no cycles', () => {
   const byId = new Map(TAXA.map((e) => [e.id, e]));
@@ -20,6 +20,24 @@ test('the tree is valid: unique ids, parents exist, no cycles', () => {
     if (e.parent !== null) assert.ok(byId.has(e.parent), `${e.id} parent ${e.parent} missing`);
     pathTo(index, e.id); // throws on a cycle
   }
+});
+
+test('cultivar is a distinct infraspecific rank, with a roman epithet', () => {
+  const cultivars = TAXA.filter((e) => e.rank === 'cultivar');
+  assert.deepEqual(cultivars.map((e) => e.id).sort(), [
+    'actinidia-deliciosa-hayward', 'actinidia-deliciosa-tomuri',
+    'prunus-dulcis-makako', 'prunus-dulcis-penta',
+  ]);
+  for (const e of cultivars) {
+    assert.equal(index.byId.get(e.parent).rank, 'species', `${e.id} under a species`);
+    const p = cultivarParts(e);
+    assert.ok(p, `${e.id} splits into binomial and epithet`);
+    assert.ok(p.binomial && p.epithet.startsWith("'") && p.epithet.endsWith("'"), `${e.id} cultivar epithet`);
+    assert.equal(`${p.binomial} ${p.epithet}`, e.name, `${e.id} name reassembles`);
+  }
+  // The botanical variety rank stays available, but no true variety is listed yet.
+  assert.equal(TAXA.filter((e) => e.rank === 'variety').length, 0);
+  assert.equal(cultivarParts(index.byId.get('prunus-dulcis')), null);
 });
 
 test('every name, text and flower fact is sourced; every source is cited and linked', () => {
@@ -94,15 +112,20 @@ test('search reaches species by Latin, common and German name', () => {
   assert.ok(search(index, 'Drachenfrucht').some((r) => r.id === 'selenicereus-undatus'));
 });
 
-test('species counts below each node match the displayed numbers', () => {
+test('counts below each node match the displayed numbers', () => {
   const count = (id) => descendantCount(index, id, (e) => e.rank === 'species');
   assert.equal(count('poales'), 1);
   assert.equal(count('caryophyllales'), 4);
   assert.equal(count('lamiales'), 1);
-  assert.equal(count('rosales'), 3);
+  assert.equal(count('rosales'), 4);
   assert.equal(count('ericales'), 1);
-  assert.equal(count('rosaceae'), 2);
+  assert.equal(count('saxifragales'), 3);
+  assert.equal(count('rosaceae'), 3);
   assert.equal(count('prunus'), 1);
-  assert.equal(count('rubus'), 1);
+  assert.equal(count('rubus'), 2);
   assert.equal(count('poaceae'), 1);
+  // A species node shows the number of taxa directly under it.
+  assert.equal(countBelow(index, 'prunus-dulcis'), 2);
+  assert.equal(countBelow(index, 'actinidia-deliciosa'), 2);
+  assert.equal(countBelow(index, 'rosales'), 4);
 });

@@ -19,13 +19,31 @@ export const SOURCES = [
  {
   "id": "apweb",
   "short": "Stevens, APweb",
-  "text": "Stevens P.F. Angiosperm Phylogeny Website (Missouri Botanical Garden). Used for the placement of the orders (Poales, Caryophyllales, Lamiales, Rosales, Ericales) and their families, following APG IV.",
+  "text": "Stevens P.F. Angiosperm Phylogeny Website (Missouri Botanical Garden). Used for the placement of the orders (Poales, Caryophyllales, Lamiales, Rosales, Ericales, Saxifragales) and their families, following APG IV.",
   "url": "https://www.mobot.org/MOBOT/research/APweb/"
+ },
+ {
+  "id": "almond-cultivars",
+  "short": "Almond cultivars, CEBAS-CSIC",
+  "text": "Dicenta F., Cremades T., Martínez-Gómez P., et al. ‘Penta and Makako: Two Extra-late Flowering Self-compatible Almond Cultivars from CEBAS-CSIC’. HortScience 53(11): 1700–1702 (2018). Used for the cultivar names, their sex/self-compatibility and their flowering and ripening traits.",
+  "url": "https://doi.org/10.21273/HORTSCI13310-18"
+ },
+ {
+  "id": "cpvo-actinidia",
+  "short": "CPVO, Actinidia protocol",
+  "text": "Community Plant Variety Office (CPVO). Technical Protocol TP/098 for Actinidia, the kiwifruit genus, with ‘Hayward’ as the reference female variety. Used for the female cultivar name and sex.",
+  "url": "https://cpvo.europa.eu/sites/default/files/documents/TP/fruits/TP_098_ACTINIDIA.pdf"
+ },
+ {
+  "id": "grin-tomuri",
+  "short": "GRIN-Global, ‘Tomuri’",
+  "text": "USDA ARS National Plant Germplasm System, GRIN-Global accession PI 667954, Actinidia deliciosa ‘Tomuri’, a male kiwifruit pollinizer. Used for the male cultivar name and sex.",
+  "url": "https://npgsweb.ars-grin.gov/gringlobal/accessiondetail?id=1641383"
  },
  {
   "id": "flora",
   "short": "Standard floras and morphology texts",
-  "text": "Floral part counts, symmetry, ovary position, phyllotaxy, inflorescence and fruit type are standard morphological facts for these widely described species, as given in regional floras (e.g. Flora of China, Flora of North America) and plant-morphology textbooks. Checked against the per-species page named in each flower_src before publication.",
+  "text": "Floral part counts, symmetry, ovary position, phyllotaxy, inflorescence and fruit type are standard morphological facts for these widely described species, as given in regional floras (e.g. Flora of China, Flora of North America) and plant-morphology textbooks. Checked against the species or genus treatment named in each flower_src before publication.",
   "url": "http://www.efloras.org/"
  },
  {

@@ -47,7 +47,11 @@ const RANK = {
   family: { en: 'family', fr: 'famille' },
   genus: { en: 'genus', fr: 'genre' },
   species: { en: 'species', fr: 'espèce' },
+  variety: { en: 'variety', fr: 'variété' },
+  cultivar: { en: 'cultivar', fr: 'cultivar' },
 };
+const LATIN_RANKS = new Set(['genus', 'species', 'variety']);
+const CULTIVAR_RE = /^(.*?)\s+((?:'[^']*')|(?:‘[^’]*’))$/;
 
 const SYMMETRY = {
   actinomorphic: { en: 'actinomorphic (radial)', fr: 'actinomorphe (radiaire)' },
@@ -73,12 +77,46 @@ const DEFAULT_ID = 'triticum-aestivum';
 const S = { id: DEFAULT_ID, open: new Set() };
 
 const href = (id) => routeHref('taxonomy', id);
-const label = (id) => {
-  const e = index.byId.get(id);
-  const sp = h('span', { class: e.rank === 'genus' || e.rank === 'species' ? 'taxo-lat' : 'taxo-rank' });
+const italic = (txt) => h('span', { class: 'taxo-lat' }, txt);
+
+/** Split a cultivar name into the italic binomial and the roman epithet. */
+export function cultivarParts(e) {
+  if (e?.rank !== 'cultivar') return null;
+  const m = String(e.name ?? '').match(CULTIVAR_RE);
+  return m ? { binomial: m[1], epithet: m[2] } : null;
+}
+
+function cultivarName(e) {
+  const p = cultivarParts(e);
+  if (!p) return h('span', { class: 'taxo-cultivar' }, e.name);
+  return h('span', {}, italic(p.binomial), ' ', h('span', { class: 'taxo-cultivar' }, p.epithet));
+}
+
+/** A tree label: rank styling, and a split name for cultivars. */
+function nameNode(e) {
+  if (e.rank === 'cultivar') return cultivarName(e);
+  const sp = h('span', { class: LATIN_RANKS.has(e.rank) ? 'taxo-lat' : 'taxo-rank' });
   sp.textContent = e.name;
   return sp;
-};
+}
+
+/** The detail heading: Latin names italic, cultivar epithets roman. */
+const detailName = (e) => (e.rank === 'cultivar' ? cultivarName(e) : italic(e.name));
+
+/** A name inside a list or a breadcrumb: plain outside the Latin ranks. */
+const nameInline = (e) => (e.rank === 'cultivar' ? cultivarName(e) : (LATIN_RANKS.has(e.rank) ? italic(e.name) : e.name));
+
+/** A search result keeps the old all-italic look, except for cultivars. */
+const searchName = (e) => (e.rank === 'cultivar' ? cultivarName(e) : italic(e.name));
+
+const label = (id) => nameNode(index.byId.get(id));
+
+/** What the tree shows beside a node: species below, or the taxa under a species. */
+export function countBelow(i, id) {
+  const e = i.byId.get(id);
+  if (e.rank === 'species') return i.children.get(id).length;
+  return descendantCount(i, id, (x) => x.rank === 'species');
+}
 
 const nTxt = (n) => (n === null ? '∞' : String(n));
 const wNote = (w) => (w.note ? ` — ${L(w.note)}` : '');
@@ -127,8 +165,15 @@ function speciesDetail(e) {
     h('dt', {}, L(STR.fruit)), h('dd', {}, L(e.fruit), fruitLinks),
   );
 
+  const kids = index.children.get(e.id);
+  const below = kids.length ? h('div', { class: 'taxo-below' },
+    h('h3', {}, T('Cultivars and varieties', 'Cultivars et variétés')),
+    h('ul', { class: 'taxo-children' }, ...kids.map((id) => h('li', {},
+      h('a', { href: href(id), 'data-id': id }, nameInline(index.byId.get(id))))))) : null;
+
   return h('div', {}, fig, photo, table, facts,
     f.note ? h('p', { class: 'taxo-note' }, L(f.note)) : null,
+    below,
     h('p', { class: 'taxo-src' }, T('Names', 'Noms'), ' ', cite(...e.names_src.map((s) => s.k)),
       ' · ', T('flower', 'fleur'), ' ', cite(...e.flower_src.map((s) => s.k))));
 }
@@ -136,9 +181,13 @@ function speciesDetail(e) {
 /** A non-species detail (order, family, genus): name, common names, children. */
 function taxonDetail(e) {
   const kids = index.children.get(e.id);
+  const parent = e.parent === null ? null : index.byId.get(e.parent);
   return h('div', {},
     h('p', { class: 'taxo-rankline' }, L(RANK[e.rank])),
-    kids.length ? h('ul', { class: 'taxo-children' }, ...kids.map((id) => h('li', {}, h('a', { href: href(id) }, index.byId.get(id).name)))) : null,
+    (e.rank === 'variety' || e.rank === 'cultivar') && parent ? h('p', { class: 'taxo-rankline' },
+      T('Flower and fruit: see ', 'Fleur et fruit : voir '), h('a', { href: href(parent.id), 'data-id': parent.id }, nameInline(parent))) : null,
+    kids.length ? h('ul', { class: 'taxo-children' }, ...kids.map((id) => h('li', {},
+      h('a', { href: href(id), 'data-id': id }, nameInline(index.byId.get(id)))))) : null,
     h('p', { class: 'taxo-src' }, T('Names and placement', 'Noms et placement'), ' ', cite(...e.names_src.map((s) => s.k)), ' ',
       cite(...(e.taxonomy?.src ?? []).map((s) => s.k))));
 }
@@ -151,10 +200,10 @@ function detail(id) {
   while (cur) { chain.unshift(cur); cur = cur.parent === null ? null : index.byId.get(cur.parent); }
   chain.forEach((c, i) => {
     if (i) path.append(h('span', { class: 'taxo-arrow' }, ' → '));
-    path.append(h('a', { href: href(c.id), 'aria-current': c.id === id ? 'true' : null }, c.name));
+    path.append(h('a', { href: href(c.id), 'data-id': c.id, 'aria-current': c.id === id ? 'true' : null }, nameInline(c)));
   });
 
-  const head = h('h2', { class: 'taxo-name' }, h('span', { class: 'taxo-lat' }, e.name),
+  const head = h('h2', { class: 'taxo-name' }, detailName(e),
     e.author ? h('span', { class: 'taxo-author' }, ` ${e.author}`) : null);
   const langs = ['fr', 'en', 'de'];
   const common = h('p', { class: 'taxo-common' },
@@ -162,6 +211,56 @@ function detail(id) {
 
   return h('article', {}, path, head, common,
     e.rank === 'species' ? speciesDetail(e) : taxonDetail(e));
+}
+
+// ---------------------------------------------------------------- hover notes
+// On a family or genus, show its taxonomy{en,fr} text in a small tooltip.
+const TIP_RANKS = new Set(['family', 'genus']);
+let tipEl = null, tipAnchor = null;
+
+function hideTip() {
+  if (tipAnchor) { tipAnchor.removeAttribute('aria-describedby'); tipAnchor = null; }
+  if (tipEl) tipEl.hidden = true;
+}
+
+function showTip(a) {
+  const e = index.byId.get(a.dataset.id);
+  const text = e && TIP_RANKS.has(e.rank) ? L(e.taxonomy) : '';
+  if (!text) { hideTip(); return; }
+  if (!tipEl) {
+    tipEl = h('div', { class: 'taxo-tip', role: 'tooltip', id: 'taxo-tip', hidden: true });
+    document.body.append(tipEl);
+  }
+  tipEl.textContent = text;
+  tipEl.hidden = false;
+  const pad = 10, r = a.getBoundingClientRect();
+  const w = tipEl.offsetWidth, ht = tipEl.offsetHeight;
+  let left = r.right + pad, top = r.top;
+  if (left + w > innerWidth - pad) left = Math.max(pad, r.left - w - pad);
+  if (top + ht > innerHeight - pad) top = Math.max(pad, innerHeight - ht - pad);
+  tipEl.style.left = `${left}px`;
+  tipEl.style.top = `${top}px`;
+  if (tipAnchor && tipAnchor !== a) tipAnchor.removeAttribute('aria-describedby');
+  tipAnchor = a;
+  a.setAttribute('aria-describedby', tipEl.id);
+}
+
+function wireTaxonomyTips(box) {
+  box.addEventListener('pointerover', (ev) => {
+    const a = ev.target.closest?.('a[data-id]');
+    if (a && box.contains(a)) showTip(a); else hideTip();
+  });
+  box.addEventListener('pointerout', (ev) => {
+    const a = ev.target.closest?.('a[data-id]');
+    if (!a || (ev.relatedTarget && a.contains(ev.relatedTarget))) return;
+    hideTip();
+  });
+  box.addEventListener('focusin', (ev) => {
+    const a = ev.target.closest?.('a[data-id]');
+    if (a && box.contains(a)) showTip(a); else hideTip();
+  });
+  box.addEventListener('focusout', hideTip);
+  box.addEventListener('scroll', hideTip, true);
 }
 
 let detailEl, treeBox;
@@ -175,6 +274,8 @@ export function mount(panel, sub) {
 
   const treeCard = h('div', { class: 'a-tree-card taxo-tree-card' }, treeBox);
   const body = h('div', { class: 'taxo-body' }, treeCard, detailEl);
+  wireTaxonomyTips(treeBox);
+  wireTaxonomyTips(detailEl);
 
   panel.replaceChildren(
     h('header', { class: 'taxo-head' }, h('h1', {}, L(STR.title)), h('p', { class: 'lead' }, L(STR.lead))),
@@ -186,7 +287,7 @@ export function mount(panel, sub) {
   wireSearch({
     input: searchInput, results, msg, T,
     find: (q) => (q.trim() ? search(index, q.trim()) : []),
-    option: (r) => [h('span', { class: 'taxo-lat' }, index.byId.get(r.id).name),
+    option: (r) => [searchName(index.byId.get(r.id)),
       h('span', { class: 'taxo-dim' }, (index.byId.get(r.id).common?.[lang()] ?? []).join(', '))],
     pick: (r) => { location.hash = href(r.id); },
   });
@@ -196,9 +297,10 @@ export function mount(panel, sub) {
 }
 
 export function show(sub) {
+  hideTip();
   if (sub && index.byId.has(sub)) S.id = sub;
   renderTree(treeBox, { index, current: S.id, open: S.open, label, href, T,
-    count: (_i, id) => descendantCount(index, id, (e) => e.rank === 'species'),
-    countTitle: T('species below', 'espèces en dessous') });
+    count: countBelow,
+    countTitle: T('entries below', 'entrées en dessous') });
   detailEl.replaceChildren(detail(S.id));
 }

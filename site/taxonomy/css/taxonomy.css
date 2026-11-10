@@ -19,6 +19,7 @@
 .taxo-tree-box { padding: .25rem 0; }
 
 .taxo-lat { font-style: italic; }
+.taxo-cultivar { font-style: normal; }
 .taxo-rank { font-weight: 600; }
 .taxo-path { color: var(--muted); font-size: .92rem; margin: 0 0 .4rem; }
 .taxo-arrow { color: var(--muted); margin: 0 .2rem; }
@@ -49,7 +50,17 @@
 .taxo-src { color: var(--muted); font-size: .9rem; margin: .8rem 0 0; }
 
 .taxo-children { margin: .4rem 0 0; padding-left: 1.3rem; }
+.taxo-below { margin: .8rem 0; }
+.taxo-below h3 { font-size: 1rem; margin: 0 0 .2rem; }
 .taxo-dim { color: var(--muted); font-size: .9rem; }
+
+/* Hover note on a family or genus in the tree or the breadcrumb. */
+.taxo-tip {
+  position: fixed; z-index: 30; max-width: 24rem; pointer-events: none;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: .55rem .7rem; font-size: .85rem; line-height: 1.45;
+}
+.taxo-tip[hidden] { display: none; }
 
 .taxo-sources { margin-top: 1.5rem; border-top: 1px solid var(--hairline); padding-top: .8rem; }
 .taxo-sources h2 { font-size: 1.05rem; }

@@ -62,7 +62,7 @@ export function pollination(motherGenotype, donorGenotype) {
   return { result, accepted };
 }
 
-const TEXT_BLOCKS = ['taxonomy', 'ploidy', 'mating', 'varieties', 'isolation', 'true_to_type', 'propagation'];
+const TEXT_BLOCKS = ['taxonomy', 'name_note', 'ploidy', 'mating', 'varieties', 'isolation', 'true_to_type', 'propagation'];
 
 /** Every source id cited by a taxon. */
 export function citedSources(t) {

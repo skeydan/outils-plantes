@@ -59,6 +59,8 @@ test('the hard cases have their notes, on the right entries', () => {
   for (const id of ['bark', 'cortex', 'rhytidome']) hasNote(id, 'rinde-borke');
   hasNote('cortex', 'cortex-bark');
   hasNote('bark', 'cortex-bark');
+  for (const id of ['flower', 'perianth', 'calyx', 'corolla', 'perigone', 'tepal', 'sepal', 'petal', 'stamen', 'carpel']) hasNote(id, 'bluetenblatt');
+  for (const id of ['receptacle', 'hypanthium', 'accessory-fruit']) hasNote(id, 'bluetenboden');
 });
 
 test('search works in the four languages, with or without accents and umlauts', () => {
@@ -78,6 +80,10 @@ test('search works in the four languages, with or without accents and umlauts', 
   assert.equal(top('Spaltöffnung'), 'stoma');
   assert.equal(top('chloroplst'), 'chloroplast', 'one typo');
   assert.equal(top('Samenanlage'), 'ovule');
+  for (const [q, id] of [
+    ['Blütenblatt', 'petal'], ['Kronblatt', 'petal'], ['Kelchblatt', 'sepal'],
+    ['Staubblatt', 'stamen'], ['Fruchtblatt', 'carpel'], ['Blütenboden', 'receptacle'],
+  ]) assert.equal(top(q), id, q);
   assert.equal(search(index, '').length, 0);
 });
 

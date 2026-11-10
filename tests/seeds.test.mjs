@@ -42,6 +42,12 @@ test('the featured taxa are there, under the right parents', () => {
   under('ribes-rubrum', 'grossulariaceae');
   under('hippophae-rhamnoides', 'elaeagnaceae');
   assert.ok(TAXA.some((t) => t.parent === 'hippophae-rhamnoides' && t.rank === 'subspecies'), 'sea buckthorn subspecies');
+  for (const id of ['hippophae-rhamnoides-botanika', 'hippophae-rhamnoides-pollmix-1', 'hippophae-rhamnoides-pollmix-2', 'hippophae-rhamnoides-pollmix-3']) under(id, 'hippophae-rhamnoides');
+  const botanika = TAXA.find((t) => t.id === 'hippophae-rhamnoides-botanika');
+  assert.equal(botanika.cultivar.self, 'female');
+  assert.ok(botanika.synonyms.includes("'Botanica'"), 'Botanica spelling kept as a synonym');
+  for (const id of ['hippophae-rhamnoides-pollmix-1', 'hippophae-rhamnoides-pollmix-2', 'hippophae-rhamnoides-pollmix-3'])
+    assert.equal(TAXA.find((t) => t.id === id).cultivar.self, 'male', id);
   under('eucalyptus-deglupta', 'myrtaceae');
   assert.ok(TAXA.filter((t) => t.parent === 'prunus-amygdalus' && t.cultivar).length >= 5, 'almond cultivars');
 });

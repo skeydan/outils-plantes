@@ -397,6 +397,24 @@ export const SOURCES = [
   "url": "https://www.lubera.com/de/shop/sanddorn-pollmix-2-maennlich_produkt-193.html"
  },
  {
+  "id": "berries-lubera-botanika",
+  "short": "Lubera: Argousier Botanica",
+  "text": "Lubera (nursery), product page 'Argousier Botanica', read 2026-11-10. Describes a female sea buckthorn of Hippophae rhamnoides subsp. mongolica with Eastern European roots, very large yellow-orange fruit (12.5 × 10.5 mm, 0.7–0.85 g), less acidic than the German cultivars, ripening mid-August to late September, and requiring 'Pollmix 2' as pollinizer. A nursery catalogue, used for the cultivar description and the spelling 'Botanica'.",
+  "url": "https://www.lubera.com/fr-ch/shop/argousier-botanica_produkt-2277836.html"
+ },
+ {
+  "id": "berries-brandenburg-sanddorn",
+  "short": "LELF Brandenburg, Sanddorn brochure",
+  "text": "Landesamt für Ländliche Entwicklung, Landwirtschaft und Flurneuordnung (LELF) Brandenburg. Sanddorn brochure, 'Pionier im märkischen Sand', pp. 42–47 (undated PDF, read 2026-11-10). Cultivar portraits of 'Leikora', 'Hergo', 'Frugana', 'Dorana', 'Askola', 'Sirola' and 'Habego', and the male 'Pollmix' group: four clones, Pollmix 1 (early), 4 (mid-early), 3 (late), and Pollmix 2 (mid-early, very thorny, hardly traded).",
+  "url": "https://mleuv.brandenburg.de/sixcms/media.php/9/Sanddorn_Teil1_web.pdf"
+ },
+ {
+  "id": "berries-pollmix-friedersdorf",
+  "short": "Baumschule Friedersdorf: Pollmix",
+  "text": "Baumschule Friedersdorf, cultivar portraits 'Sanddorn: Pollmix', after Albrecht (1992) and Müller (2006), read 2026-11-10. Gives the flowering period and thorniness of the five Pollmix clones: Pollmix 1 early, moderately thorny; Pollmix 2 mid-to-late, strongly thorny, no longer propagated; Pollmix 3 mid-to-late, little to moderately thorny; Pollmix 4 mid, hardly thorny; Pollmix 5 very early, hardly thorny. A nursery page, used only for those clone traits.",
+  "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html"
+ },
+ {
   "id": "berries-wikipedia-sea-buckthorn",
   "short": "Wikipedia: Sea buckthorn",
   "text": "Wikipedia, 'Sea buckthorn' (accessed 2026-10-16; page carries a notice about unverified text). Used only to report the ~100 m pollination distance it attributes to Li & Schroeder (1996), which we could not open.",

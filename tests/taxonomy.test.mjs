@@ -10,7 +10,7 @@ import { keysOf, cultivarParts, countBelow } from '../site/taxonomy/js/app.js';
 const index = buildIndex(TAXA, keysOf);
 const top = (q) => search(index, q)[0]?.id;
 const WHORLS = ['sepals', 'petals', 'stamens', 'carpels'];
-const RANKS = ['order', 'family', 'genus', 'species', 'variety', 'cultivar'];
+const RANKS = ['order', 'family', 'tribe', 'genus', 'species', 'variety', 'cultivar'];
 
 test('the tree is valid: unique ids, parents exist, no cycles', () => {
   const byId = new Map(TAXA.map((e) => [e.id, e]));
@@ -71,8 +71,19 @@ test('the starter species are present under their genus', () => {
     'hippophae-rhamnoides': 'hippophae',
   };
   for (const [sp, gen] of Object.entries(species)) under(sp, gen);
-  // Each species sits under family and order too (four levels).
-  for (const sp of Object.keys(species)) assert.equal(pathTo(index, sp).length, 4, `${sp} depth`);
+  // Each species sits under family and order too: four levels, or five when
+  // its family has a tribe in the tree (Rosaceae here).
+  for (const sp of Object.keys(species)) {
+    const path = pathTo(index, sp);
+    assert.ok([4, 5].includes(path.length), `${sp} depth ${path.length}`);
+    assert.ok(path.includes('rosales') || path.includes('poales') || path.includes('caryophyllales')
+      || path.includes('lamiales') || path.includes('ericales'), `${sp} under an order`);
+  }
+  for (const sp of ['prunus-dulcis', 'rubus-fruticosus', 'rubus-idaeus']) {
+    const path = pathTo(index, sp);
+    assert.equal(path.length, 5, `${sp} depth with its tribe`);
+    assert.ok(path.includes(sp.startsWith('prunus') ? 'amygdaleae' : 'rubeae'), `${sp} under its tribe`);
+  }
 });
 
 test('each species has a complete, consistent flower', () => {
@@ -110,6 +121,10 @@ test('search reaches species by Latin, common and German name', () => {
   assert.ok(search(index, 'argousier').some((r) => r.id === 'hippophae-rhamnoides'));
   assert.ok(search(index, 'Sanddorn').some((r) => r.id === 'hippophae-rhamnoides'));
   assert.ok(search(index, 'Drachenfrucht').some((r) => r.id === 'selenicereus-undatus'));
+  // The Rosaceae tribes are searchable too.
+  assert.equal(top('Amygdaleae'), 'amygdaleae');
+  assert.equal(top('Rubeae'), 'rubeae');
+  assert.equal(top('Maleae'), 'maleae');
 });
 
 test('counts below each node match the displayed numbers', () => {
@@ -121,6 +136,9 @@ test('counts below each node match the displayed numbers', () => {
   assert.equal(count('ericales'), 1);
   assert.equal(count('saxifragales'), 3);
   assert.equal(count('rosaceae'), 3);
+  assert.equal(count('amygdaleae'), 1);
+  assert.equal(count('rubeae'), 2);
+  assert.equal(count('maleae'), 0);
   assert.equal(count('prunus'), 1);
   assert.equal(count('rubus'), 2);
   assert.equal(count('poaceae'), 1);

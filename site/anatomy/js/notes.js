@@ -354,6 +354,38 @@ export const NOTES = {
     },
     src: ['wpde', 'spektrum'],
   },
+  bluetenblatt: {
+    title: { en: 'Blütenblatt, Kronblatt, Fruchtblatt: which floral leaf?', fr: 'Blütenblatt, Kronblatt, Fruchtblatt : quelle feuille florale ?' },
+    body: {
+      en: [
+        'German [[de:Blütenblatt]] literally means “flower leaf”, and dictionaries define it as a leaf of a flower. In the narrow, everyday sense it is the coloured petal, the {{petal}}, which German botany also calls [[de:Kronblatt]]. In the broad morphological sense it covers every leaf-like organ of the flower, including the [[de:Kelchblatt]] ({{sepal}}), the [[de:Staubblatt]] ({{stamen}}) and the [[de:Fruchtblatt]] ({{carpel}}). So the word is not a precise synonym of petal: read the context. ^g4-duden,wpde,spektrum^',
+        'The precise terms follow the whorls, from outside in: [[de:Kelchblatt]] = {{sepal}}, one piece of the {{calyx}}; [[de:Kronblatt]] = {{petal}}, one piece of the {{corolla}}; [[de:Staubblatt]] = {{stamen}}, the pollen-bearing organ of the androecium; [[de:Fruchtblatt]] = {{carpel}}, the ovule-bearing organ of the gynoecium. When the perianth is not divided into calyx and corolla, the pieces are {{tepal}}s ([[de:Tepal]], [[de:Perigonblatt]]) and the whole is a {{perigone}}. ^g4-duden,wpde,spektrum,iate^',
+        'The trap is the shared element [[de:Blatt]]: all these organs are modified leaves, but they are not interchangeable. In particular, Blütenblatt does not name the carpel precisely. The carpel is the [[de:Fruchtblatt]] (Latin carpellum): the folded leaf that encloses the {{ovule}}s and forms the {{ovary}}, whose wall later becomes the {{pericarp}} of the true {{fruit}}. A petal is sterile and bears no ovules. When a flora says Blütenblatt, ask whether it counts petals or speaks of floral leaves in general; when it says Fruchtblatt, it means the carpel. ^g4-duden,wpde,spektrum,po^',
+      ],
+      fr: [
+        'L’allemand [[de:Blütenblatt]] signifie littéralement « feuille de fleur », et les dictionnaires le définissent comme une feuille d’une fleur. Au sens étroit et courant, c’est le pétale coloré, le {{petal}}, que la botanique allemande appelle aussi [[de:Kronblatt]]. Au sens morphologique large, il couvre toute pièce foliacée de la fleur, y compris le [[de:Kelchblatt]] ({{sepal}}), le [[de:Staubblatt]] ({{stamen}}) et le [[de:Fruchtblatt]] ({{carpel}}). Ce n’est donc pas un synonyme précis de pétale : lisez le contexte. ^g4-duden,wpde,spektrum^',
+        'Les termes précis suivent les verticilles, de l’extérieur vers l’intérieur : [[de:Kelchblatt]] = {{sepal}}, une pièce du {{calyx}} ; [[de:Kronblatt]] = {{petal}}, une pièce de la {{corolla}} ; [[de:Staubblatt]] = {{stamen}}, l’organe pollinifère de l’androcée ; [[de:Fruchtblatt]] = {{carpel}}, l’organe ovulifère du gynécée. Quand le périanthe n’est pas divisé en calice et corolle, les pièces sont des {{tepal}}s ([[de:Tepal]], [[de:Perigonblatt]]) et l’ensemble est un {{perigone}}. ^g4-duden,wpde,spektrum,iate^',
+        'Le piège est l’élément commun [[de:Blatt]] : tous ces organes sont des feuilles modifiées, mais ils ne sont pas interchangeables. En particulier, Blütenblatt ne désigne pas précisément le carpelle. Le carpelle est le [[de:Fruchtblatt]] (latin carpellum) : la feuille repliée qui enferme les {{ovule}}s et forme l’{{ovary|ovaire}}, dont la paroi deviendra le {{pericarp}} du vrai {{fruit}}. Un pétale est stérile et ne porte pas d’ovules. Quand une flore dit Blütenblatt, demandez si elle compte les pétales ou si elle parle des feuilles florales en général ; quand elle dit Fruchtblatt, elle parle du carpelle. ^g4-duden,wpde,spektrum,po^',
+      ],
+    },
+    src: ['g4-duden', 'wpde', 'spektrum', 'iate', 'po'],
+  },
+  bluetenboden: {
+    title: { en: 'Blütenboden and Blütenbecher: axis or cup?', fr: 'Blütenboden et Blütenbecher : axe ou coupe ?' },
+    body: {
+      en: [
+        'German [[de:Blütenboden]] (also [[de:Blütenachse]]) is the {{receptacle}}: the shortened tip of the flower stalk on which the floral whorls are inserted, from the {{calyx}} and {{corolla}} to the {{stamen}}s and {{carpel}}s. Latin names it receptaculum, torus or thalamus; French says réceptacle floral, English receptacle. It is stem tissue, not a floral leaf, and it is the platform of the gynoecium, not the ovary wall. ^g4-duden,wpde,spektrum,po^',
+        'Do not merge it with the [[de:Blütenbecher]], the {{hypanthium}}: a cup- or tube-shaped floral receptacle, often formed with the fused bases of calyx, corolla and stamens around the ovary. German can use Blütenboden loosely for the whole region, but the precise pair is Blütenboden for the axis and Blütenbecher for the cup. In the strawberry the red flesh is the {{receptacle}}; in the apple, pear ({{pome}}) and rose hip it is the {{hypanthium}}; in the sea buckthorn the true {{achene}} sits inside a fleshy floral tube, described as a hypanthium or a fleshy calyx tube. ^g4-duden,wpde,spektrum,wpen,cnrtl^',
+        'Function follows anatomy. The receptacle bears the carpels, so it is not part of the carpel: when it swells, it adds accessory flesh around the true fruit, which is still made by the ovary. That is why a strawberry can be fleshy while its true fruits are dry achenes, and why an apple can be fleshy while its core is papery. The ovary wall becomes the {{pericarp}}; the receptacle or hypanthium remains accessory tissue. ^po,spektrum,wpen,g4-uclouvain^',
+      ],
+      fr: [
+        'L’allemand [[de:Blütenboden]] (aussi [[de:Blütenachse]]) est le {{receptacle}} : l’extrémité raccourcie du pédoncule floral sur laquelle s’insèrent les verticilles, du {{calyx}} et de la {{corolla}} aux {{stamen}}s et aux {{carpel}}s. Le latin dit receptaculum, torus ou thalamus ; le français réceptacle floral, l’anglais receptacle. C’est un tissu de tige, pas une feuille florale, et c’est la plate-forme du gynécée, pas la paroi de l’ovaire. ^g4-duden,wpde,spektrum,po^',
+        'Ne le confondez pas avec le [[de:Blütenbecher]], l’{{hypanthium}} : un réceptacle floral en forme de coupe ou de tube, souvent formé avec les bases soudées du calice, de la corolle et des étamines autour de l’ovaire. L’allemand peut employer Blütenboden au sens large pour toute la région, mais la paire précise est Blütenboden pour l’axe et Blütenbecher pour la coupe. Chez la fraise, la chair rouge est le {{receptacle}} ; chez la pomme, la poire ({{pome}}) et le cynorhodon, c’est l’{{hypanthium}} ; chez l’argousier, le vrai {{achene}} est logé dans un tube floral charnu, décrit comme un hypanthe ou comme le tube charnu du calice. ^g4-duden,wpde,spektrum,wpen,cnrtl^',
+        'La fonction suit l’anatomie. Le réceptacle porte les carpelles : il ne fait donc pas partie du carpelle. Quand il gonfle, il ajoute une chair accessoire autour du vrai fruit, lequel est toujours formé par l’ovaire. C’est pourquoi une fraise peut être charnue alors que ses vrais fruits sont des akènes secs, et pourquoi une pomme peut être charnue alors que son cœur est parcheminé. La paroi de l’ovaire devient le {{pericarp}} ; le réceptacle ou l’hypanthe reste un tissu accessoire. ^po,spektrum,wpen,g4-uclouvain^',
+      ],
+    },
+    src: ['g4-duden', 'wpde', 'spektrum', 'po', 'wpen', 'cnrtl', 'g4-uclouvain'],
+  },
 };
 
 /** Which entries show which notes. */
@@ -373,6 +405,8 @@ export const NOTE_ENTRIES = {
   'frucht-samenreife': ['fruit'],
   'ovule-fr': ['ovule', 'egg-cell'],
   'pistil-carpel': ['pistil', 'carpel', 'gynoecium'],
+  bluetenblatt: ['flower', 'perianth', 'calyx', 'corolla', 'perigone', 'tepal', 'sepal', 'petal', 'stamen', 'carpel'],
+  bluetenboden: ['receptacle', 'hypanthium', 'accessory-fruit'],
   'stoma-ostiole': ['stoma', 'stomatal-pore'],
   'membrane-wall': ['cell-wall', 'plasma-membrane', 'pit-membrane'],
   'medullary-ray': ['pith-ray', 'wood-ray'],

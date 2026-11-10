@@ -3787,6 +3787,71 @@ export const TAXA = [
   }
  },
  {
+  "id": "hippophae-rhamnoides-botanika",
+  "parent": "hippophae-rhamnoides",
+  "rank": "cultivar",
+  "name": "Hippophae rhamnoides 'Botanika'",
+  "author": "",
+  "common": {
+   "en": [
+    "sea buckthorn 'Botanika'"
+   ],
+   "fr": [
+    "argousier 'Botanika'"
+   ]
+  },
+  "synonyms": [
+   "'Botanica'"
+  ],
+  "names_src": [
+   {
+    "k": "berries-lubera-botanika",
+    "url": "https://www.lubera.com/fr-ch/shop/argousier-botanica_produkt-2277836.html",
+    "loc": "product name 'Argousier Botanica'"
+   }
+  ],
+  "cultivar": {
+   "self": "female",
+   "pollinizers": [
+    "hippophae-rhamnoides-pollmix-2"
+   ],
+   "incompatible_with": [],
+   "group": "Russian, subsp. mongolica",
+   "origin": {
+    "en": "Female cultivar of subsp. mongolica with Eastern European roots, sold as 'Botanica' by some nurseries: very large oval yellow-orange fruit (12.5 × 10.5 mm, 0.7–0.85 g), less acidic than the German cultivars, ripening from mid-August to late September. The nursery recommends 'Pollmix 2' as pollinizer.",
+    "fr": "Cultivar femelle de la subsp. mongolica aux racines d’Europe de l’Est, vendu comme « Botanica » par certaines pépinières : très gros fruits ovales jaune orangé (12,5 × 10,5 mm, 0,7 à 0,85 g), moins acides que les cultivars allemands, mûrissant de la mi-août à la fin septembre. La pépinière recommande 'Pollmix 2' comme pollinisateur."
+   },
+   "src": [
+    {
+     "k": "berries-lubera-botanika",
+     "url": "https://www.lubera.com/fr-ch/shop/argousier-botanica_produkt-2277836.html",
+     "loc": "description, attribute table; 'Botanica a impérativement besoin d’un pollinisateur ! Nous recommandons l’argousier Pollmix2.'"
+    }
+   ]
+  },
+  "mating": {
+   "system": "allogamous",
+   "flags": [
+    "dioecious",
+    "wind-pollinated"
+   ],
+   "en": "Female clone: fruits only if a male that flowers at the same time grows close by.",
+   "fr": "Clone femelle : ne fructifie que si un mâle fleurissant en même temps pousse à proximité.",
+   "src": [
+    {
+     "k": "berries-nybom-2023",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+     "loc": "1. Introduction; 8. Breeding of Male Plants"
+    },
+    {
+     "k": "berries-mangla-tandon-2014",
+     "url": "https://www.currentscience.ac.in/Volumes/106/12/1731.pdf",
+     "loc": "Abstract"
+    }
+   ]
+  }
+ },
+ {
   "id": "hippophae-rhamnoides-habego",
   "parent": "hippophae-rhamnoides",
   "rank": "cultivar",
@@ -4047,6 +4112,224 @@ export const TAXA = [
      "k": "berries-mangla-tandon-2014",
      "url": "https://www.currentscience.ac.in/Volumes/106/12/1731.pdf",
      "loc": "Abstract"
+    }
+   ]
+  }
+ },
+ {
+  "id": "hippophae-rhamnoides-pollmix-1",
+  "parent": "hippophae-rhamnoides",
+  "rank": "cultivar",
+  "name": "Hippophae rhamnoides 'Pollmix 1'",
+  "author": "",
+  "common": {
+   "en": [
+    "sea buckthorn 'Pollmix 1'"
+   ],
+   "fr": [
+    "argousier 'Pollmix 1'"
+   ]
+  },
+  "synonyms": [],
+  "names_src": [
+   {
+    "k": "berries-nybom-2023",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+    "loc": "8. Breeding of Male Plants: 'Pollmix' is a group of four genotypes"
+   },
+   {
+    "k": "berries-pollmix-friedersdorf",
+    "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html",
+    "loc": "Pollmix 1: early flowering, moderate thorniness"
+   }
+  ],
+  "cultivar": {
+   "self": "male",
+   "pollinizers": [],
+   "incompatible_with": [],
+   "group": "Pollmix group, German, subsp. rhamnoides",
+   "origin": {
+    "en": "Male clone of the Pollmix group, selected from wild subsp. rhamnoides in Germany; early-flowering and moderately thorny. Recommended for early-flowering females such as 'Askola'. Bears no fruit.",
+    "fr": "Clone mâle du groupe Pollmix, sélectionné dans la subsp. rhamnoides sauvage en Allemagne ; floraison précoce et épines modérées. Recommandé pour les femelles précoces comme 'Askola'. Ne porte pas de fruits."
+   },
+   "src": [
+    {
+     "k": "berries-brandenburg-sanddorn",
+     "url": "https://mleuv.brandenburg.de/sixcms/media.php/9/Sanddorn_Teil1_web.pdf",
+     "loc": "p. 43: Pollmix 1 (früh), for Askola, Leikora, Hergo, Frugana"
+    },
+    {
+     "k": "berries-pollmix-friedersdorf",
+     "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html",
+     "loc": "Pollmix 1: early, moderate thorniness"
+    },
+    {
+     "k": "berries-rhs-pollmix",
+     "url": "https://www.rhs.org.uk/plants/93257/hippophae-rhamnoides-pollmix-m/details",
+     "loc": "RHS lists 'Pollmix' as male (m), no berries"
+    }
+   ]
+  },
+  "mating": {
+   "system": "allogamous",
+   "flags": [
+    "dioecious",
+    "wind-pollinated"
+   ],
+   "en": "Male clone: gives pollen only; choose it to flower with the females.",
+   "fr": "Clone mâle : ne donne que du pollen ; à choisir pour fleurir en même temps que les femelles.",
+   "src": [
+    {
+     "k": "berries-nybom-2023",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+     "loc": "1. Introduction; 8. Breeding of Male Plants"
+    }
+   ]
+  }
+ },
+ {
+  "id": "hippophae-rhamnoides-pollmix-2",
+  "parent": "hippophae-rhamnoides",
+  "rank": "cultivar",
+  "name": "Hippophae rhamnoides 'Pollmix 2'",
+  "author": "",
+  "common": {
+   "en": [
+    "sea buckthorn 'Pollmix 2'"
+   ],
+   "fr": [
+    "argousier 'Pollmix 2'"
+   ]
+  },
+  "synonyms": [],
+  "names_src": [
+   {
+    "k": "berries-nybom-2023",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+    "loc": "8. Breeding of Male Plants: 'Pollmix' is a group of four genotypes"
+   },
+   {
+    "k": "berries-pollmix-friedersdorf",
+    "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html",
+    "loc": "Pollmix 2: mid-to-late flowering, strongly thorny, 'Nicht in der Vermehrung'"
+   }
+  ],
+  "cultivar": {
+   "self": "male",
+   "pollinizers": [],
+   "incompatible_with": [],
+   "group": "Pollmix group, German, subsp. rhamnoides",
+   "origin": {
+    "en": "Male clone of the Pollmix group, selected from wild subsp. rhamnoides in Germany; strongly thorny and no longer propagated in Germany, though some nurseries still sell it. Sources disagree on its flowering: mid-early (Brandenburg) or mid-to-late (Friedersdorf). Lubera recommends it for 'Botanika'. Bears no fruit.",
+    "fr": "Clone mâle du groupe Pollmix, sélectionné dans la subsp. rhamnoides sauvage en Allemagne ; très épineux et plus multiplié en Allemagne, bien que certaines pépinières le vendent encore. Les sources divergent sur sa floraison : mi-précoce (Brandenburg) ou mi-tardive (Friedersdorf). Lubera le recommande pour 'Botanika'. Ne porte pas de fruits."
+   },
+   "src": [
+    {
+     "k": "berries-brandenburg-sanddorn",
+     "url": "https://mleuv.brandenburg.de/sixcms/media.php/9/Sanddorn_Teil1_web.pdf",
+     "loc": "p. 43: Pollmix 2, mittelfrüh, kaum noch im Handel wegen starker Bedornung"
+    },
+    {
+     "k": "berries-pollmix-friedersdorf",
+     "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html",
+     "loc": "Pollmix 2: mid-to-late, strongly thorny, not in propagation"
+    },
+    {
+     "k": "berries-lubera-botanika",
+     "url": "https://www.lubera.com/fr-ch/shop/argousier-botanica_produkt-2277836.html",
+     "loc": "recommended pollinizer for 'Botanica'"
+    },
+    {
+     "k": "berries-rhs-pollmix",
+     "url": "https://www.rhs.org.uk/plants/93257/hippophae-rhamnoides-pollmix-m/details",
+     "loc": "RHS lists 'Pollmix' as male (m), no berries"
+    }
+   ]
+  },
+  "mating": {
+   "system": "allogamous",
+   "flags": [
+    "dioecious",
+    "wind-pollinated"
+   ],
+   "en": "Male clone: gives pollen only; choose it to flower with the females.",
+   "fr": "Clone mâle : ne donne que du pollen ; à choisir pour fleurir en même temps que les femelles.",
+   "src": [
+    {
+     "k": "berries-nybom-2023",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+     "loc": "1. Introduction; 8. Breeding of Male Plants"
+    }
+   ]
+  }
+ },
+ {
+  "id": "hippophae-rhamnoides-pollmix-3",
+  "parent": "hippophae-rhamnoides",
+  "rank": "cultivar",
+  "name": "Hippophae rhamnoides 'Pollmix 3'",
+  "author": "",
+  "common": {
+   "en": [
+    "sea buckthorn 'Pollmix 3'"
+   ],
+   "fr": [
+    "argousier 'Pollmix 3'"
+   ]
+  },
+  "synonyms": [],
+  "names_src": [
+   {
+    "k": "berries-nybom-2023",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+    "loc": "8. Breeding of Male Plants: 'Pollmix' is a group of four genotypes"
+   },
+   {
+    "k": "berries-pollmix-friedersdorf",
+    "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html",
+    "loc": "Pollmix 3: mid-to-late flowering, little to moderate thorniness"
+   }
+  ],
+  "cultivar": {
+   "self": "male",
+   "pollinizers": [],
+   "incompatible_with": [],
+   "group": "Pollmix group, German, subsp. rhamnoides",
+   "origin": {
+    "en": "Male clone of the Pollmix group, selected from wild subsp. rhamnoides in Germany; late-flowering (Brandenburg) or mid-to-late (Friedersdorf), little to moderately thorny. Recommended for late-flowering females such as 'Leikora' and 'Hergo'. Bears no fruit.",
+    "fr": "Clone mâle du groupe Pollmix, sélectionné dans la subsp. rhamnoides sauvage en Allemagne ; floraison tardive (Brandenburg) ou mi-tardive (Friedersdorf), peu à modérément épineux. Recommandé pour les femelles tardives comme 'Leikora' et 'Hergo'. Ne porte pas de fruits."
+   },
+   "src": [
+    {
+     "k": "berries-brandenburg-sanddorn",
+     "url": "https://mleuv.brandenburg.de/sixcms/media.php/9/Sanddorn_Teil1_web.pdf",
+     "loc": "p. 43: Pollmix 3 (spät), for Askola, Leikora, Hergo, Frugana"
+    },
+    {
+     "k": "berries-pollmix-friedersdorf",
+     "url": "https://www.baumschule-friedersdorf.de/sanddorn-pollmix.html",
+     "loc": "Pollmix 3: mid-to-late, little to moderate thorniness"
+    },
+    {
+     "k": "berries-rhs-pollmix",
+     "url": "https://www.rhs.org.uk/plants/93257/hippophae-rhamnoides-pollmix-m/details",
+     "loc": "RHS lists 'Pollmix' as male (m), no berries"
+    }
+   ]
+  },
+  "mating": {
+   "system": "allogamous",
+   "flags": [
+    "dioecious",
+    "wind-pollinated"
+   ],
+   "en": "Male clone: gives pollen only; choose it to flower with the females.",
+   "fr": "Clone mâle : ne donne que du pollen ; à choisir pour fleurir en même temps que les femelles.",
+   "src": [
+    {
+     "k": "berries-nybom-2023",
+     "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10743242/",
+     "loc": "1. Introduction; 8. Breeding of Male Plants"
     }
    ]
   }
@@ -6233,6 +6516,62 @@ export const TAXA = [
     "loc": "WFO Plant List 2026-06: Prunus domestica L., accepted; child taxon subsp. insititia (L.) C.K.Schneid."
    }
   ],
+  "name_note": {
+   "en": "Reading the name in a German flora. The × in Prunus × domestica L. is the hybrid sign (ICN Art. H.1.1): the plant is of hybrid origin, here between the cherry plum P. cerasifera and the blackthorn P. spinosa; the usual model crosses a diploid P. cerasifera with a tetraploid P. spinosa to give the hexaploid plum, while other hypotheses invoke a polyploid P. cerasifera, a contribution of P. salicina, or no P. spinosa at all, so the origin is not settled, and no truly wild P. domestica is known. POWO and WFO accept the name without ×, so the tool writes Prunus domestica L.; the × is the international way to flag hybridity, not a German convention. L. is the author, Carl Linnaeus (1707–1778), who published the name in Species Plantarum (1753): the abbreviation belongs to the International Code of Nomenclature, and is the same in every language. subsp. is the rank subspecies (ICN Art. 4.2). Prunus domestica subsp. rotunda H.L.Werneck (Naturkundliches Jahrbuch der Stadt Linz 7: 61, 1961) is Werneck's round-fruited plum; POWO treats it as a synonym of P. domestica subsp. domestica. The round plums include the greengage/reine-claude group, which many floras place in subsp. italica, and German sources also use var. rotunda for the small Austrian landrace 'Punzen'. 'Prunus silicana' is a misreading of Prunus salicina Lindl., the Japanese plum, accepted by POWO and WFO. Prunus cerasifera Ehrh. has the synonym Prunus myrobalana (L.) Loisel., the cherry plum or myrobolan; some databases shorten the author to Loisel., and 'Loisach' is a misreading of Loisel., for Loiseleur-Deslongchamps. The book therefore uses the international code, with German as its language; the tool normalises names to POWO/WFO and keeps the × only where the hybrid status is accepted.",
+   "fr": "Lire le nom dans une flore allemande. Le × de Prunus × domestica L. est le signe de l'hybride (ICN, art. H.1.1) : la plante est d'origine hybride, ici entre le prunier myrobolan P. cerasifera et le prunellier P. spinosa ; le modèle habituel croise un P. cerasifera diploïde et un P. spinosa tétraploïde pour donner le prunier hexaploïde, tandis que d'autres hypothèses font appel à un P. cerasifera polyploïde, à une contribution de P. salicina, ou contestent celle de P. spinosa : l'origine n'est donc pas tranchée, et l'on ne connaît pas de P. domestica vraiment sauvage. POWO et WFO acceptent le nom sans ×, et l'outil écrit donc Prunus domestica L. ; le × est la façon internationale de signaler l'hybridité, pas une convention allemande. L. est l'auteur, Carl Linnaeus (1707–1778), qui a publié le nom dans Species Plantarum (1753) : cette abréviation relève du Code international de nomenclature et s'écrit de la même façon dans toutes les langues. subsp. est le rang de sous-espèce (ICN, art. 4.2). Prunus domestica subsp. rotunda H.L.Werneck (Naturkundliches Jahrbuch der Stadt Linz 7 : 61, 1961) est le prunier à fruits ronds de Werneck ; POWO le met en synonyme de P. domestica subsp. domestica. Les prunes rondes comprennent le groupe des reines-claudes, que beaucoup de flores placent dans la subsp. italica, et les sources allemandes emploient aussi var. rotunda pour la petite variété autrichienne 'Punzen'. « Prunus silicana » est une mauvaise lecture de Prunus salicina Lindl., le prunier japonais, accepté par POWO et WFO. Prunus cerasifera Ehrh. a pour synonyme Prunus myrobalana (L.) Loisel., le prunier myrobolan ; certaines bases abrègent l'auteur en Loisel., et « Loisach » est une mauvaise lecture de Loisel., pour Loiseleur-Deslongchamps. Le livre suit donc le code international, avec l'allemand comme langue ; l'outil normalise les noms selon POWO/WFO et ne garde le × que lorsque le statut d'hybride est accepté.",
+   "src": [
+    {
+     "k": "icn",
+     "url": "https://www.iapt-taxon.org/nomen/pages/main/art_h1.html",
+     "loc": "Art. H.1.1 (hybrid sign), H.2.1, H.3.1"
+    },
+    {
+     "k": "icn",
+     "url": "https://www.iapt-taxon.org/nomen/pages/main/art_4.html",
+     "loc": "Art. 4.1–4.2 (primary and secondary ranks, subspecies)"
+    },
+    {
+     "k": "powo",
+     "url": "https://api.gbif.org/v1/species/207748787",
+     "loc": "WCVP 2026-06 via GBIF: Prunus domestica L., accepted, without ×"
+    },
+    {
+     "k": "wfo",
+     "url": "https://wfoplantlist.org/taxon/wfo-0000984349-2026-06",
+     "loc": "WFO Plant List 2026-06: Prunus domestica L., accepted, without ×"
+    },
+    {
+     "k": "prunus-zheb",
+     "url": "https://www.nature.com/articles/s41438-018-0090-6",
+     "loc": "Abstract; Introduction (hybrid origin of P. domestica)"
+    },
+    {
+     "k": "prunus-abd",
+     "url": "https://www.frontiersin.org/journals/plant-science/articles/10.3389/fpls.2019.00896/full",
+     "loc": "Discussion, 'Genetic Relationships in Prunus Species'"
+    },
+    {
+     "k": "powo",
+     "url": "https://api.gbif.org/v1/species/match?name=Prunus%20domestica%20subsp.%20rotunda",
+     "loc": "GBIF match: Prunus domestica subsp. rotunda H.L.Werneck, status SYNONYM, accepted P. domestica subsp. domestica (usageKey 12343037, accepted 6369140)"
+    },
+    {
+     "k": "powo",
+     "url": "https://api.gbif.org/v1/species/match?name=Prunus%20salicina",
+     "loc": "GBIF match against the WCVP backbone: Prunus salicina Lindl., accepted"
+    },
+    {
+     "k": "powo",
+     "url": "https://api.gbif.org/v1/species/match?name=Prunus%20cerasifera",
+     "loc": "GBIF match against the WCVP backbone: Prunus cerasifera Ehrh., accepted"
+    },
+    {
+     "k": "powo",
+     "url": "https://api.gbif.org/v1/species/match?name=Prunus%20myrobalana",
+     "loc": "GBIF match: Prunus myrobalana (L.) Loisel., synonym of P. cerasifera (usageKey 3021731)"
+    }
+   ]
+  },
   "taxonomy": {
    "en": "Accepted by POWO and WFO. Damsons, bullaces and mirabelles are split off differently: POWO (WCVP) accepts Prunus insititia L. and Prunus ×syriaca Borkh. as separate species; WFO accepts P. insititia and P. syriaca too, but also keeps P. domestica subsp. insititia (L.) C.K.Schneid. as an accepted subspecies. DNA data on 405 samples found four clades in cultivated plums (greengages, mirabelles, European plums, d'Agen prunes) but no separate clade for damsons, bullaces or P. insititia.",
    "fr": "Accepté par POWO et WFO. Les damas (damsons), prunelles de haie (bullaces) et mirabelles sont traités différemment : POWO (WCVP) accepte Prunus insititia L. et Prunus ×syriaca Borkh. comme espèces distinctes ; WFO accepte aussi P. insititia et P. syriaca, mais garde en même temps P. domestica subsp. insititia (L.) C.K.Schneid. comme sous-espèce acceptée. Des données ADN sur 405 échantillons montrent quatre clades chez les pruniers cultivés (reines-claudes, mirabelles, pruniers européens, pruneaux d'Agen), sans clade propre aux damas, bullaces ou P. insititia.",

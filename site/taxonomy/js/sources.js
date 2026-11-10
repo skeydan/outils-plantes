@@ -19,8 +19,14 @@ export const SOURCES = [
  {
   "id": "apweb",
   "short": "Stevens, APweb",
-  "text": "Stevens P.F. Angiosperm Phylogeny Website (Missouri Botanical Garden). Used for the placement of the orders (Poales, Caryophyllales, Lamiales, Rosales, Ericales, Saxifragales) and their families, following APG IV.",
+  "text": "Stevens P.F. Angiosperm Phylogeny Website (Missouri Botanical Garden). Used for the placement of the orders (Poales, Caryophyllales, Lamiales, Rosales, Ericales, Saxifragales) and their families, following APG IV, and for the tribes of Rosaceae.",
   "url": "https://www.mobot.org/MOBOT/research/APweb/"
+ },
+ {
+  "id": "fna-rosaceae",
+  "short": "Flora of North America, Rosaceae",
+  "text": "Brouillet L. Rosaceae Jussieu, including the tribe treatments Amygdaleae, Maleae and Rubeae. Flora of North America North of Mexico, vol. 9 (2014), online at floranorthamerica.org. Used for the tribe names, their authorities and their circumscription; where APweb and FNA differ on the author of Amygdaleae, the entry says so.",
+  "url": "https://floranorthamerica.org/Rosaceae"
  },
  {
   "id": "almond-cultivars",

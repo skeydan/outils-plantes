@@ -382,6 +382,7 @@ function renderEntry({ scroll = true } = {}) {
       h('span', { class: 'a-kind', text: L(RANK[t.rank]) })),
     names.length ? h('p', { class: 'sd-names' }, ...names.flatMap((l, i) => [i ? ' · ' : '', h('span', { class: 'a-lang', text: l.toUpperCase() }), ' ', h('span', { lang: l, text: t.common[l].join(', ') })]), ' ', ...srcRefs(t.names_src)) : t.names_src?.length ? h('p', { class: 'sd-names small muted' }, T('Name: ', 'Nom : '), ...srcRefs(t.names_src)) : null,
     t.synonyms?.length ? h('p', { class: 'small muted' }, T('Also known as ', 'Aussi appelé '), ...((lang() === 'fr' && t.synonyms_fr) || t.synonyms).flatMap((s, i) => [i ? ', ' : '', h('span', { class: 'sd-sci' }, ...nameParts(s, 'species').map((p) => (p.italic ? h('i', { text: p.text }) : p.text)))])) : null,
+    block(T('Reading this name', 'Lire ce nom'), t.name_note, { id: 'name-note' }),
     glance(t),
     block(T('Name and classification', 'Nom et classification'), t.taxonomy, { id: 'taxonomy' }),
     block(T('How it reproduces', 'Comment elle se reproduit'), t.mating, { id: 'mating' }),

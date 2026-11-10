@@ -20,7 +20,7 @@ const STR = {
     fr: 'Une petite classification qui grandit peu à peu. Pour chaque espèce : son ordre, sa famille, son genre et son nom d’espèce (avec l’auteur), une fleur schématique montrant sépales, pétales, étamines et carpelles, le nombre de chacun, et la disposition des feuilles.',
   },
   search: { en: 'Search a name or a common name…', fr: 'Chercher un nom ou un nom commun…' },
-  path: { en: 'Order → family → genus → species', fr: 'Ordre → famille → genre → espèce' },
+  path: { en: 'Order → family → (tribe) → genus → species', fr: 'Ordre → famille → (tribu) → genre → espèce' },
   flowerParts: { en: 'Flower parts', fr: 'Pièces florales' },
   formula: { en: 'Floral formula', fr: 'Formule florale' },
   symmetry: { en: 'Symmetry', fr: 'Symétrie' },
@@ -45,6 +45,7 @@ const FRUIT_CAT = {
 const RANK = {
   order: { en: 'order', fr: 'ordre' },
   family: { en: 'family', fr: 'famille' },
+  tribe: { en: 'tribe', fr: 'tribu' },
   genus: { en: 'genus', fr: 'genre' },
   species: { en: 'species', fr: 'espèce' },
   variety: { en: 'variety', fr: 'variété' },
@@ -188,6 +189,7 @@ function taxonDetail(e) {
       T('Flower and fruit: see ', 'Fleur et fruit : voir '), h('a', { href: href(parent.id), 'data-id': parent.id }, nameInline(parent))) : null,
     kids.length ? h('ul', { class: 'taxo-children' }, ...kids.map((id) => h('li', {},
       h('a', { href: href(id), 'data-id': id }, nameInline(index.byId.get(id)))))) : null,
+    e.taxonomy ? h('p', { class: 'taxo-note' }, L(e.taxonomy)) : null,
     h('p', { class: 'taxo-src' }, T('Names and placement', 'Noms et placement'), ' ', cite(...e.names_src.map((s) => s.k)), ' ',
       cite(...(e.taxonomy?.src ?? []).map((s) => s.k))));
 }
@@ -215,7 +217,7 @@ function detail(id) {
 
 // ---------------------------------------------------------------- hover notes
 // On a family or genus, show its taxonomy{en,fr} text in a small tooltip.
-const TIP_RANKS = new Set(['family', 'genus']);
+const TIP_RANKS = new Set(['family', 'tribe', 'genus']);
 let tipEl = null, tipAnchor = null;
 
 function hideTip() {

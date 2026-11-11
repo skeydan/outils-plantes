@@ -29,6 +29,12 @@ export const SOURCES = [
   "url": "https://floranorthamerica.org/Rosaceae"
  },
  {
+  "id": "burnett-1835",
+  "short": "Burnett, Outlines of Botany (1835)",
+  "text": "Burnett G.T., Outlines of Botany, including a general history of the vegetable kingdom, vol. 1. London: H. Renshaw, 1835. Scan and OCR on archive.org (item outlinesbotany00burngoog). Used for the names Amaranthoideae and Chenopodioideae, published there as the groups Amaranthidae and Chenopodidae (p. 591); the modern -oideae spelling and the rank of subfamily follow APweb.",
+  "url": "https://archive.org/details/outlinesbotany00burngoog/page/591/mode/1up"
+ },
+ {
   "id": "almond-cultivars",
   "short": "Almond cultivars, CEBAS-CSIC",
   "text": "Dicenta F., Cremades T., Martínez-Gómez P., et al. ‘Penta and Makako: Two Extra-late Flowering Self-compatible Almond Cultivars from CEBAS-CSIC’. HortScience 53(11): 1700–1702 (2018). Used for the cultivar names, their sex/self-compatibility and their flowering and ripening traits.",
@@ -105,6 +111,30 @@ export const SOURCES = [
   "short": "Photo : CC BY-SA 4.0, Stefan.lefnaer",
   "text": "Photo of love-lies-bleeding (Amaranthus caudatus) inflorescences, CC BY-SA 4.0, Stefan.lefnaer, Wikimedia Commons (reduced in size for the web).",
   "url": "https://commons.wikimedia.org/wiki/File:Amaranthus_caudatus_sl7.jpg"
+ },
+ {
+  "id": "photo-ribes-rubrum",
+  "short": "Photo : CC BY-SA 3.0, Hedwig Storch",
+  "text": "Photo of ripe red currant berries, CC BY-SA 3.0, Hedwig Storch, Wikimedia Commons (reduced in size for the web). The same image is used by Plants For A Future; the original is on Wikimedia Commons.",
+  "url": "https://commons.wikimedia.org/wiki/File:Ribes_rubrum_-_Rote_Johannisbeeren_1353.jpg"
+ },
+ {
+  "id": "photo-ribes-nigrum",
+  "short": "Photo : CC BY-SA 3.0, Aiwok",
+  "text": "Photo of blackcurrant flowers, CC BY-SA 3.0, Aiwok, Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Ribes_nigrum_flos.JPG"
+ },
+ {
+  "id": "photo-ribes-uva-crispa",
+  "short": "Photo : CC BY-SA 4.0, Krzysztof Ziarnek, Kenraiz",
+  "text": "Photo of a gooseberry flower, CC BY-SA 4.0, Krzysztof Ziarnek (Kenraiz), Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Ribes_uva-crispa_kz04.jpg"
+ },
+ {
+  "id": "photo-rubus-idaeus",
+  "short": "Photo : CC BY-SA 4.0, Krzysztof Ziarnek, Kenraiz",
+  "text": "Photo of raspberry flowers, CC BY-SA 4.0, Krzysztof Ziarnek (Kenraiz), Wikimedia Commons (reduced in size for the web).",
+  "url": "https://commons.wikimedia.org/wiki/File:Rubus_idaeus_kz03.jpg"
  },
  {
   "id": "photo-marrubium",

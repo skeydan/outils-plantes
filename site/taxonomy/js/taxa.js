@@ -47,7 +47,7 @@ export const TAXA = [
  { id: 'amaranthaceae', parent: 'caryophyllales', rank: 'family', name: 'Amaranthaceae', author: 'Juss.',
    common: { fr: ['amarantacées'], en: ['amaranth family'], de: ['Fuchsschwanzgewächse'] },
    names_src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Amaranthaceae Juss., accepted; Chenopodiaceae merged into it' }],
-   taxonomy: { en: 'The amaranth family: amaranths, quinoa, beet, spinach and goosefoots.', fr: 'La famille des amarantes : amarantes, quinoa, betterave, épinard et chénopodes.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/caryophyllalesweb.htm', loc: 'Amaranthaceae section' }] } },
+   taxonomy: { en: 'The amaranth family: amaranths, quinoa, beet, spinach and goosefoots. Its limits are debated: APG and APweb keep the former Chenopodiaceae (quinoa, beet, goosefoots) inside a broad Amaranthaceae, divided into subfamilies; older classifications kept it as a separate family. The tree follows the broad family and shows two subfamilies: Amaranthoideae (Amaranthus) and Chenopodioideae (Chenopodium).', fr: 'La famille des amarantes : amarantes, quinoa, betterave, épinard et chénopodes. Ses limites sont discutées : l’APG et APweb gardent l’ancienne famille des Chenopodiaceae (quinoa, betterave, chénopodes) dans une Amaranthaceae au sens large, divisée en sous-familles ; les classifications plus anciennes la maintenaient comme famille séparée. L’arbre suit la famille au sens large et montre deux sous-familles : Amaranthoideae (Amaranthus) et Chenopodioideae (Chenopodium).', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/caryophyllalesweb.htm', loc: 'Amaranthaceae section, five-subfamily classification' }, { k: 'burnett-1835', url: 'https://archive.org/details/outlinesbotany00burngoog/page/591/mode/1up', loc: 'p. 591 (as Amaranthidae and Chenopodidae)' }] } },
  { id: 'lamiaceae', parent: 'lamiales', rank: 'family', name: 'Lamiaceae', author: 'Martinov',
    common: { fr: ['lamiacées', 'labiées'], en: ['mint family'], de: ['Lippenblütler'] },
    synonyms: ['Labiatae Juss.'],
@@ -76,8 +76,14 @@ export const TAXA = [
 
  // ---------------------------------------------------------------- subfamilies
  // A subfamily sits between family and tribe (ICN Art. 4.1); its name ends in
- // -oideae. Rosaceae is the only family in this tree whose modern division
- // into subfamilies matters here, because two of them hold the genera shown.
+ // -oideae. They are shown where the family's modern division matters to the
+ // genera in this tree: Amaranthaceae (two genera) and Rosaceae (two tribes).
+ { id: 'amaranthoideae', parent: 'amaranthaceae', rank: 'subfamily', name: 'Amaranthoideae', author: 'Burnett',
+   names_src: [{ k: 'burnett-1835', url: 'https://archive.org/details/outlinesbotany00burngoog/page/591/mode/1up', loc: 'p. 591 (as Amaranthidae)' }],
+   taxonomy: { en: 'A subfamily of Amaranthaceae (the name ends in -oideae): the amaranths, including Amaranthus and the cockscombs (Celosia). The family is taken here in the broad sense of APG, with the former Chenopodiaceae (quinoa, beet, goosefoots) included as another subfamily.', fr: 'Une sous-famille des Amaranthaceae (le nom se termine en -oideae) : les amarantes, dont Amaranthus et les célosies (Celosia). La famille est prise ici au sens large de l’APG, avec l’ancienne famille des Chenopodiaceae (quinoa, betterave, chénopodes) incluse comme autre sous-famille.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/caryophyllalesweb.htm', loc: 'Amaranthaceae section, five-subfamily classification; Amaranthoideae' }, { k: 'burnett-1835', url: 'https://archive.org/details/outlinesbotany00burngoog/page/591/mode/1up', loc: 'p. 591 (as Amaranthidae)' }] } },
+ { id: 'chenopodioideae', parent: 'amaranthaceae', rank: 'subfamily', name: 'Chenopodioideae', author: 'Burnett',
+   names_src: [{ k: 'burnett-1835', url: 'https://archive.org/details/outlinesbotany00burngoog/page/591/mode/1up', loc: 'p. 591 (as Chenopodidae)' }],
+   taxonomy: { en: 'A subfamily of Amaranthaceae (the name ends in -oideae): goosefoots, oraches, beet, spinach and quinoa, with small, often greenish flowers. Older classifications kept this group as the separate family Chenopodiaceae; APG includes it in a broad Amaranthaceae.', fr: 'Une sous-famille des Amaranthaceae (le nom se termine en -oideae) : chénopodes, arroches, betterave, épinard et quinoa, à petites fleurs souvent verdâtres. Les classifications plus anciennes gardaient ce groupe comme famille séparée des Chenopodiaceae ; l’APG l’inclut dans une Amaranthaceae au sens large.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/caryophyllalesweb.htm', loc: 'Amaranthaceae section, five-subfamily classification; Chenopodioideae' }, { k: 'burnett-1835', url: 'https://archive.org/details/outlinesbotany00burngoog/page/591/mode/1up', loc: 'p. 591 (as Chenopodidae)' }] } },
  { id: 'dryadoideae', parent: 'rosaceae', rank: 'subfamily', name: 'Dryadoideae', author: 'Juel',
    names_src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '1. Dryadoideae Juel' }],
    taxonomy: { en: 'A subfamily of Rosaceae (the name ends in -oideae): small, often dry-climate shrubs such as Dryas, Cercocarpus and Purshia. No genus of this subfamily is in the tree yet; it is listed to show the family’s three modern branches.', fr: 'Une sous-famille des Rosaceae (le nom se termine en -oideae) : petits arbustes, souvent de climat sec, comme Dryas, Cercocarpus et Purshia. Aucun genre de cette sous-famille n’est encore dans l’arbre ; elle est indiquée pour montrer les trois branches modernes de la famille.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '1. Dryadoideae Juel' }] } },
@@ -112,11 +118,11 @@ export const TAXA = [
    common: { fr: ['sarrasin'], en: ['buckwheat'], de: ['Buchweizen'] },
    names_src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Fagopyrum Mill., accepted genus' }],
    taxonomy: { en: 'The buckwheat genus; its seeds are used like a cereal though it is not a grass.', fr: 'Le genre du sarrasin ; ses graines s’utilisent comme une céréale, sans être une graminée.', src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Fagopyrum Mill.' }] } },
- { id: 'chenopodium', parent: 'amaranthaceae', rank: 'genus', name: 'Chenopodium', author: 'L.',
+ { id: 'chenopodium', parent: 'chenopodioideae', rank: 'genus', name: 'Chenopodium', author: 'L.',
    common: { fr: ['chénopode'], en: ['goosefoot'], de: ['Gänsefuß'] },
    names_src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Chenopodium L., accepted genus' }],
    taxonomy: { en: 'The goosefoot genus: quinoa, fat-hen and many weedy or edible species.', fr: 'Le genre du chénopode : quinoa, chénopode blanc et de nombreuses espèces adventices ou comestibles.', src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Chenopodium L.' }] } },
- { id: 'amaranthus', parent: 'amaranthaceae', rank: 'genus', name: 'Amaranthus', author: 'L.',
+ { id: 'amaranthus', parent: 'amaranthoideae', rank: 'genus', name: 'Amaranthus', author: 'L.',
    common: { fr: ['amarante'], en: ['amaranth'], de: ['Amarant', 'Fuchsschwanz'] },
    names_src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Amaranthus L., accepted genus' }],
    taxonomy: { en: 'The amaranth genus: grain amaranths and leafy amaranths, and many weeds.', fr: 'Le genre de l’amarante : amarantes à grains et à feuilles, et de nombreuses adventices.', src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Amaranthus L.' }] } },
@@ -292,6 +298,9 @@ export const TAXA = [
    inflorescence: { en: 'a few-flowered corymbose cyme or small panicle', fr: 'une cyme corymbiforme à quelques fleurs ou une petite panicule' },
    fruit: { en: 'an aggregate of red drupelets', fr: 'un agrégat de drupéoles rouges (fruit composé)' },
    fruit_anatomy: 'aggregate-fruit',   process: 'aggregate',
+
+   photo: { file: 'rubus-idaeus.jpg', credit: 'photo-rubus-idaeus',
+     cap: { en: 'The photo shows a cluster of raspberry flowers: white petals, many stamens and sepals bent back; the red aggregate fruit is not shown.', fr: 'La photo montre un groupe de fleurs de framboisier : pétales blancs, nombreuses étamines et sépales réfléchis ; le fruit rouge composé n’est pas montré.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=1&taxon_id=200011446', loc: 'Flora of North America description' }] },
 
  { id: 'ribes-rubrum', parent: 'ribes', rank: 'species', name: 'Ribes rubrum', author: 'L.',
@@ -307,6 +316,9 @@ export const TAXA = [
    inflorescence: { en: 'a drooping raceme of 5–15 flowers', fr: 'une grappe pendante de 5 à 15 fleurs' },
    fruit: { en: 'a red, globose berry', fr: 'une baie rouge globuleuse' },
    fruit_anatomy: 'berry',   process: 'berry',
+
+   photo: { file: 'ribes-rubrum.jpg', credit: 'photo-ribes-rubrum',
+     cap: { en: 'The photo shows ripe red currant berries and their leaves, not the flowers; the dark scar at the tip of each berry is what remains of the flower.', fr: 'La photo montre des baies de groseille rouge mûres et leurs feuilles, pas les fleurs ; la cicatrice sombre au sommet de chaque baie est ce qui reste de la fleur.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=220011643', loc: 'Flora of China description' }] },
 
  { id: 'ribes-nigrum', parent: 'ribes', rank: 'species', name: 'Ribes nigrum', author: 'L.',
@@ -322,6 +334,9 @@ export const TAXA = [
    inflorescence: { en: 'a drooping raceme of 4–10 flowers', fr: 'une grappe pendante de 4 à 10 fleurs' },
    fruit: { en: 'a black, globose berry', fr: 'une baie noire globuleuse' },
    fruit_anatomy: 'berry',   process: 'berry',
+
+   photo: { file: 'ribes-nigrum.jpg', credit: 'photo-ribes-nigrum',
+     cap: { en: 'The photo shows a drooping raceme of blackcurrant flowers: buds and one open flower, with five reddish sepals and the inferior ovary below them. The black berries are not shown.', fr: 'La photo montre une grappe pendante de fleurs de cassis : des boutons et une fleur ouverte, à cinq sépales rougeâtres et ovaire infère sous eux. Les baies noires ne sont pas montrées.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=128544', loc: 'Flora of China, Ribes (genus treatment)' }] },
 
  { id: 'ribes-uva-crispa', parent: 'ribes', rank: 'species', name: 'Ribes uva-crispa', author: 'L.',
@@ -338,6 +353,9 @@ export const TAXA = [
    inflorescence: { en: 'flowers solitary or in pairs', fr: 'fleurs solitaires ou par paires' },
    fruit: { en: 'a green to purple berry, often glandular-hairy', fr: 'une baie verte à pourpre, souvent poilue et glanduleuse' },
    fruit_anatomy: 'berry',   process: 'berry',
+
+   photo: { file: 'ribes-uva-crispa.jpg', credit: 'photo-ribes-uva-crispa',
+     cap: { en: 'The photo shows a single gooseberry flower, close up: five spreading reddish sepals, five small petals and five stamens around the inferior ovary. The spiny stems and the berry are not shown.', fr: 'La photo montre une fleur de groseille à maquereau en gros plan : cinq sépales étalés rougeâtres, cinq petits pétales et cinq étamines autour de l’ovaire infère. Les tiges épineuses et la baie ne sont pas montrées.' } },
    flower_src: [{ k: 'flora', url: 'http://www.efloras.org/florataxon.aspx?flora_id=2&taxon_id=128544', loc: 'Flora of China, Ribes (genus treatment)' }] },
 
  { id: 'actinidia-deliciosa', parent: 'actinidia', rank: 'species', name: 'Actinidia deliciosa', author: '(A.Chev.) C.F.Liang & A.R.Ferguson',

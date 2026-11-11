@@ -67,7 +67,8 @@ a cited source, listed at the bottom of each tab.
   "absent"), the floral formula, symmetry, ovary position, sexuality, leaf
   arrangement (phyllotaxy), inflorescence and fruit; the author of each
   name. Names and placement follow POWO/WCVP and WFO; the Rosaceae
-  subfamilies and tribes follow APweb and Flora of North America; the flower
+  subfamilies and tribes follow APweb and Flora of North America, and the
+  Amaranthaceae subfamilies follow Burnett (1835) and APweb; the flower
   facts are per-species from regional floras. Search on Latin, common and German
   names; a link per node (`#taxonomy/prunus-dulcis`).
 - **Microscope** (`#microscope`, code in `site/microscope/`): a simulated
@@ -307,3 +308,4 @@ Code: MIT, see [LICENSE](LICENSE). Text, data tables and our own drawings:
 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), unless
 stated otherwise. Third-party images keep their own licence as credited.
 The microscope tab's photographs are by Josef Reischig and by Jon Houseman and Matthew Ford (Wikimedia Commons, CC BY-SA 3.0 or 4.0). Our blurred, cropped and resampled versions are shared under the same CC BY-SA licence as each original; the tab's credits list gives author, licence and changes for every photograph.
+The taxonomy tab's new species photographs are from Wikimedia Commons and credited per species in its Sources: *Ribes rubrum* by Hedwig Storch (CC BY-SA 3.0; the same image is used by Plants For A Future), *Ribes nigrum* by Aiwok (CC BY-SA 3.0), *Ribes uva-crispa* and *Rubus idaeus* by Krzysztof Ziarnek, Kenraiz (CC BY-SA 4.0). They are reduced in size and shared under the same CC BY-SA licence as each original.

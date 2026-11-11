@@ -71,11 +71,12 @@ test('the starter species are present under their genus', () => {
     'hippophae-rhamnoides': 'hippophae',
   };
   for (const [sp, gen] of Object.entries(species)) under(sp, gen);
-  // Each species sits under family and order too: four levels, or six when
-  // its family has a subfamily and a tribe in the tree (Rosaceae here).
+  // Each species sits under family and order too: four levels, five when its
+  // family has a subfamily (Amaranthaceae here), six when it also has a tribe
+  // (Rosaceae here).
   for (const sp of Object.keys(species)) {
     const path = pathTo(index, sp);
-    assert.ok([4, 6].includes(path.length), `${sp} depth ${path.length}`);
+    assert.ok([4, 5, 6].includes(path.length), `${sp} depth ${path.length}`);
     assert.ok(path.includes('rosales') || path.includes('poales') || path.includes('caryophyllales')
       || path.includes('lamiales') || path.includes('ericales'), `${sp} under an order`);
   }
@@ -84,6 +85,11 @@ test('the starter species are present under their genus', () => {
     assert.equal(path.length, 6, `${sp} depth with its subfamily and tribe`);
     assert.ok(path.includes(sp.startsWith('prunus') ? 'amygdaleae' : 'rubeae'), `${sp} under its tribe`);
     assert.ok(path.includes(sp.startsWith('prunus') ? 'amygdaloideae' : 'rosoideae'), `${sp} under its subfamily`);
+  }
+  for (const [sp, sf] of [['amaranthus-caudatus', 'amaranthoideae'], ['chenopodium-quinoa', 'chenopodioideae']]) {
+    const path = pathTo(index, sp);
+    assert.equal(path.length, 5, `${sp} depth with its subfamily`);
+    assert.ok(path.includes(sf), `${sp} under ${sf}`);
   }
 });
 
@@ -122,7 +128,9 @@ test('search reaches species by Latin, common and German name', () => {
   assert.ok(search(index, 'argousier').some((r) => r.id === 'hippophae-rhamnoides'));
   assert.ok(search(index, 'Sanddorn').some((r) => r.id === 'hippophae-rhamnoides'));
   assert.ok(search(index, 'Drachenfrucht').some((r) => r.id === 'selenicereus-undatus'));
-  // The Rosaceae subfamilies and tribes are searchable too.
+  // The Amaranthaceae and Rosaceae subfamilies and tribes are searchable too.
+  assert.equal(top('Amaranthoideae'), 'amaranthoideae');
+  assert.equal(top('Chenopodioideae'), 'chenopodioideae');
   assert.equal(top('Dryadoideae'), 'dryadoideae');
   assert.equal(top('Rosoideae'), 'rosoideae');
   assert.equal(top('Amygdaloideae'), 'amygdaloideae');
@@ -139,6 +147,9 @@ test('counts below each node match the displayed numbers', () => {
   assert.equal(count('rosales'), 4);
   assert.equal(count('ericales'), 1);
   assert.equal(count('saxifragales'), 3);
+  assert.equal(count('amaranthaceae'), 2);
+  assert.equal(count('amaranthoideae'), 1);
+  assert.equal(count('chenopodioideae'), 1);
   assert.equal(count('rosaceae'), 3);
   assert.equal(count('dryadoideae'), 0);
   assert.equal(count('rosoideae'), 2);

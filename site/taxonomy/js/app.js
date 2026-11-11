@@ -1,4 +1,5 @@
-// Taxonomy: a small, growing tree (order -> family -> genus -> species) with,
+// Taxonomy: a small, growing tree (order -> family -> subfamily -> tribe ->
+// genus -> species) with,
 // for each species, a schematic flower (parts per whorl, symmetry, ovary) and
 // the leaf arrangement (phyllotaxy). Names follow POWO/WFO.
 import { lang } from '../../assets/site.js';
@@ -16,11 +17,11 @@ const L = (o) => (o ? o[lang()] ?? o.en : '');
 const STR = {
   title: { en: 'Taxonomy: from order to species, and the flower of each', fr: 'Taxonomie : de l’ordre à l’espèce, et la fleur de chacune' },
   lead: {
-    en: 'A small, growing classification. For each species: its order, family, genus and species name (with the author), a schematic flower showing sepals, petals, stamens and carpels, the count of each, and how the leaves are arranged.',
-    fr: 'Une petite classification qui grandit peu à peu. Pour chaque espèce : son ordre, sa famille, son genre et son nom d’espèce (avec l’auteur), une fleur schématique montrant sépales, pétales, étamines et carpelles, le nombre de chacun, et la disposition des feuilles.',
+    en: 'A small, growing classification. For each species: its order, family, genus and species name (with the author), a schematic flower showing sepals, petals, stamens and carpels, the count of each, and how the leaves are arranged. Ranks nest: a family may be divided into subfamilies (names in -oideae) and these into tribes (names in -eae); where the tree knows them, both are shown.',
+    fr: 'Une petite classification qui grandit peu à peu. Pour chaque espèce : son ordre, sa famille, son genre et son nom d’espèce (avec l’auteur), une fleur schématique montrant sépales, pétales, étamines et carpelles, le nombre de chacun, et la disposition des feuilles. Les rangs s’emboîtent : une famille peut se diviser en sous-familles (noms en -oideae), puis en tribus (noms en -eae) ; quand l’arbre les connaît, les deux sont affichés.',
   },
   search: { en: 'Search a name or a common name…', fr: 'Chercher un nom ou un nom commun…' },
-  path: { en: 'Order → family → (tribe) → genus → species', fr: 'Ordre → famille → (tribu) → genre → espèce' },
+  path: { en: 'Order → family → (subfamily) → (tribe) → genus → species', fr: 'Ordre → famille → (sous-famille) → (tribu) → genre → espèce' },
   flowerParts: { en: 'Flower parts', fr: 'Pièces florales' },
   formula: { en: 'Floral formula', fr: 'Formule florale' },
   symmetry: { en: 'Symmetry', fr: 'Symétrie' },
@@ -45,13 +46,14 @@ const FRUIT_CAT = {
 const RANK = {
   order: { en: 'order', fr: 'ordre' },
   family: { en: 'family', fr: 'famille' },
+  subfamily: { en: 'subfamily', fr: 'sous-famille' },
   tribe: { en: 'tribe', fr: 'tribu' },
   genus: { en: 'genus', fr: 'genre' },
   species: { en: 'species', fr: 'espèce' },
   variety: { en: 'variety', fr: 'variété' },
   cultivar: { en: 'cultivar', fr: 'cultivar' },
 };
-const LATIN_RANKS = new Set(['genus', 'species', 'variety']);
+const LATIN_RANKS = new Set(['subfamily', 'genus', 'species', 'variety']);
 const CULTIVAR_RE = /^(.*?)\s+((?:'[^']*')|(?:‘[^’]*’))$/;
 
 const SYMMETRY = {
@@ -179,7 +181,7 @@ function speciesDetail(e) {
       ' · ', T('flower', 'fleur'), ' ', cite(...e.flower_src.map((s) => s.k))));
 }
 
-/** A non-species detail (order, family, genus): name, common names, children. */
+/** A non-species detail (order, family, subfamily, tribe, genus): name, common names, children. */
 function taxonDetail(e) {
   const kids = index.children.get(e.id);
   const parent = e.parent === null ? null : index.byId.get(e.parent);
@@ -216,8 +218,8 @@ function detail(id) {
 }
 
 // ---------------------------------------------------------------- hover notes
-// On a family or genus, show its taxonomy{en,fr} text in a small tooltip.
-const TIP_RANKS = new Set(['family', 'tribe', 'genus']);
+// On a family, subfamily, tribe or genus, show its taxonomy{en,fr} text in a small tooltip.
+const TIP_RANKS = new Set(['family', 'subfamily', 'tribe', 'genus']);
 let tipEl = null, tipAnchor = null;
 
 function hideTip() {

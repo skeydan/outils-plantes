@@ -1,7 +1,8 @@
-// A small, growing taxonomy: order -> family -> (tribe) -> genus -> species,
-// with for each species the flower (parts per whorl, symmetry, ovary),
-// phyllotaxy, inflorescence and fruit. Names and authorities follow POWO/WCVP
-// and WFO; tribes follow Flora of North America and APweb.
+// A small, growing taxonomy: order -> family -> (subfamily) -> (tribe) ->
+// genus -> species, with for each species the flower (parts per whorl,
+// symmetry, ovary), phyllotaxy, inflorescence and fruit. Names and authorities
+// follow POWO/WCVP and WFO; the Rosaceae subfamilies and tribes follow APweb
+// and Flora of North America.
 //
 // In `flower`, a whorl's `n` is the number of parts; `n: null` means "many",
 // `n: 0` means "absent". `fused: true` means the parts of that whorl are joined
@@ -55,7 +56,7 @@ export const TAXA = [
  { id: 'rosaceae', parent: 'rosales', rank: 'family', name: 'Rosaceae', author: 'Juss.',
    common: { fr: ['rosacées'], en: ['rose family'], de: ['Rosengewächse'] },
    names_src: [{ k: 'powo', url: 'https://powo.science.kew.org/', loc: 'Rosaceae Juss., accepted family' }],
-   taxonomy: { en: 'The rose family: roses, almonds, plums, cherries, apples, pears, strawberries and brambles. Modern classifications divide it into three subfamilies (Dryadoideae, Rosoideae, Amygdaloideae) and further into tribes. This tree shows the tribes that contain its genera: Amygdaleae for Prunus, Rubeae for Rubus. Maleae (apple, pear, quince, rowan, hawthorn) is listed with no genus yet.', fr: 'La famille des roses : rosiers, amandiers, pruniers, cerisiers, pommiers, poiriers, fraisiers et ronces. Les classifications modernes la divisent en trois sous-familles (Dryadoideae, Rosoideae, Amygdaloideae), puis en tribus. Cet arbre montre les tribus de ses genres : Amygdaleae pour Prunus, Rubeae pour Rubus. Maleae (pommier, poirier, cognassier, sorbier, aubépine) est indiquée sans genre pour l’instant.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: 'Rosaceae section, subfamilies and tribes' }, { k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae', loc: 'Flora of North America 9, Rosaceae: key to tribes' }] } },
+   taxonomy: { en: 'The rose family: roses, almonds, plums, cherries, apples, pears, strawberries and brambles. Modern classifications divide it into three subfamilies, shown here — Dryadoideae, Rosoideae and Amygdaloideae — and these into tribes. The tree follows the tribes that contain its genera: Rubeae (Rubus) in Rosoideae; Amygdaleae (Prunus) and Maleae (apple, pear, quince, rowan, hawthorn) in Amygdaloideae. Dryadoideae has no genus in the tree yet.', fr: 'La famille des roses : rosiers, amandiers, pruniers, cerisiers, pommiers, poiriers, fraisiers et ronces. Les classifications modernes la divisent en trois sous-familles, montrées ici — Dryadoideae, Rosoideae et Amygdaloideae — puis en tribus. L’arbre suit les tribus de ses genres : Rubeae (Rubus) dans les Rosoideae ; Amygdaleae (Prunus) et Maleae (pommier, poirier, cognassier, sorbier, aubépine) dans les Amygdaloideae. Les Dryadoideae n’ont pas encore de genre dans l’arbre.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: 'Rosaceae section, subfamilies and tribes' }, { k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae', loc: 'Flora of North America 9, Rosaceae: key to tribes' }] } },
  { id: 'actinidiaceae', parent: 'ericales', rank: 'family', name: 'Actinidiaceae', author: 'Engl. & Gilg',
    common: { fr: ['actinidiacées'], en: ['kiwifruit family'], de: ['Strahlengriffelgewächse'] },
    names_src: [{ k: 'wfo', url: 'https://list.worldfloraonline.org/wfo-7000000006', loc: 'accepted family; Angiosperms > Ericales > Actinidiaceae' }],
@@ -73,17 +74,32 @@ export const TAXA = [
    names_src: [{ k: 'wfo', url: 'https://list.worldfloraonline.org/wfo-7000000259', loc: 'Grossulariaceae DC., accepted family; Saxifragales' }],
    taxonomy: { en: 'The gooseberry family: the genus Ribes, with gooseberries and red, black and white currants.', fr: 'La famille des groseilliers : le genre Ribes, avec les groseilles à maquereau et les cassis et groseilles (rouges, noires et blanches).', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/Saxifragalesweb.htm', loc: 'Grossulariaceae section' }] } },
 
+ // ---------------------------------------------------------------- subfamilies
+ // A subfamily sits between family and tribe (ICN Art. 4.1); its name ends in
+ // -oideae. Rosaceae is the only family in this tree whose modern division
+ // into subfamilies matters here, because two of them hold the genera shown.
+ { id: 'dryadoideae', parent: 'rosaceae', rank: 'subfamily', name: 'Dryadoideae', author: 'Juel',
+   names_src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '1. Dryadoideae Juel' }],
+   taxonomy: { en: 'A subfamily of Rosaceae (the name ends in -oideae): small, often dry-climate shrubs such as Dryas, Cercocarpus and Purshia. No genus of this subfamily is in the tree yet; it is listed to show the family’s three modern branches.', fr: 'Une sous-famille des Rosaceae (le nom se termine en -oideae) : petits arbustes, souvent de climat sec, comme Dryas, Cercocarpus et Purshia. Aucun genre de cette sous-famille n’est encore dans l’arbre ; elle est indiquée pour montrer les trois branches modernes de la famille.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '1. Dryadoideae Juel' }] } },
+ { id: 'rosoideae', parent: 'rosaceae', rank: 'subfamily', name: 'Rosoideae', author: 'Arnott',
+   names_src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '2. Rosoideae Arnott' }],
+   taxonomy: { en: 'A subfamily of Rosaceae (the name ends in -oideae): roses, brambles, strawberries and cinquefoils, with tribes such as Roseae, Rubeae and Potentilleae. In this tree it holds the tribe Rubeae (Rubus).', fr: 'Une sous-famille des Rosaceae (le nom se termine en -oideae) : rosiers, ronces, fraisiers et potentilles, avec des tribus comme Roseae, Rubeae et Potentilleae. Dans cet arbre, elle contient la tribu Rubeae (Rubus).', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '2. Rosoideae Arnott; 2B. Rubeae Dumortier' }] } },
+ { id: 'amygdaloideae', parent: 'rosaceae', rank: 'subfamily', name: 'Amygdaloideae', author: 'Arnott',
+   names_src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '3. Amygdaloideae Arnott' }],
+   taxonomy: { en: 'A subfamily of Rosaceae (the name ends in -oideae): plums, apples, pears, spiraeas and their relatives. It gathers what older classifications called Prunoideae, Maloideae and Spiraeoideae. In this tree it holds the tribes Amygdaleae (Prunus) and Maleae.', fr: 'Une sous-famille des Rosaceae (le nom se termine en -oideae) : pruniers, pommiers, poiriers, spirées et leurs proches. Elle réunit ce que les classifications plus anciennes appelaient Prunoideae, Maloideae et Spiraeoideae. Dans cet arbre, elle contient les tribus Amygdaleae (Prunus) et Maleae.', src: [{ k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '3. Amygdaloideae Arnott; 3D. Amygdaleae Jussieu; 3I. Maleae Small' }] } },
+
  // ---------------------------------------------------------------- tribes
- // Tribes are a secondary rank between family and genus (ICN Art. 4.1). They
- // are shown only where the family's classification is stable and relevant to
- // the genera in this tree; the rest of the tree goes straight to the genus.
- { id: 'amygdaleae', parent: 'rosaceae', rank: 'tribe', name: 'Amygdaleae', author: 'DC.',
+ // Tribes sit between subfamily and genus (ICN Art. 4.1); their name ends in
+ // -eae. They are shown only where the family's classification is stable and
+ // relevant to the genera in this tree; the rest of the tree goes straight to
+ // the genus.
+ { id: 'amygdaleae', parent: 'amygdaloideae', rank: 'tribe', name: 'Amygdaleae', author: 'DC.',
    names_src: [{ k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae_tribe_Amygdaleae', loc: 'Rosaceae tribe Amygdaleae de Candolle, Prodr. 2: 529. 1825' }],
    taxonomy: { en: 'The drupe tribe of Rosaceae, subfamily Amygdaloideae: Prunus only — plums, cherries, almonds, peaches and apricots, all with a single carpel and a drupe. Flora of North America cites the tribe as Amygdaleae DC. (1825); APweb uses Amygdaleae Jussieu, from a section published in 1789.', fr: 'La tribu des drupes, dans la sous-famille des Amygdaloideae : Prunus seulement — pruniers, cerisiers, amandiers, pêchers et abricotiers, tous à un seul carpelle et à drupe. Flora of North America cite la tribu comme Amygdaleae DC. (1825) ; APweb écrit Amygdaleae Jussieu, d’une section publiée en 1789.', src: [{ k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae_tribe_Amygdaleae', loc: 'tribe description and author citation' }, { k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '3D. Amygdaleae Jussieu' }] } },
- { id: 'rubeae', parent: 'rosaceae', rank: 'tribe', name: 'Rubeae', author: 'Dumort.',
+ { id: 'rubeae', parent: 'rosoideae', rank: 'tribe', name: 'Rubeae', author: 'Dumort.',
    names_src: [{ k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae_tribe_Rubeae', loc: 'Rosaceae tribe Rubeae Dumortier, Anal. Fl. Belg. 39. 1829' }],
    taxonomy: { en: 'The bramble tribe of Rosaceae, subfamily Rosoideae: Rubus only — blackberries, raspberries and dewberries. Its fruits are aggregates of small drupes (drupelets) borne on a raised receptacle.', fr: 'La tribu des ronces, dans la sous-famille des Rosoideae : Rubus seulement — mûres, framboises et ronces rampantes. Ses fruits sont des agrégats de petites drupes (drupéoles) portées par un réceptacle bombé.', src: [{ k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae_tribe_Rubeae', loc: 'tribe description and author citation' }, { k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '2B. Rubeae Dumortier' }] } },
- { id: 'maleae', parent: 'rosaceae', rank: 'tribe', name: 'Maleae', author: 'Small',
+ { id: 'maleae', parent: 'amygdaloideae', rank: 'tribe', name: 'Maleae', author: 'Small',
    names_src: [{ k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae_tribe_Maleae', loc: 'Rosaceae tribe Maleae Small, Man. SE. Fl. 632. 1933' }],
    taxonomy: { en: 'The pome tribe of Rosaceae, subfamily Amygdaloideae: apple (Malus), pear (Pyrus), quince (Cydonia), medlar, rowan and hawthorn. No genus of this tribe is in the tree yet; it is listed to show where the pome fruits sit. Their fruit is an accessory fruit: the flesh is the hypanthium, the core is the true fruit.', fr: 'La tribu des fruits à pépins, dans la sous-famille des Amygdaloideae : pommier (Malus), poirier (Pyrus), cognassier (Cydonia), néflier, sorbier et aubépine. Aucun genre de cette tribu n’est encore dans l’arbre ; elle est indiquée pour situer les fruits à pépins. Leur fruit est un faux-fruit : la chair est l’hypanthe, le cœur est le vrai fruit.', src: [{ k: 'fna-rosaceae', url: 'https://floranorthamerica.org/Rosaceae_tribe_Maleae', loc: 'tribe description and author citation' }, { k: 'apweb', url: 'https://www.mobot.org/MOBOT/research/APweb/orders/rosalesweb.htm', loc: '3I. Maleae Small' }] } },
 

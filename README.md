@@ -59,14 +59,16 @@ a cited source, listed at the bottom of each tab.
   instead. Search on plant, variety or rootstock names; a link per node
   (`#graft/prunus-amygdalus--gf-677`).
 - **Taxonomy** (`#taxonomy`, code in `site/taxonomy/`): a small, growing
-  classification from order to family to genus to species (starters: bread
-  wheat, buckwheat, quinoa, amaranth, white horehound, almond, blackberry,
-  kiwifruit). For each species a schematic flower of our own showing the
+  classification from order to family (with, where useful, subfamily and
+  tribe) to genus to species (starters: bread wheat, buckwheat, quinoa,
+  amaranth, white horehound, almond, blackberry, kiwifruit). For each species
+  a schematic flower of our own showing the
   sepals, petals, stamens and carpels and their count (∞ for "many", 0 for
   "absent"), the floral formula, symmetry, ovary position, sexuality, leaf
   arrangement (phyllotaxy), inflorescence and fruit; the author of each
-  name. Names and placement follow POWO/WCVP and WFO; the flower facts are
-  per-species from regional floras. Search on Latin, common and German
+  name. Names and placement follow POWO/WCVP and WFO; the Rosaceae
+  subfamilies and tribes follow APweb and Flora of North America; the flower
+  facts are per-species from regional floras. Search on Latin, common and German
   names; a link per node (`#taxonomy/prunus-dulcis`).
 - **Microscope** (`#microscope`, code in `site/microscope/`): a simulated
   student microscope (the objectives, eyepieces and Barlow lens of the

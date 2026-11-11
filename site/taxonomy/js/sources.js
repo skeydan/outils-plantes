@@ -19,7 +19,7 @@ export const SOURCES = [
  {
   "id": "apweb",
   "short": "Stevens, APweb",
-  "text": "Stevens P.F. Angiosperm Phylogeny Website (Missouri Botanical Garden). Used for the placement of the orders (Poales, Caryophyllales, Lamiales, Rosales, Ericales, Saxifragales) and their families, following APG IV, and for the tribes of Rosaceae.",
+  "text": "Stevens P.F. Angiosperm Phylogeny Website (Missouri Botanical Garden). Used for the placement of the orders (Poales, Caryophyllales, Lamiales, Rosales, Ericales, Saxifragales) and their families, following APG IV, and for the subfamilies and tribes of Rosaceae.",
   "url": "https://www.mobot.org/MOBOT/research/APweb/"
  },
  {

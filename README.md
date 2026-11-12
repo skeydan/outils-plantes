@@ -1,12 +1,12 @@
 # outils-plantes
 
-One page, six tabs, for gardeners and for anyone learning how plants are
+One page, nine tabs, for gardeners and for anyone learning how plants are
 built and how they live. French and English (follows the browser language,
 with a switch), light and dark, works on phones and with the keyboard. A
 static site: no backend, no build step, no tracking. Every number comes from
 a cited source, listed at the bottom of each tab.
 
-## The six tabs
+## The nine tabs
 
 - **Anatomy** (`#anatomy`, code in `site/anatomy/`): a drill-down tree from
   the whole plant to organs, tissues, cells and cell parts (297 entries),
@@ -42,6 +42,20 @@ a cited source, listed at the bottom of each tab.
   pair check from published S-genotypes; the words (var., cultivar, the
   seed-trade « variété ») explained. Names follow POWO and WFO, with their
   disagreements.
+- **Germination** (`#germination`, code in `site/germination/`): seed
+  dormancy and how to break it. The five Baskin–Baskin classes (non-dormant,
+  physiological, morphophysiological, physical, combinational) with the
+  species concerned; eleven treatments (cold, cool, warm, warm then cold,
+  mechanical, acid, hot water, soak, GA₃, light, fresh seed) and what each
+  actually does; seventeen species with a sourced protocol, sowing depth,
+  temperature, light and germination time (Acacia, kiwifruit, citrus,
+  Eucalyptus, sea buckthorn, Nyctanthes, olive, Scots pine, terebinth,
+  Poncirus, cherry plum, two currants, two brambles, Schisandra, dragon
+  fruit); three original drawings (seed section, epigeal vs hypogeal,
+  dormancy timelines); eight practical steps; seven common confusions; and
+  ten corrections to the course PDF it started from, whose per-species DOIs
+  were checked and found largely invented. A link per species
+  (`#germination/olea-europaea`).
 - **Grafting** (`#graft`, code in `site/graft/`): the same plants as the
   breeding tab, from family to cultivar (the taxa are read from
   `site/seeds/js/taxa.js`), each grafted plant branching into the
@@ -89,7 +103,7 @@ their own repository, outils-sols.
 
 ## How the page works
 
-`site/index.html` holds the header, the tab bar and six empty panels.
+`site/index.html` holds the header, the tab bar and nine empty panels.
 `site/assets/app.js` reads the route from the hash, `#<tab>[/<entry or
 section>]` (`site/assets/route.js`), and loads a tab's code the first time
 it opens (`import()`), so the 435 KB anatomy data is only fetched for the
@@ -168,6 +182,11 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
   taxa are where they should be, search on old names and common names,
   italics of scientific names, the S-allele rule against the published
   self-compatibility of almond cultivars, who needs a partner.
+- `tests/germination.test.mjs`: the five dormancy classes and eleven
+  treatments are bilingual and sourced, each treatment is used by a
+  species, the seventeen species have a binomial, author, family, seed
+  description, protocol, sowing data and sources, every source is cited,
+  and the corrections to the PDF are present and sourced.
 - `tests/graft.test.mjs`: the grafting data are valid and sourced, the
   tree is the breeding tab's with the rootstocks under their plants, every
   species has a grafting answer (own or inherited), plants grown from
@@ -186,7 +205,7 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
 - `python3 -I scripts/microscope/check_optics.py`: the transfer function and
   the Airy pattern are a Fourier pair, first dark ring at 0.61 λ/NA, a
   blurred point matches the Airy pattern.
-- `scripts/e2e.mjs`: screenshots of the six tabs (desktop and phone,
+- `scripts/e2e.mjs`: screenshots of the nine tabs (desktop and phone,
   light and dark, French and English, into `/tmp/plantes-shots`); the tab
   bar (ARIA, keyboard, lazy loading, history, language switch keeps the
   route, old addresses, no request to another site); every anatomy entry
@@ -269,7 +288,7 @@ Locally, either way from "Run locally":
 
 ```
 site/
-  index.html              the page: header, tab bar, six panels
+  index.html              the page: header, tab bar, nine panels
   assets/app.js           tabs, hash routing, lazy loading, in-page anchors
   assets/route.js         routes (#tab/sub), no side effects
   assets/site.js          language and theme shell
@@ -279,6 +298,7 @@ site/
   anatomy/                anatomy tab (js/entries.js, notes.js, drawings.js, sources.js, tree.js)
   plant-water/            water tab (js/physics.js, sources.js)
   seeds/                  breeding tab (js/taxa.js, concepts.js, breeding.js, sources.js)
+  germination/            germination tab (js/data.js, sources.js, draw.js)
   graft/                  grafting tab (js/graft.js data, grafting.js logic, sources.js; reuses seeds/js/taxa.js)
   taxonomy/               taxonomy tab (js/taxa.js, flower.js, sources.js)
   microscope/             microscope tab (js/optics.js, specimens.js, structures.js, sources.js; img/)

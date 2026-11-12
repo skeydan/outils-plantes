@@ -1,5 +1,5 @@
 // Browser checks of the single page: screenshots (desktop/phone x light/dark
-// x fr/en x the six tabs), the tab bar (ARIA, keyboard, hash routing,
+// x fr/en x the nine tabs), the tab bar (ARIA, keyboard, hash routing,
 // history, lazy loading), and scripted use of each tab. Fails on any console
 // error or warning and on horizontal overflow.
 //
@@ -20,7 +20,7 @@ const devices = {
   desktop: { viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 },
   phone: { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true },
 };
-const TABS = ['anatomy', 'water', 'seeds', 'graft', 'taxonomy', 'fruits', 'development', 'microscope'];
+const TABS = ['anatomy', 'water', 'seeds', 'germination', 'graft', 'taxonomy', 'fruits', 'development', 'microscope'];
 
 const browser = await chromium.launch();
 const problems = [];
@@ -52,7 +52,7 @@ for (const device of Object.keys(devices)) {
       await page.goto(`${BASE}/`, { waitUntil: 'networkidle' });
       await opened(page, 'anatomy');
       ok((await page.getAttribute('html', 'lang')) === lang, `browser language ${lang} not picked up`);
-      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['graft', 'prunus-amygdalus'], ['taxonomy', 'prunus-dulcis'], ['fruits', 'drupe'], ['development', 'berry'], ['microscope', null]]) {
+      for (const [tab, sub] of [['anatomy', 'bordered-pit'], ['water', null], ['seeds', 'prunus-amygdalus'], ['germination', null], ['graft', 'prunus-amygdalus'], ['taxonomy', 'prunus-dulcis'], ['fruits', 'drupe'], ['development', 'berry'], ['microscope', null]]) {
         await page.evaluate((h) => { location.hash = h; }, sub ? `${tab}/${sub}` : tab);
         await opened(page, tab);
         await page.waitForLoadState('networkidle');
@@ -75,7 +75,7 @@ for (const device of Object.keys(devices)) {
   await opened(page, 'anatomy');
   // Lazy loading: only the open tab's code and data are fetched.
   ok(requested.some((u) => u.endsWith('/anatomy/js/entries.js')), 'anatomy data loaded on the anatomy tab');
-  ok(!requested.some((u) => u.endsWith('/seeds/js/taxa.js') || u.endsWith('/graft/js/graft.js') || u.endsWith('/plant-water/js/app.js') || /\/microscope\/(js|img)\//.test(u) || u.endsWith('/taxonomy/js/taxa.js')), `other tabs not loaded yet: ${requested.filter((u) => /seeds|plant-water|microscope\/(js|img)|taxonomy\/js\//.test(u)).join(', ')}`);
+  ok(!requested.some((u) => u.endsWith('/seeds/js/taxa.js') || u.endsWith('/germination/js/app.js') || u.endsWith('/graft/js/graft.js') || u.endsWith('/plant-water/js/app.js') || /\/microscope\/(js|img)\//.test(u) || u.endsWith('/taxonomy/js/taxa.js')), `other tabs not loaded yet: ${requested.filter((u) => /seeds|germination|plant-water|microscope\/(js|img)|taxonomy\/js\//.test(u)).join(', ')}`);
   // ARIA structure.
   const aria = await page.evaluate(() => {
     const tabs = [...document.querySelectorAll('[role="tablist"] [role="tab"]')];
@@ -88,9 +88,9 @@ for (const device of Object.keys(devices)) {
       visible: [...document.querySelectorAll('[role="tabpanel"]')].filter((p) => !p.hidden).map((p) => p.id),
     };
   });
-  ok(aria.n === 8, `eight tabs: ${aria.n}`);
+  ok(aria.n === 9, `nine tabs: ${aria.n}`);
   ok(aria.selected.join() === 'tab-anatomy', `anatomy selected: ${aria.selected}`);
-  ok(aria.tabindex.join() === '0,-1,-1,-1,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
+  ok(aria.tabindex.join() === '0,-1,-1,-1,-1,-1,-1,-1,-1', `roving tabindex: ${aria.tabindex}`);
   ok(aria.controls && aria.labelled, 'tabs and panels point at each other');
   ok(aria.visible.join() === 'panel-anatomy', `one panel visible: ${aria.visible}`);
   // Keyboard: arrows move and open, Home and End, focus stays on the tab.
@@ -120,6 +120,9 @@ for (const device of Object.keys(devices)) {
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'graft');
   ok(requested.some((u) => u.endsWith('/graft/js/app.js')), 'grafting code loaded on demand');
+  await page.keyboard.press('ArrowLeft');
+  await opened(page, 'germination');
+  ok(requested.some((u) => u.endsWith('/germination/js/app.js')), 'germination code loaded on demand');
   await page.keyboard.press('ArrowLeft');
   await opened(page, 'seeds');
   await page.keyboard.press('Home');
@@ -331,6 +334,55 @@ for (const device of Object.keys(devices)) {
   await ctx.close();
 }
 
+// ---------------------------------------------------------------- germination
+{
+  const { ctx, page } = await newPage('desktop', 'light', 'en');
+  await page.goto(`${BASE}/#germination`, { waitUntil: 'networkidle' });
+  await opened(page, 'germination');
+  ok((await page.textContent('#panel-germination h1')).includes('Germination'), 'germination: title');
+  ok((await page.locator('.gm-stats li').count()) === 4, 'germination: four key figures');
+  ok((await page.locator('.gm-fig-grid svg').count()) === 3, 'germination: three drawings');
+  ok((await page.locator('.gm-dorm').count()) === 5, 'germination: five dormancy cards');
+  ok((await page.locator('.gm-treat').count()) === 11, 'germination: eleven treatments');
+  ok((await page.locator('.gm-sp').count()) === 17, 'germination: seventeen species');
+  // Search by common name, then an empty result.
+  await page.fill('#gm-search', 'olive');
+  ok((await page.locator('.gm-sp').count()) === 1, 'germination: "olive" narrows to one species');
+  ok(await page.isVisible('#sp-olea-europaea'), 'germination: the olive is the match');
+  await page.fill('#gm-search', 'zzzz');
+  ok(await page.isVisible('.gm-empty'), 'germination: empty search gives a message');
+  await page.fill('#gm-search', '');
+  // Filter by dormancy: PY+PD has three species here.
+  await page.selectOption('#gm-filter', 'pypd');
+  ok((await page.locator('.gm-sp').count()) === 3, 'germination: PY+PD filters to three species');
+  ok((await page.textContent('.gm-count')).includes('3 / 17'), `germination: live count: ${await page.textContent('.gm-count')}`);
+  await page.selectOption('#gm-filter', 'all');
+  // A species route opens its entry and clears a stale search.
+  await page.fill('#gm-search', 'zzzz');
+  await page.evaluate(() => { location.hash = 'germination/olea-europaea'; });
+  await page.waitForFunction(() => document.getElementById('sp-olea-europaea')?.open === true);
+  ok((await page.inputValue('#gm-search')) === '', 'germination: route clears the search');
+  ok(hashOf(page) === '#germination/olea-europaea', `germination: species route: ${page.url()}`);
+  ok((await page.textContent('#sp-olea-europaea')).includes('Olea europaea'), 'germination: olive entry open');
+  // Treatments are native details, open and close with the keyboard.
+  const treat = page.locator('#t-cold');
+  await treat.locator('summary').click();
+  ok(await treat.evaluate((d) => d.open), 'germination: treatment opens');
+  await treat.locator('summary').press('Enter');
+  ok(!(await treat.evaluate((d) => d.open)), 'germination: treatment closes with Enter');
+  // The corrections of the PDF are listed and sourced.
+  ok((await page.locator('.gm-corr-item').count()) >= 10, 'germination: corrections listed');
+  ok((await page.locator('#src-wpsm').count()) === 1, 'germination: WPSM in the sources');
+  // Language switch keeps the species route and rebuilds the tab.
+  await page.click('[data-lang-btn="fr"]');
+  await page.waitForFunction(() => document.documentElement.lang === 'fr');
+  await page.waitForFunction(() => document.getElementById('sp-olea-europaea')?.open === true);
+  ok(hashOf(page) === '#germination/olea-europaea', 'germination: French keeps the route');
+  ok((await page.textContent('#panel-germination h1')).includes('Germination'), 'germination: French title');
+  await page.screenshot({ path: `${SHOTS}/interact-4-germination-olive.png`, fullPage: true });
+  await ctx.close();
+}
+
 // ---------------------------------------------------------------- grafting
 {
   const { ctx, page } = await newPage('desktop', 'light', 'en');
@@ -493,14 +545,14 @@ for (const device of Object.keys(devices)) {
 // ---------------------------------------------------------------- phone
 {
   const { ctx, page } = await newPage('phone', 'dark', 'fr');
-  for (const route of ['anatomy/bordered-pit', 'anatomy/fruit-types', 'water/compartments', 'seeds/prunus-amygdalus', 'graft/prunus-amygdalus--gf-677', 'microscope']) {
+  for (const route of ['anatomy/bordered-pit', 'anatomy/fruit-types', 'water/compartments', 'seeds/prunus-amygdalus', 'germination/prunus-cerasifera', 'graft/prunus-amygdalus--gf-677', 'microscope']) {
     await page.goto(`${BASE}/#${route}`, { waitUntil: 'networkidle' });
     await opened(page, route.split('/')[0]);
     const overflow = await overflowOf(page);
     ok(overflow <= 0, `${route} phone: horizontal overflow ${overflow}px`);
     await page.screenshot({ path: `${SHOTS}/phone-${route.replace('/', '-')}.png`, fullPage: true });
   }
-  // The eight tabs fit side by side, are big enough to tap and stay reachable while scrolling.
+  // The nine tabs fit side by side, are big enough to tap and stay reachable while scrolling.
   const boxes = await page.$$eval('[role="tab"]', (ts) => ts.map((t) => t.getBoundingClientRect()).map((r) => ({ top: r.top, right: r.right, h: r.height })));
   ok(boxes.every((b) => Math.abs(b.top - boxes[0].top) < 1) && boxes.at(-1).right <= 390, `phone: tabs on one row: ${JSON.stringify(boxes)}`);
   ok(boxes.every((b) => b.h >= 44), 'phone: tabs are at least 44 px tall');

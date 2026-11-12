@@ -167,17 +167,22 @@ main { max-width: 1180px; margin: 0 auto; padding: 4px 20px 48px; }
 .tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--cyan); background: var(--surface); }
 .tabs [role="tab"]:focus-visible { outline-offset: -3px; }
 .tab-icon { flex: none; width: 20px; height: 20px; }
-/* Below the full row, the eight tabs go compact: equal width, icon over the
+/* Below the full row, the nine tabs go compact: equal width, icon over the
    label. Keeps one row (and the sticky bar) at every width. */
-@media (max-width: 1180px) {
+@media (max-width: 1400px) {
   :root { --tabs-h: 56px; }
   .tabs { padding: 0 8px; gap: 2px; }
-  .tabs [role="tab"] { flex: 1 1 0; flex-direction: column; gap: 2px; padding: 6px 2px 4px; font-size: 0.8rem; text-align: center; line-height: 1.15; min-width: 0; }
+  .tabs [role="tab"] { flex: 1 1 0; flex-direction: column; gap: 2px; padding: 6px 2px 4px; font-size: 0.74rem; text-align: center; line-height: 1.1; min-width: 0; }
+  .tabs [role="tab"] .tab-label { max-width: 100%; overflow-wrap: anywhere; }
+}
+@media (max-width: 700px) {
+  .tabs [role="tab"] { font-size: 0.66rem; }
 }
 @media (max-width: 560px) {
   :root { --tabs-h: 58px; }
   .tabs { padding: 0 4px; gap: 0; }
-  .tabs [role="tab"] { padding: 6px 1px 3px; font-size: 0.7rem; letter-spacing: -0.01em; hyphens: auto; }
+  .tabs [role="tab"] { padding: 5px 1px 3px; font-size: 0.62rem; letter-spacing: -0.01em; hyphens: auto; gap: 1px; line-height: 1.08; }
+  .tabs .tab-icon { width: 18px; height: 18px; }
 }
 @media (max-width: 380px) { .tabs [role="tab"] { font-size: 0.64rem; } }
 @media (forced-colors: active) { .tabs [role="tab"][aria-selected="true"] { border-bottom-color: Highlight; } }

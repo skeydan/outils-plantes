@@ -15,6 +15,8 @@ const TABS = [
     label: { en: 'Water potential', fr: 'Potentiel hydrique' }, long: { en: 'How water moves in plants', fr: 'Comment l’eau circule dans les plantes' } },
   { id: 'seeds', load: () => import('../seeds/js/app.js'),
     label: { en: 'Breeding', fr: 'Hybridation' }, long: { en: 'Pollination, crosses and seeds', fr: 'Fécondation, croisements et graines' } },
+  { id: 'germination', load: () => import('../germination/js/app.js'),
+    label: { en: 'Germination', fr: 'Germination' }, long: { en: 'Seed dormancy and how to break it', fr: 'Dormance des graines et comment la lever' } },
   { id: 'graft', load: () => import('../graft/js/app.js'),
     label: { en: 'Grafting', fr: 'Greffe' }, long: { en: 'Scions, rootstocks and how to choose them', fr: 'Greffons, porte-greffes et comment les choisir' } },
   { id: 'taxonomy', load: () => import('../taxonomy/js/app.js'),

@@ -1,0 +1,217 @@
+/* Germination: dormancy cards, treatment accordions, species explorer.
+   Only the shared tokens of assets/site.css are used; no new palette.
+   Information is never carried by colour alone: every badge has its letters,
+   every status has words. */
+
+.gm-head { max-width: 58rem; }
+.gm-head .lead { max-width: 52rem; }
+
+.gm-stats {
+  list-style: none; margin: 1.1rem 0 1rem; padding: 0;
+  display: flex; flex-wrap: wrap; gap: .55rem;
+}
+.gm-stats li {
+  display: flex; align-items: baseline; gap: .4rem;
+  padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface); box-shadow: var(--shadow);
+}
+.gm-stats strong { font-size: 1.15rem; color: var(--green-ink); font-variant-numeric: tabular-nums; }
+.gm-stats span { font-size: .8rem; color: var(--ink-2); }
+
+.gm-cross { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; font-size: .85rem; color: var(--ink-2); }
+.gm-cross-label { font-weight: 650; color: var(--ink); }
+.gm-chip {
+  display: inline-block; padding: .12rem .55rem; border: 1px solid var(--border);
+  border-radius: 999px; background: var(--surface); color: var(--green-ink);
+  font-size: .82rem; text-decoration: none; white-space: nowrap;
+}
+.gm-chip:hover { border-color: var(--green); }
+.gm-chip .gm-sci { font-size: inherit; }
+
+.gm-section { margin: 2.6rem 0 0; }
+.gm-section > h2 { font-size: 1.3rem; }
+.gm-lead { max-width: 54rem; }
+.gm-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+
+/* ---------------------------------------------------------------- figures */
+.gm-fig-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+.gm-fig { margin: 0; padding: 12px; }
+.gm-fig svg {
+  display: block; width: 100%; height: auto;
+  background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 10px;
+}
+.gm-fig figcaption { padding: .65rem .2rem 0; font-size: .88rem; color: var(--ink-2); }
+.gm-fig figcaption strong { color: var(--ink); }
+
+.gm-svg text { font-family: var(--font); font-size: 12.5px; fill: var(--ink); }
+.gm-lbl { font-size: 12.5px; }
+.gm-lbl-link { fill: var(--green-ink); cursor: pointer; }
+.gm-lbl-link:hover { text-decoration: underline; }
+.gm-lead { stroke: var(--ink-2); stroke-width: 1; fill: none; }
+.gm-dot { fill: var(--ink-2); }
+.gm-testa { fill: none; stroke: var(--green); stroke-width: 3.2; }
+.gm-endo { fill: var(--cyan-wash); stroke: var(--cyan); stroke-width: 1.2; }
+.gm-cot { fill: var(--yellow-wash); stroke: var(--yellow); stroke-width: 1.4; }
+.gm-cot-line { fill: none; stroke: var(--yellow); stroke-width: 1; opacity: .7; }
+.gm-axis { fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; }
+.gm-leaf { fill: var(--green); fill-opacity: .5; stroke: var(--green); stroke-width: 1.2; }
+.gm-hilum { fill: var(--sand); fill-opacity: .65; stroke: var(--sand); stroke-width: 1.2; }
+.gm-panel { fill: var(--surface); stroke: var(--hairline); stroke-width: 1.4; }
+.gm-soil { fill: var(--sand); fill-opacity: .16; }
+.gm-soil-line { stroke: var(--sand); stroke-width: 1.6; }
+.gm-stem { fill: none; stroke: var(--green); stroke-width: 3.2; stroke-linecap: round; }
+.gm-cot2 { fill: var(--yellow-wash); stroke: var(--yellow); stroke-width: 1.4; }
+.gm-seed { fill: var(--clay); fill-opacity: .35; stroke: var(--clay); stroke-width: 1.3; }
+.gm-coat { fill: none; stroke: var(--ink-2); stroke-width: 1.4; }
+.gm-panel-h { font-size: 13px; font-weight: 700; fill: var(--ink); }
+.gm-panel-note { font-size: 11.5px; fill: var(--ink-2); }
+.gm-axis-line { stroke: var(--ink-2); stroke-width: 1.4; fill: none; }
+.gm-grid { stroke: var(--hairline); stroke-width: 1; stroke-dasharray: 2 3; }
+.gm-tick { font-size: 11px; fill: var(--ink-2); }
+.gm-row-h { font-size: 12px; font-weight: 650; fill: var(--ink); }
+.gm-bar-cold { fill: var(--cyan-wash); stroke: var(--cyan); stroke-width: 1.2; }
+.gm-bar-warm { fill: var(--clay); fill-opacity: .32; stroke: var(--clay); stroke-width: 1.2; }
+.gm-bar-open { fill: var(--yellow); stroke: var(--sand); stroke-width: 1.2; }
+.gm-bar-lbl { font-size: 11px; fill: var(--ink); }
+
+/* ---------------------------------------------------------------- dormancy */
+.gm-dorm { padding: 16px; scroll-margin-top: calc(var(--tabs-h) + 14px); }
+.gm-dorm-head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.gm-dorm-head h3 { margin: 0; }
+.gm-dorm-short { font-weight: 600; margin-top: .55rem; }
+.gm-dorm p { font-size: .93rem; }
+.gm-dorm-spp { margin-top: .8rem; padding-top: .7rem; border-top: 1px solid var(--hairline); }
+.gm-dorm-spp h4 { font-size: .85rem; color: var(--ink-2); margin: 0 0 .4rem; }
+.gm-dorm-spp ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+
+.gm-badge {
+  display: inline-grid; place-items: center; min-width: 2.6em;
+  padding: .12rem .4rem; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--cyan-wash); color: var(--ink);
+  font-size: .72rem; font-weight: 800; letter-spacing: .04em; line-height: 1.5;
+}
+.gm-b-nd { background: var(--cyan-wash); }
+.gm-b-pd { background: var(--yellow-wash); }
+.gm-b-mpd { background: color-mix(in oklab, var(--clay) 18%, var(--surface)); }
+.gm-b-py { background: color-mix(in oklab, var(--silt) 18%, var(--surface)); }
+.gm-b-pypd { background: color-mix(in oklab, var(--green) 18%, var(--surface)); }
+
+/* ---------------------------------------------------------------- treatments */
+.gm-treat { padding: 14px 16px; scroll-margin-top: calc(var(--tabs-h) + 14px); }
+.gm-treat > summary {
+  display: grid; grid-template-columns: auto 1fr; gap: .05rem .6rem;
+  list-style: none; cursor: pointer; align-items: start;
+}
+.gm-treat > summary::-webkit-details-marker { display: none; }
+.gm-treat > summary::before {
+  content: '+'; grid-row: span 2; align-self: start;
+  display: inline-grid; place-items: center; width: 1.4em; height: 1.4em;
+  border: 1px solid var(--border); border-radius: 50%;
+  font-weight: 700; color: var(--green-ink); background: var(--surface-2);
+}
+.gm-treat[open] > summary::before { content: '−'; }
+.gm-treat-name { grid-column: 2; font-weight: 650; }
+.gm-treat-short { grid-column: 2; font-size: .84rem; color: var(--ink-2); }
+.gm-treat-body { margin-top: .7rem; font-size: .93rem; }
+
+/* ---------------------------------------------------------------- species explorer */
+.gm-controls {
+  display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; align-items: flex-end;
+  padding: 14px 16px; margin-bottom: 1rem;
+}
+.gm-field { display: flex; flex-direction: column; gap: .25rem; flex: 1 1 260px; min-width: 0; }
+.gm-field label { font-size: .82rem; font-weight: 650; color: var(--ink-2); }
+.gm-field-select { flex: 0 1 260px; }
+.gm-search-in, .gm-select {
+  width: 100%; font: inherit; padding: 8px 10px; min-height: 42px;
+  border: 1px solid var(--border); border-radius: 9px;
+  background: var(--surface); color: var(--ink);
+}
+.gm-count { margin: 0 0 .35rem; flex: 1 1 100%; }
+
+.gm-sp-list { display: grid; gap: .7rem; }
+.gm-sp { padding: 0; overflow: clip; }
+.gm-sp > summary {
+  display: grid; grid-template-columns: auto 1fr auto; gap: .2rem .65rem;
+  align-items: center; padding: 14px 16px; cursor: pointer; list-style: none;
+}
+.gm-sp > summary::-webkit-details-marker { display: none; }
+.gm-sp > summary::before {
+  content: '+'; display: inline-grid; place-items: center;
+  width: 1.5em; height: 1.5em; border: 1px solid var(--border); border-radius: 50%;
+  font-weight: 700; color: var(--green-ink); background: var(--surface-2);
+}
+.gm-sp[open] > summary::before { content: '−'; }
+.gm-sp[open] > summary { border-bottom: 1px solid var(--hairline); }
+.gm-sp-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .5rem; min-width: 0; }
+.gm-sci { font-weight: 600; }
+.gm-sci i { font-style: italic; }
+.gm-author { font-size: .72em; color: var(--ink-2); font-weight: 500; }
+.gm-sp-common { color: var(--ink-2); font-size: .88rem; }
+.gm-sp-badge { display: flex; flex-direction: column; align-items: flex-end; gap: .15rem; text-align: right; }
+.gm-sp-badge-name { font-size: .7rem; color: var(--ink-2); max-width: 12em; line-height: 1.2; }
+
+.gm-sp-body { padding: 4px 16px 16px; }
+.gm-sp-body h3 { font-size: .95rem; margin: 1rem 0 .35rem; color: var(--green-ink); }
+.gm-sp-body p { font-size: .93rem; }
+.gm-names { font-size: .9rem; margin-top: .7rem; }
+.gm-name-lang { white-space: normal; }
+.gm-lang-code { font-size: .72rem; font-weight: 700; color: var(--ink-2); letter-spacing: .04em; }
+.gm-sp-meta { font-size: .88rem !important; color: var(--ink-2); }
+.gm-table-wrap { overflow-x: auto; margin: .3rem 0 .8rem; }
+.gm-kv { max-width: 34rem; }
+.gm-kv th { width: 11em; color: var(--ink-2); font-weight: 600; }
+.gm-kv td { font-variant-numeric: tabular-nums; }
+.gm-note {
+  background: var(--note); border-radius: 10px; padding: .6rem .75rem;
+  font-size: .9rem !important; margin-top: .9rem;
+}
+.gm-empty { text-align: center; color: var(--ink-2); padding: 22px; }
+.gm-src { font-size: .8rem; color: var(--ink-2); margin: .5rem 0 0; }
+
+/* ---------------------------------------------------------------- steps, confusions, corrections */
+.gm-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.gm-step { padding: 15px 16px; }
+.gm-step h3 { font-size: .98rem; display: flex; gap: .55rem; align-items: flex-start; }
+.gm-step p { font-size: .92rem; margin-bottom: 0; }
+.gm-step-n, .gm-corr-n {
+  flex: none; display: inline-grid; place-items: center;
+  width: 1.7em; height: 1.7em; border-radius: 50%;
+  background: var(--cyan-wash); color: var(--ink);
+  font-size: .78em; font-weight: 700;
+}
+
+.gm-conf { padding: 15px 16px; }
+.gm-wrong, .gm-right { font-size: .92rem; }
+.gm-wrong { color: var(--ink); }
+.gm-right { color: var(--ink); }
+.gm-tag {
+  display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .06em;
+  text-transform: uppercase; padding: .08rem .4rem; border-radius: 4px;
+  border: 1px solid var(--border); margin-right: .2rem;
+}
+.gm-tag-wrong { color: var(--danger); border-color: color-mix(in oklab, var(--danger) 45%, var(--border)); }
+.gm-tag-right { color: var(--green-ink); border-color: color-mix(in oklab, var(--green) 45%, var(--border)); }
+
+.gm-corr { display: grid; gap: .8rem; max-width: 62rem; }
+.gm-corr-item { padding: 15px 16px; }
+.gm-corr-item h3 { font-size: .98rem; display: flex; gap: .55rem; align-items: flex-start; }
+.gm-corr-item p { font-size: .92rem; }
+.gm-corr-n { background: var(--yellow-wash); }
+
+.gm-sources { margin-top: 3rem; border-top: 1px solid var(--hairline); padding-top: 1rem; }
+.gm-sources li, .gm-sources a { overflow-wrap: anywhere; }
+
+/* ---------------------------------------------------------------- small screens */
+@media (max-width: 700px) {
+  .gm-stats { gap: .4rem; }
+  .gm-stats li { padding: .3rem .65rem; }
+  .gm-fig-grid, .gm-grid, .gm-steps { grid-template-columns: 1fr; }
+  .gm-controls { align-items: stretch; }
+  .gm-field, .gm-field-select { flex: 1 1 100%; }
+  .gm-sp > summary { grid-template-columns: auto 1fr; padding: 12px 13px; }
+  .gm-sp-badge { grid-column: 2; flex-direction: row; align-items: center; gap: .4rem; text-align: left; }
+  .gm-sp-badge-name { max-width: none; }
+  .gm-sp-body { padding: 4px 13px 14px; }
+  .gm-kv th { width: 8.5em; }
+}

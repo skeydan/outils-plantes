@@ -167,7 +167,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 4px 20px 48px; }
 .tabs [role="tab"][aria-selected="true"] { color: var(--ink); border-bottom-color: var(--cyan); background: var(--surface); }
 .tabs [role="tab"]:focus-visible { outline-offset: -3px; }
 .tab-icon { flex: none; width: 20px; height: 20px; }
-/* Below the full row, the nine tabs go compact: equal width, icon over the
+/* Below the full row, the ten tabs go compact: equal width, icon over the
    label. Keeps one row (and the sticky bar) at every width. */
 @media (max-width: 1400px) {
   :root { --tabs-h: 56px; }
@@ -176,15 +176,19 @@ main { max-width: 1180px; margin: 0 auto; padding: 4px 20px 48px; }
   .tabs [role="tab"] .tab-label { max-width: 100%; overflow-wrap: anywhere; }
 }
 @media (max-width: 700px) {
-  .tabs [role="tab"] { font-size: 0.66rem; }
+  /* Ten labels cannot share 390 px without breaking mid-word. Below this
+     width the row scrolls sideways instead; each tab keeps its whole label. */
+  .tabs { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+  .tabs [role="tab"] { flex: 0 0 auto; min-width: 76px; font-size: 0.7rem; white-space: nowrap; }
+  .tabs [role="tab"] .tab-label { overflow-wrap: normal; white-space: nowrap; }
 }
 @media (max-width: 560px) {
   :root { --tabs-h: 58px; }
   .tabs { padding: 0 4px; gap: 0; }
-  .tabs [role="tab"] { padding: 5px 1px 3px; font-size: 0.62rem; letter-spacing: -0.01em; hyphens: auto; gap: 1px; line-height: 1.08; }
+  .tabs [role="tab"] { flex: 0 0 auto; min-width: 70px; padding: 5px 3px 3px; font-size: 0.66rem; letter-spacing: -0.01em; gap: 1px; line-height: 1.08; }
   .tabs .tab-icon { width: 18px; height: 18px; }
 }
-@media (max-width: 380px) { .tabs [role="tab"] { font-size: 0.64rem; } }
+@media (max-width: 380px) { .tabs [role="tab"] { font-size: 0.68rem; } }
 @media (forced-colors: active) { .tabs [role="tab"][aria-selected="true"] { border-bottom-color: Highlight; } }
 [role="tabpanel"]:focus { outline: none; }
 [role="tabpanel"] [id] { scroll-margin-top: calc(var(--tabs-h) + 12px); }

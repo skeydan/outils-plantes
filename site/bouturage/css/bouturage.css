@@ -1,0 +1,209 @@
+/* Cuttings and layering: type and factor cards, species explorer, SVG figures.
+   Only the shared tokens of assets/site.css are used; no new palette.
+   Information is never carried by colour alone: every badge has words. */
+
+.bt-head { max-width: 58rem; }
+.bt-head .lead { max-width: 54rem; }
+
+.bt-stats {
+  list-style: none; margin: 1.1rem 0 1rem; padding: 0;
+  display: flex; flex-wrap: wrap; gap: .55rem;
+}
+.bt-stats li {
+  display: flex; align-items: baseline; gap: .4rem;
+  padding: .4rem .8rem; border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface); box-shadow: var(--shadow);
+}
+.bt-stats strong { font-size: 1.15rem; color: var(--green-ink); font-variant-numeric: tabular-nums; }
+.bt-stats span { font-size: .8rem; color: var(--ink-2); }
+
+.bt-cross { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; font-size: .85rem; color: var(--ink-2); }
+.bt-cross-label { font-weight: 650; color: var(--ink); }
+.bt-chip {
+  display: inline-block; padding: .12rem .55rem; border: 1px solid var(--border);
+  border-radius: 999px; background: var(--surface); color: var(--green-ink);
+  font-size: .82rem; text-decoration: none; white-space: nowrap;
+}
+.bt-chip:hover { border-color: var(--green); }
+.bt-chip .bt-sci { font-size: inherit; }
+
+.bt-section { margin: 2.6rem 0 0; }
+.bt-section > h2 { font-size: 1.3rem; }
+.bt-lead { max-width: 54rem; }
+.bt-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); align-items: start; }
+
+/* ---------------------------------------------------------------- figures */
+.bt-fig-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start; }
+.bt-fig { margin: 0; padding: 12px; }
+.bt-fig svg {
+  display: block; width: 100%; height: auto;
+  background: var(--surface-2); border: 1px solid var(--hairline); border-radius: 10px;
+}
+.bt-fig figcaption { padding: .65rem .2rem 0; font-size: .88rem; color: var(--ink-2); }
+.bt-fig figcaption strong { color: var(--ink); }
+
+.bt-svg text { font-family: var(--font); font-size: 12.5px; fill: var(--ink); }
+.bt-lbl { font-size: 12.5px; }
+.bt-lbl-link { fill: var(--green-ink); cursor: pointer; }
+.bt-lbl-link:hover { text-decoration: underline; }
+.bt-lead { stroke: var(--ink-2); stroke-width: 1; fill: none; }
+.bt-dot { fill: var(--ink-2); }
+
+.bt-stem { fill: var(--green); fill-opacity: .32; stroke: var(--green); stroke-width: 1.8; }
+.bt-stem-soft { fill: none; stroke: var(--green); stroke-width: 3; stroke-linecap: round; }
+.bt-stem-hard { fill: var(--sand); fill-opacity: .55; stroke: var(--sand); stroke-width: 1.8; }
+.bt-leaf { fill: var(--green); fill-opacity: .5; stroke: var(--green); stroke-width: 1.2; }
+.bt-vein { fill: none; stroke: var(--green-ink); stroke-width: .9; opacity: .7; }
+.bt-node { fill: var(--green); fill-opacity: .55; stroke: var(--green-ink); stroke-width: 1.1; }
+.bt-bud, .bt-bud-b { fill: var(--yellow); fill-opacity: .8; stroke: var(--yellow); stroke-width: 1.2; }
+.bt-cut { fill: var(--clay); fill-opacity: .55; stroke: var(--clay); stroke-width: 1.2; }
+.bt-wound { fill: none; stroke: var(--danger); stroke-width: 2; }
+.bt-root { fill: none; stroke: var(--cyan); stroke-width: 1.8; stroke-linecap: round; }
+.bt-panel { fill: var(--surface); stroke: var(--hairline); stroke-width: 1.4; }
+.bt-panel-h { font-size: 13px; font-weight: 700; fill: var(--ink); }
+.bt-panel-note { font-size: 11.5px; fill: var(--ink-2); }
+.bt-soil { fill: var(--sand); fill-opacity: .2; }
+.bt-soil-line { stroke: var(--sand); stroke-width: 1.6; }
+.bt-mound { fill: var(--sand); fill-opacity: .25; stroke: var(--sand); stroke-width: 1.4; }
+.bt-branch-lay { fill: none; stroke: var(--green); stroke-width: 3; stroke-linecap: round; }
+.bt-peg { stroke: var(--ink-2); stroke-width: 2.4; stroke-linecap: round; }
+.bt-shoot { fill: none; stroke: var(--green); stroke-width: 2.6; stroke-linecap: round; }
+.bt-root-piece { fill: var(--sand); fill-opacity: .5; stroke: var(--sand); stroke-width: 1.5; }
+.bt-cladode { fill: var(--green); fill-opacity: .45; stroke: var(--green); stroke-width: 1.8; }
+.bt-callus { fill: var(--clay); fill-opacity: .7; stroke: var(--clay); stroke-width: 1.2; }
+.bt-girdle { fill: var(--danger); fill-opacity: .45; stroke: var(--danger); stroke-width: 1; }
+.bt-moss { fill: var(--green); fill-opacity: .18; stroke: var(--green); stroke-width: 1.2; stroke-dasharray: 3 2; }
+.bt-wrap { fill: none; stroke: var(--ink-2); stroke-width: 1.6; }
+.bt-wrap-tie { fill: none; stroke: var(--ink-2); stroke-width: 1; opacity: .55; }
+.bt-note-line { font-size: 11.5px; fill: var(--ink-2); }
+
+/* ---------------------------------------------------------------- type cards */
+.bt-type { padding: 14px 16px; scroll-margin-top: calc(var(--tabs-h) + 14px); }
+.bt-type > summary {
+  display: grid; grid-template-columns: auto 1fr; gap: .05rem .6rem;
+  list-style: none; cursor: pointer; align-items: start;
+}
+.bt-type > summary::-webkit-details-marker { display: none; }
+.bt-type > summary::before, .bt-sp > summary::before {
+  content: '+'; display: inline-grid; place-items: center;
+  width: 1.5em; height: 1.5em; border: 1px solid var(--border); border-radius: 50%;
+  font-weight: 700; color: var(--green-ink); background: var(--surface-2);
+}
+.bt-type[open] > summary::before, .bt-sp[open] > summary::before { content: '−'; }
+.bt-type-name { grid-column: 2; font-weight: 650; }
+.bt-type-short { grid-column: 2; font-size: .84rem; color: var(--ink-2); }
+.bt-type-when { margin-top: .7rem; font-size: .9rem; }
+.bt-type-body { font-size: .93rem; }
+
+/* ---------------------------------------------------------------- factors, layering */
+.bt-factor, .bt-layer { padding: 15px 16px; }
+.bt-factor h3, .bt-layer h3 { font-size: .98rem; }
+.bt-factor p, .bt-layer p { font-size: .93rem; }
+
+/* ---------------------------------------------------------------- species explorer */
+.bt-controls {
+  display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; align-items: flex-end;
+  padding: 14px 16px; margin-bottom: 1rem;
+}
+.bt-field { display: flex; flex-direction: column; gap: .25rem; flex: 1 1 260px; min-width: 0; }
+.bt-field label { font-size: .82rem; font-weight: 650; color: var(--ink-2); }
+.bt-field-select { flex: 0 1 260px; }
+.bt-search-in, .bt-select {
+  width: 100%; font: inherit; padding: 8px 10px; min-height: 42px;
+  border: 1px solid var(--border); border-radius: 9px;
+  background: var(--surface); color: var(--ink);
+}
+.bt-count { margin: 0 0 .35rem; flex: 1 1 100%; }
+
+.bt-sp-list { display: grid; gap: .7rem; }
+.bt-sp { padding: 0; overflow: clip; }
+.bt-sp > summary {
+  display: grid; grid-template-columns: auto 1fr auto; gap: .2rem .65rem;
+  align-items: center; padding: 14px 16px; cursor: pointer; list-style: none;
+}
+.bt-sp > summary::-webkit-details-marker { display: none; }
+.bt-sp[open] > summary { border-bottom: 1px solid var(--hairline); }
+.bt-sp-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: .15rem .5rem; min-width: 0; }
+.bt-sci { font-weight: 600; }
+.bt-sci i { font-style: italic; }
+.bt-author { font-size: .72em; color: var(--ink-2); font-weight: 500; }
+.bt-sp-common { color: var(--ink-2); font-size: .88rem; }
+.bt-sp-badges { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .3rem; }
+
+.bt-badge {
+  display: inline-block; padding: .1rem .5rem; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--surface-2); color: var(--ink);
+  font-size: .72rem; font-weight: 700; line-height: 1.5; white-space: nowrap;
+}
+.bt-d-easy { background: color-mix(in oklab, var(--green) 16%, var(--surface)); }
+.bt-d-moderate { background: var(--yellow-wash); }
+.bt-d-difficult { background: color-mix(in oklab, var(--clay) 18%, var(--surface)); }
+.bt-sex { background: var(--cyan-wash); }
+
+.bt-sp-body { padding: 4px 16px 16px; }
+.bt-sp-body h3 { font-size: .95rem; margin: 1rem 0 .35rem; color: var(--green-ink); }
+.bt-sp-body p { font-size: .93rem; }
+.bt-names { font-size: .9rem; margin-top: .7rem; }
+.bt-name-lang { white-space: normal; }
+.bt-lang-code { font-size: .72rem; font-weight: 700; color: var(--ink-2); letter-spacing: .04em; }
+.bt-sp-meta { font-size: .88rem !important; color: var(--ink-2); }
+.bt-table-wrap { overflow-x: auto; margin: .3rem 0 .8rem; }
+.bt-kv { max-width: 40rem; }
+.bt-kv th { width: 10em; color: var(--ink-2); font-weight: 600; }
+.bt-kv td { font-variant-numeric: tabular-nums; }
+.bt-layer-meta { font-size: .9rem; }
+.bt-graft { border-left: 3px solid var(--green); padding-left: .8rem; margin-top: 1rem; }
+.bt-graft h3 { margin-top: 0 !important; }
+.bt-no-layer { color: var(--ink-2); }
+.bt-note {
+  background: var(--note); border-radius: 10px; padding: .6rem .75rem;
+  font-size: .9rem !important; margin-top: .9rem;
+}
+.bt-empty { text-align: center; color: var(--ink-2); padding: 22px; }
+.bt-src { font-size: .8rem; color: var(--ink-2); margin: .5rem 0 0; }
+
+/* ---------------------------------------------------------------- steps, confusions, corrections */
+.bt-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.bt-step { padding: 15px 16px; }
+.bt-step h3 { font-size: .98rem; display: flex; gap: .55rem; align-items: flex-start; }
+.bt-step p { font-size: .92rem; margin-bottom: 0; }
+.bt-step-n, .bt-corr-n {
+  flex: none; display: inline-grid; place-items: center;
+  width: 1.7em; height: 1.7em; border-radius: 50%;
+  background: var(--cyan-wash); color: var(--ink);
+  font-size: .78em; font-weight: 700;
+}
+
+.bt-conf { padding: 15px 16px; }
+.bt-wrong, .bt-right { font-size: .92rem; }
+.bt-wrong { color: var(--ink); }
+.bt-right { color: var(--ink); }
+.bt-tag {
+  display: inline-block; font-size: .68rem; font-weight: 800; letter-spacing: .06em;
+  text-transform: uppercase; padding: .08rem .4rem; border-radius: 4px;
+  border: 1px solid var(--border); margin-right: .2rem;
+}
+.bt-tag-wrong { color: var(--danger); border-color: color-mix(in oklab, var(--danger) 45%, var(--border)); }
+.bt-tag-right { color: var(--green-ink); border-color: color-mix(in oklab, var(--green) 45%, var(--border)); }
+
+.bt-corr { display: grid; gap: .8rem; max-width: 62rem; }
+.bt-corr-item { padding: 15px 16px; }
+.bt-corr-item h3 { font-size: .98rem; display: flex; gap: .55rem; align-items: flex-start; }
+.bt-corr-item p { font-size: .92rem; }
+.bt-corr-n { background: var(--yellow-wash); }
+
+.bt-sources { margin-top: 3rem; border-top: 1px solid var(--hairline); padding-top: 1rem; }
+.bt-sources li, .bt-sources a { overflow-wrap: anywhere; }
+
+/* ---------------------------------------------------------------- small screens */
+@media (max-width: 700px) {
+  .bt-stats { gap: .4rem; }
+  .bt-stats li { padding: .3rem .65rem; }
+  .bt-fig-grid, .bt-grid, .bt-steps { grid-template-columns: 1fr; }
+  .bt-controls { align-items: stretch; }
+  .bt-field, .bt-field-select { flex: 1 1 100%; }
+  .bt-sp > summary { grid-template-columns: auto 1fr; padding: 12px 13px; }
+  .bt-sp-badges { grid-column: 2; justify-content: flex-start; }
+  .bt-sp-body { padding: 4px 13px 14px; }
+  .bt-kv th { width: 8em; }
+}

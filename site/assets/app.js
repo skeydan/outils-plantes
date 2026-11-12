@@ -17,6 +17,8 @@ const TABS = [
     label: { en: 'Breeding', fr: 'Hybridation' }, long: { en: 'Pollination, crosses and seeds', fr: 'Fécondation, croisements et graines' } },
   { id: 'germination', load: () => import('../germination/js/app.js'),
     label: { en: 'Germination', fr: 'Germination' }, long: { en: 'Seed dormancy and how to break it', fr: 'Dormance des graines et comment la lever' } },
+  { id: 'bouturage', load: () => import('../bouturage/js/app.js'),
+    label: { en: 'Cuttings', fr: 'Bouturage' }, long: { en: 'Cuttings and layering, species by species', fr: 'Bouturage et marcottage, espèce par espèce' } },
   { id: 'graft', load: () => import('../graft/js/app.js'),
     label: { en: 'Grafting', fr: 'Greffe' }, long: { en: 'Scions, rootstocks and how to choose them', fr: 'Greffons, porte-greffes et comment les choisir' } },
   { id: 'taxonomy', load: () => import('../taxonomy/js/app.js'),
@@ -73,6 +75,15 @@ function paintTabs(active) {
     panelEl(t.id).hidden = !on;
   }
   list.setAttribute('aria-label', say('shell.tabs'));
+  // On a narrow screen the ten labels scroll sideways: keep the active tab
+  // visible when the route changes, without moving the page itself.
+  const el = tabEl(active);
+  if (el && list.scrollWidth > list.clientWidth) {
+    const r = el.getBoundingClientRect();
+    const lr = list.getBoundingClientRect();
+    if (r.left < lr.left) list.scrollLeft += r.left - lr.left - 4;
+    else if (r.right > lr.right) list.scrollLeft += r.right - lr.right + 4;
+  }
 }
 
 /** Show the route in the hash. remount: build the tab again (language change). */

@@ -3,8 +3,8 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseRoute, routeHref, TAB_IDS, DEFAULT_TAB } from '../site/assets/route.js';
 
-test('nine tabs, anatomy first', () => {
-  assert.deepEqual(TAB_IDS, ['anatomy', 'water', 'seeds', 'germination', 'graft', 'taxonomy', 'fruits', 'development', 'microscope']);
+test('ten tabs, anatomy first', () => {
+  assert.deepEqual(TAB_IDS, ['anatomy', 'water', 'seeds', 'germination', 'bouturage', 'graft', 'taxonomy', 'fruits', 'development', 'microscope']);
   assert.equal(DEFAULT_TAB, 'anatomy');
 });
 
@@ -18,6 +18,8 @@ test('parse and write routes', () => {
   assert.equal(routeHref('water', 'compartments'), '#water/compartments');
   assert.equal(routeHref('seeds'), '#seeds');
   assert.deepEqual(parseRoute('#germination/acacia-baileyana'), { tab: 'germination', sub: 'acacia-baileyana' });
+  assert.deepEqual(parseRoute('#bouturage/olea-europaea'), { tab: 'bouturage', sub: 'olea-europaea' });
+  assert.equal(routeHref('bouturage', 'ribes-rubrum'), '#bouturage/ribes-rubrum');
   assert.equal(routeHref('germination', 'olea-europaea'), '#germination/olea-europaea');
   assert.deepEqual(parseRoute('#microscope/leaf'), { tab: 'microscope', sub: 'leaf' });
   assert.deepEqual(parseRoute('#graft/prunus-amygdalus--gf-677'), { tab: 'graft', sub: 'prunus-amygdalus--gf-677' });

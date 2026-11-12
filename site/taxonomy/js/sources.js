@@ -137,6 +137,54 @@ export const SOURCES = [
   "url": "https://commons.wikimedia.org/wiki/File:Rubus_idaeus_kz03.jpg"
  },
  {
+  "id": "gbif",
+  "short": "GBIF backbone",
+  "text": "GBIF Secretariat, GBIF Backbone Taxonomy (2026). Used to check the spelling, authority and current status of the species names added in this task, and to give each name a stable page; where GBIF treats a name as a synonym, the entry says so and gives the accepted name.",
+  "url": "https://www.gbif.org/"
+ },
+ {
+  "id": "wattle",
+  "short": "World Wide Wattle",
+  "text": "World Wide Wattle (Australian Tree Seed Centre, CSIRO), species gallery, Acacia baileyana F.Muell. Used for the tree’s phyllotaxy, its globular flower heads, its 5-merous flowers with 30–40 stamens and its legume.",
+  "url": "https://worldwidewattle.com/speciesgallery/baileyana.php"
+ },
+ {
+  "id": "euclid",
+  "short": "EUCLID, eucalypts of Australia",
+  "text": "EUCLID (Centre for Australian National Biodiversity Research), Eucalyptus deglupta Blume. Used for the opposite adult leaves, the double operculum, the 3–7-flowered umbels in terminal panicles, the numerous stamens, the inferior ovary and the woody capsule.",
+  "url": "https://keyserver.lucidcentral.org/euclid/text/entities/eucalyptus_deglupta.htm"
+ },
+ {
+  "id": "gymnosperm",
+  "short": "Gymnosperm Database",
+  "text": "Earle C.J., The Gymnosperm Database, Pinus sylvestris L. Used for the monoecious cones, the two naked ovules on each ovuliferous scale, the absence of an ovary and carpel, and the needle leaves in fascicles of two. A gymnosperm has no true fruit: the cone is a strobilus.",
+  "url": "https://www.conifers.org/pi/Pinus_sylvestris.php"
+ },
+ {
+  "id": "tropicos",
+  "short": "Tropicos, Flora de Costa Rica",
+  "text": "Missouri Botanical Garden, Tropicos, Flora de Costa Rica treatment of Selenicereus. Used for the many tepals, numerous stamens, inferior ovary, berry with bracteoles, and for the fruit colours of S. monacanthus, S. costaricensis and S. megalanthus.",
+  "url": "http://legacy.tropicos.org/ProjectAnswerDetails.aspx?nameid=40034944&descid=67321&projectid=66"
+ },
+ {
+  "id": "ts-online",
+  "short": "Trees and Shrubs Online",
+  "text": "Trees and Shrubs Online (International Dendrology Society), species accounts for Olea europaea, Pistacia terebinthus, Citrus trifoliata, Prunus cerasifera, P. domestica, P. salicina, P. spinosa, Actinidia arguta and Schisandra chinensis. Used for flower counts, ovary position, inflorescence and fruit where the account is cited.",
+  "url": "https://www.treesandshrubsonline.org/"
+ },
+ {
+  "id": "prosea",
+  "short": "PROSEA, Citrus sinensis",
+  "text": "Plant Resources of South-East Asia (PROSEA), Citrus sinensis (L.) Osbeck account. Used for the 20–25 stamens, the 10–13-locular ovary and the hesperidium; the account also notes that Flora of China merges the sweet orange into Citrus × aurantium.",
+  "url": "https://plantuse.plantnet.org/en/index.php?title=Citrus_sinensis_(PROSEA)"
+ },
+ {
+  "id": "northafrica",
+  "short": "North Africa Trees",
+  "text": "North Africa Trees, species accounts for Prunus webbii (Spach) Fritsch and Prunus insititia L. Used for the 5 sepals and petals, the stamen counts, the solitary or fascicled flowers and the drupe.",
+  "url": "https://www.northafricatrees.org/en/species/prunus-dulcis-mill-d-a-webb/"
+ },
+ {
   "id": "photo-marrubium",
   "short": "Photo : CC BY-SA 4.0, Kenraiz",
   "text": "Photo of a white horehound plant in flower, CC BY-SA 4.0, Krzysztof Ziarnek (Kenraiz), Wikimedia Commons (reduced in size for the web).",

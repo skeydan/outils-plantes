@@ -4,6 +4,7 @@
 // corrections section lists what the PDF got wrong. Route: #germination[/<species>].
 import { lang } from '../../assets/site.js';
 import { routeHref } from '../../assets/route.js';
+import { taxonomyId } from '../../assets/species-links.js';
 import { h, citer } from '../../assets/ui.js';
 import { DORMANCY, TREATMENTS, SPECIES, STEPS, CONFUSIONS, CORRECTIONS } from './data.js';
 import { SOURCES } from './sources.js';
@@ -33,6 +34,7 @@ const STR = {
   seeSeed: { en: 'the seed in anatomy', fr: 'la graine en anatomie' },
   seeFruit: { en: 'fruit types', fr: 'les types de fruits' },
   seeTaxo: { en: 'the species in taxonomy', fr: 'les espèces en taxonomie' },
+  inTaxo: { en: 'in Taxonomy', fr: 'dans Taxonomie' },
   figures: { en: 'Three drawings to start with', fr: 'Trois dessins pour commencer' },
   figSeed: { en: 'A seed cut open', fr: 'Une graine ouverte' },
   figSeedCap: {
@@ -217,6 +219,7 @@ function namesLine(s) {
 
 function speciesCard(s) {
   const d = DORM.get(s.dormancy);
+  const taxId = taxonomyId('germination', s.id);
   return h('details', { class: 'card gm-sp', id: `sp-${s.id}`, 'data-dorm': s.dormancy },
     h('summary', { class: 'gm-sp-sum' },
       h('span', { class: 'gm-sp-title' }, sci(s, { author: true }),
@@ -226,7 +229,8 @@ function speciesCard(s) {
       namesLine(s),
       h('p', { class: 'gm-sp-meta' },
         h('strong', { text: L(STR.family) }), ' ', s.family, ' · ',
-        h('strong', { text: L(STR.dormancyLabel) }), ' ', L(d.name), ' ', ...srcRefs(['bask2004'])),
+        h('strong', { text: L(STR.dormancyLabel) }), ' ', L(d.name), ' ', ...srcRefs(['bask2004']),
+        taxId ? [' · ', h('a', { class: 'gm-chip gm-sp-tax', href: routeHref('taxonomy', taxId) }, L(STR.inTaxo))] : null),
       h('p', {}, h('strong', { text: L(STR.seed) }), ' ', L(s.seed)),
       h('h3', { text: L(STR.protocol) }),
       h('p', { text: L(s.protocol) }),

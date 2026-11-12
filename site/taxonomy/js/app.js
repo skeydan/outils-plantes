@@ -4,6 +4,7 @@
 // the leaf arrangement (phyllotaxy). Names follow POWO/WFO.
 import { lang } from '../../assets/site.js';
 import { routeHref } from '../../assets/route.js';
+import { tabIds } from '../../assets/species-links.js';
 import { h, citer } from '../../assets/ui.js';
 import { renderTree, wireSearch } from '../../assets/tree-ui.js';
 import { buildIndex, search, descendantCount } from '../../assets/tree.js';
@@ -33,8 +34,15 @@ const STR = {
   inAnatomy: { en: 'in Anatomy', fr: 'dans Anatomie' },
   inFruits: { en: 'fruit types in Fruits', fr: 'types de fruits dans Fruits' },
   inDevelopment: { en: 'flower → fruit in Development', fr: 'fleur → fruit dans Développement' },
+  inSeeds: { en: 'seeds and crosses in Breeding', fr: 'graines et croisements dans Hybridation' },
+  inGermination: { en: 'seed germination in Germination', fr: 'germination des graines dans Germination' },
+  inCuttings: { en: 'cuttings in Cuttings', fr: 'bouturage dans Bouturage' },
+  alsoIn: { en: 'Also in:', fr: 'Aussi dans :' },
   sources: { en: 'Sources', fr: 'Sources' },
 };
+
+// The three propagation tabs, in the order the cross-links are shown.
+const CROSS_TABS = ['seeds', 'germination', 'bouturage'];
 
 // Fruit-type category on the Fruits tab for each fruit type in the Anatomy tab.
 const FRUIT_CAT = {
@@ -60,7 +68,11 @@ const SYMMETRY = {
   actinomorphic: { en: 'actinomorphic (radial)', fr: 'actinomorphe (radiaire)' },
   zygomorphic: { en: 'zygomorphic (two-sided)', fr: 'zygomorphe (bilatérale)' },
 };
-const OVARY = { superior: { en: 'superior', fr: 'supère' }, inferior: { en: 'inferior', fr: 'infère' } };
+const OVARY = {
+  superior: { en: 'superior', fr: 'supère' },
+  inferior: { en: 'inferior', fr: 'infère' },
+  naked: { en: 'naked (no ovary: gymnosperm)', fr: 'nu (pas d’ovaire : gymnosperme)' },
+};
 const SEX = {
   bisexual: { en: 'bisexual (one flower has both)', fr: 'bisexuée (une fleur porte les deux)' },
   monoecious: { en: 'monoecious (male and female flowers on one plant)', fr: 'monoïque (fleurs mâles et femelles sur un même pied)' },
@@ -144,7 +156,9 @@ function speciesDetail(e) {
     ...rows.map(([k, v]) => h('tr', {}, h('th', { scope: 'row' }, k), h('td', {}, v))),
     h('tr', {}, h('th', { scope: 'row' }, L(STR.symmetry)), h('td', {}, L(SYMMETRY[f.symmetry]))),
     h('tr', {}, h('th', { scope: 'row' }, L(STR.ovary)), h('td', {},
-      alink(f.ovary === 'superior' ? 'superior-ovary' : 'inferior-ovary', L(OVARY[f.ovary])))),
+      f.ovary === 'naked'
+        ? L(OVARY.naked)
+        : alink(f.ovary === 'superior' ? 'superior-ovary' : 'inferior-ovary', L(OVARY[f.ovary])))),
     h('tr', {}, h('th', { scope: 'row' }, L(STR.sex)), h('td', {}, L(SEX[f.sex]))),
   );
 
@@ -168,13 +182,22 @@ function speciesDetail(e) {
     h('dt', {}, L(STR.fruit)), h('dd', {}, L(e.fruit), fruitLinks),
   );
 
+  const links = tabIds(e.id);
+  const cross = CROSS_TABS.some((tab) => links[tab]) ? h('p', { class: 'taxo-see taxo-cross' },
+    L(STR.alsoIn), ' ',
+    ...CROSS_TABS.filter((tab) => links[tab]).flatMap((tab, i) => [
+      i ? ' · ' : null,
+      h('a', { class: 'taxo-chip', href: routeHref(tab, links[tab]), 'data-tab': tab },
+        L(STR[{ seeds: 'inSeeds', germination: 'inGermination', bouturage: 'inCuttings' }[tab]])),
+    ])) : null;
+
   const kids = index.children.get(e.id);
   const below = kids.length ? h('div', { class: 'taxo-below' },
     h('h3', {}, T('Cultivars and varieties', 'Cultivars et variétés')),
     h('ul', { class: 'taxo-children' }, ...kids.map((id) => h('li', {},
       h('a', { href: href(id), 'data-id': id }, nameInline(index.byId.get(id))))))) : null;
 
-  return h('div', {}, fig, photo, table, facts,
+  return h('div', {}, fig, photo, table, facts, cross,
     f.note ? h('p', { class: 'taxo-note' }, L(f.note)) : null,
     below,
     h('p', { class: 'taxo-src' }, T('Names', 'Noms'), ' ', cite(...e.names_src.map((s) => s.k)),

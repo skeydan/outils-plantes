@@ -319,6 +319,8 @@ for (const device of Object.keys(devices)) {
   await page.evaluate(() => { location.hash = 'seeds/prunus-amygdalus'; });
   await waitCurrent(page, 'prunus-amygdalus');
   ok(await page.isVisible('#sd-mother'), 'seeds: almond pair check shown');
+  ok((await page.locator('#a-entry .sd-taxlink a').getAttribute('href')) === '#taxonomy/prunus-dulcis',
+    'seeds: almond links to its accepted taxonomy name');
   const opts = await page.$$eval('#sd-mother option', (os) => os.map((o) => o.value));
   await page.selectOption('#sd-mother', opts[0]);
   await page.selectOption('#sd-donor', opts[0]);
@@ -348,6 +350,9 @@ for (const device of Object.keys(devices)) {
   ok((await page.locator('.gm-dorm').count()) === 5, 'germination: five dormancy cards');
   ok((await page.locator('.gm-treat').count()) === 11, 'germination: eleven treatments');
   ok((await page.locator('.gm-sp').count()) === 17, 'germination: seventeen species');
+  ok((await page.locator('.gm-sp .gm-sp-tax').count()) === 17, 'germination: every species links to taxonomy');
+  ok((await page.locator('#sp-olea-europaea .gm-sp-tax').getAttribute('href')) === '#taxonomy/olea-europaea',
+    'germination: olive links to its taxonomy entry');
   // Search by common name, then an empty result.
   await page.fill('#gm-search', 'olive');
   ok((await page.locator('.gm-sp').count()) === 1, 'germination: "olive" narrows to one species');
@@ -398,6 +403,9 @@ for (const device of Object.keys(devices)) {
   ok((await page.locator('.bt-factor').count()) === 6, 'cuttings: six factors');
   ok((await page.locator('.bt-layer').count()) === 4, 'cuttings: four layering methods');
   ok((await page.locator('.bt-sp').count()) === 14, 'cuttings: fourteen species');
+  ok((await page.locator('.bt-sp .bt-sp-tax').count()) === 14, 'cuttings: every species links to taxonomy');
+  ok((await page.locator('#sp-olea-europaea .bt-sp-tax').getAttribute('href')) === '#taxonomy/olea-europaea',
+    'cuttings: olive links to its taxonomy entry');
   // Search by common name and by scientific name, then an empty result.
   await page.fill('#bt-search', 'olive');
   ok((await page.locator('.bt-sp').count()) === 1, 'cuttings: "olive" narrows to one species');
@@ -461,6 +469,8 @@ for (const device of Object.keys(devices)) {
   await page.evaluate(() => { location.hash = 'graft/rubus-idaeus'; });
   await waitCurrent(page, 'rubus-idaeus');
   ok(/Not grafted/.test(await page.textContent('#a-entry .sd-glance')), 'graft: raspberry is not grafted');
+  ok((await page.locator('#a-entry .gf-taxlink a').getAttribute('href')) === '#taxonomy/rubus-idaeus',
+    'graft: raspberry links to its taxonomy entry');
   // A criterion link scrolls to its card and keeps the route.
   await page.evaluate(() => { location.hash = 'graft/prunus-amygdalus--marianna-2624'; });
   await waitCurrent(page, 'prunus-amygdalus--marianna-2624');
@@ -504,6 +514,20 @@ for (const device of Object.keys(devices)) {
     await page.waitForFunction((n) => (document.querySelector('.taxo-name')?.textContent ?? '').includes(n), name);
   }
   ok(taxa.length >= 8, `taxonomy: ${taxa.length} taxa rendered`);
+  const spCount = await page.evaluate(async () => (await import('./taxonomy/js/taxa.js')).TAXA.filter((t) => t.rank === 'species').length);
+  ok(spCount === 37, `taxonomy: ${spCount} species (all propagation species included)`);
+  // A gymnosperm has no ovary: the row says “naked”, with no anatomy link.
+  await page.evaluate(() => { location.hash = 'taxonomy/pinus-sylvestris'; });
+  await page.waitForFunction(() => /Pinus sylvestris/.test(document.querySelector('.taxo-name')?.textContent ?? ''));
+  ok((await page.textContent('.taxo-table')).includes('naked (no ovary: gymnosperm)'), 'taxonomy: pine ovary marked naked');
+  // A species of several tabs links to each: breeding, germination and cuttings.
+  await page.evaluate(() => { location.hash = 'taxonomy/actinidia-deliciosa'; });
+  await page.waitForFunction(() => /Actinidia deliciosa/.test(document.querySelector('.taxo-name')?.textContent ?? ''));
+  const crossHrefs = await page.$$eval('.taxo-cross a', (as) => as.map((a) => a.getAttribute('href')));
+  ok(crossHrefs.length === 3, `taxonomy: three cross-tab links: ${crossHrefs.join(', ')}`);
+  for (const want of ['#seeds/actinidia-chinensis-var-deliciosa', '#germination/actinidia-deliciosa', '#bouturage/actinidia-deliciosa'])
+    ok(crossHrefs.includes(want), `taxonomy: cross-link ${want}`);
+  await page.screenshot({ path: `${SHOTS}/interact-7-taxonomy-links.png`, fullPage: true });
   await ctx.close();
 }
 

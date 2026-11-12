@@ -3,6 +3,7 @@
 // is pollinated, what it crosses with, and whether its seed comes true.
 import { lang } from '../../assets/site.js';
 import { routeHref } from '../../assets/route.js';
+import { taxonomyId } from '../../assets/species-links.js';
 import { h, citer } from '../../assets/ui.js';
 import { renderTree as drawTree, wireSearch } from '../../assets/tree-ui.js';
 import { pathTo, search } from '../../assets/tree.js';
@@ -399,6 +400,8 @@ function renderEntry({ scroll = true } = {}) {
     kids.length ? h('div', { class: 'a-rel' }, h('div', {}, h('h3', { text: T(`Below (${kids.length})`, `En dessous (${kids.length})`) }),
       h('div', { class: 'a-chips' }, ...kids.map((k) => { const x = index.byId.get(k); return h('a', { href: link(k), class: 'a-chip' }, sciName(x), x.cultivar?.self ? h('span', { class: 'a-chip-alt', text: L(SELF[x.cultivar.self])?.split(':')[0] }) : null); })))) : null,
     t.parent ? h('div', { class: 'a-rel' }, h('div', {}, h('h3', { text: T('Belongs to', 'Fait partie de') }), taxonLink(t.parent))) : null,
+    taxonomyId('seeds', t.id) ? h('p', { class: 'small sd-taxlink' }, T('Flower and fruit: ', 'Fleur et fruit : '),
+      h('a', { href: routeHref('taxonomy', taxonomyId('seeds', t.id)) }, T('the species in Taxonomy', 'l’espèce dans Taxonomie')), '.') : null,
     h('p', { class: 'a-perma small' }, T('Permalink: ', 'Permalien : '), h('a', { href: link(t.id), id: 'a-permalink', text: new URL(link(t.id), location.href).href })),
   ].filter(Boolean));
   if (scroll) {

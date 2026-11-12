@@ -86,21 +86,32 @@ a cited source, listed at the bottom of each tab.
   sea buckthorn, rainbow eucalyptus) say so and how they are propagated
   instead. Search on plant, variety or rootstock names; a link per node
   (`#graft/prunus-amygdalus--gf-677`).
-- **Taxonomy** (`#taxonomy`, code in `site/taxonomy/`): a small, growing
-  classification from order to family (with, where useful, subfamily and
-  tribe) to genus to species (starters: bread wheat, buckwheat, quinoa,
-  amaranth, white horehound, almond, blackberry, kiwifruit, apple, walnut).
-  For each species
-  a schematic flower of our own showing the
-  sepals, petals, stamens and carpels and their count (∞ for "many", 0 for
-  "absent"), the floral formula, symmetry, ovary position, sexuality, leaf
-  arrangement (phyllotaxy), inflorescence and fruit; the author of each
-  name. Names and placement follow POWO/WCVP and WFO; the Rosaceae
-  subfamilies and tribes follow APweb and Flora of North America, the
-  Amaranthaceae subfamilies follow Burnett (1835) and APweb, and the
-  Juglandaceae sit in Fagales following APweb; the flower
-  facts are per-species from regional floras. Search on Latin, common and German
-  names; a link per node (`#taxonomy/prunus-dulcis`).
+- **Taxonomy** (`#taxonomy`, code in `site/taxonomy/`): the classification
+  from order to family (with, where useful, subfamily and tribe) to genus to
+  species. It holds **37 species**, including every species of the
+  germination, cuttings and breeding tabs: besides the crop, fruit and
+  ornamental plants already there, it adds acacia, sweet orange, rainbow eucalyptus,
+  Nyctanthes, olive, Scots pine, terebinth, Poncirus, cherry plum,
+  Schisandra, the Chinese and hardy kiwis, three more pitayas, Chinese sea
+  buckthorn and six plums and almonds. For each species a schematic flower
+  of our own showing the sepals, petals, stamens and carpels and their count
+  (∞ for "many", 0 for "absent"), the floral formula, symmetry, ovary
+  position, sexuality, leaf arrangement (phyllotaxy), inflorescence and
+  fruit; the author of each name. The pine is a gymnosperm: its ovary row
+  says **naked** (no ovary), the carpels are 0 and the cone is marked as not
+  a true fruit. Names and placement follow POWO/WCVP and WFO, checked
+  against the GBIF backbone; the Rosaceae subfamilies and tribes follow APweb and Flora of
+  North America, the Amaranthaceae subfamilies follow Burnett (1835) and
+  APweb, and the Juglandaceae sit in Fagales following APweb; the flower
+  facts are per-species from regional floras and monographs. Search on Latin,
+  common and German names; a link per node (`#taxonomy/prunus-dulcis`).
+  Cross-links use a small manifest, `site/assets/species-links.js`, because
+  the tabs do not always use the same name: *Prunus dulcis* is
+  *P. amygdalus* in Breeding, *Rubus fruticosus* is the aggregate there, and
+  *Actinidia deliciosa* is the variety *A. chinensis* var. *deliciosa*.
+  Species entries link to their breeding, germination and cuttings entries;
+  those tabs link back to the taxonomy species. `#graft` reuses the breeding
+  taxa and links to the accepted taxonomy name too.
 - **Fruits** (`#fruits`, code in `site/fruits/`): seven fruit types found
   among our species — drupe, berry, aggregate (Sammelfrucht), pome, nut,
   accessory and dry — each with an original section drawing and a link to
@@ -230,11 +241,16 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
   tree is the breeding tab's with the rootstocks under their plants, every
   species has a grafting answer (own or inherited), plants grown from
   cuttings or seed say so, every criterion has its card.
-- `tests/taxonomy.test.mjs`: the taxonomy tree is valid and sourced, the
-  starter species are under their genus at four levels, each has a complete
-  and consistent flower (parts per whorl, symmetry, ovary, sexuality,
-  formula, phyllotaxy, inflorescence, fruit), and search reaches them by
+- `tests/taxonomy.test.mjs`: the taxonomy tree is valid and sourced, all 37
+  species are under their genus (four to six levels), each has a complete
+  and consistent flower (parts per whorl, symmetry, ovary including the
+  gymnosperm `naked` state, sexuality, formula, phyllotaxy, inflorescence,
+  fruit), the counts below each node match, and search reaches them by
   Latin, common and German name.
+- `tests/species-links.test.mjs`: every species of the germination, cuttings
+  and breeding tabs has a taxonomy entry; every manifest target exists in
+  its tab; each tab maps each entry once; the reverse lookup is stable; and
+  a species with no propagation entry has no link.
 - `tests/fruits.test.mjs`: the seven fruit types are bilingual, sourced and
   matched to species with the same Anatomy entry, every example is a
   species of the taxonomy, the eleven German/English/French terms are
@@ -335,6 +351,7 @@ site/
   index.html              the page: header, tab bar, ten panels
   assets/app.js           tabs, hash routing, lazy loading, in-page anchors
   assets/route.js         routes (#tab/sub), no side effects
+  assets/species-links.js cross-tab species ids (taxonomy ↔ seeds, germination, bouturage)
   assets/site.js          language and theme shell
   assets/site.css         shared tokens (light/dark, validated palettes), layout, tab bar
   assets/ui.js            small DOM helpers (elements, numbers, citations)

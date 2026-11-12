@@ -66,11 +66,36 @@ test('the starter species are present under their genus', () => {
     'marrubium-vulgare': 'marrubium',
     'prunus-dulcis': 'prunus',
     'rubus-fruticosus': 'rubus',
+    'rubus-idaeus': 'rubus',
+    'ribes-rubrum': 'ribes',
+    'ribes-nigrum': 'ribes',
+    'ribes-uva-crispa': 'ribes',
     'actinidia-deliciosa': 'actinidia',
     'selenicereus-undatus': 'selenicereus',
     'hippophae-rhamnoides': 'hippophae',
     'malus-domestica': 'malus',
     'juglans-regia': 'juglans',
+    'acacia-baileyana': 'acacia',
+    'citrus-sinensis': 'citrus',
+    'eucalyptus-deglupta': 'eucalyptus',
+    'nyctanthes-arbor-tristis': 'nyctanthes',
+    'olea-europaea': 'olea',
+    'pinus-sylvestris': 'pinus',
+    'pistacia-terebinthus': 'pistacia',
+    'poncirus-trifoliata': 'poncirus',
+    'prunus-cerasifera': 'prunus',
+    'schisandra-chinensis': 'schisandra',
+    'actinidia-chinensis': 'actinidia',
+    'actinidia-arguta': 'actinidia',
+    'selenicereus-monacanthus': 'selenicereus',
+    'selenicereus-costaricensis': 'selenicereus',
+    'selenicereus-megalanthus': 'selenicereus',
+    'hippophae-sinensis': 'hippophae',
+    'prunus-webbii': 'prunus',
+    'prunus-domestica': 'prunus',
+    'prunus-insititia': 'prunus',
+    'prunus-salicina': 'prunus',
+    'prunus-spinosa': 'prunus',
   };
   for (const [sp, gen] of Object.entries(species)) under(sp, gen);
   // Each species sits under family and order too: four levels, five when its
@@ -81,7 +106,9 @@ test('the starter species are present under their genus', () => {
     assert.ok([4, 5, 6].includes(path.length), `${sp} depth ${path.length}`);
     assert.ok(path.includes('rosales') || path.includes('poales') || path.includes('caryophyllales')
       || path.includes('lamiales') || path.includes('ericales') || path.includes('saxifragales')
-      || path.includes('fagales'), `${sp} under an order`);
+      || path.includes('fagales') || path.includes('fabales') || path.includes('sapindales')
+      || path.includes('myrtales') || path.includes('pinales') || path.includes('austrobaileyales'),
+    `${sp} under an order`);
   }
   for (const sp of ['prunus-dulcis', 'rubus-fruticosus', 'rubus-idaeus']) {
     const path = pathTo(index, sp);
@@ -106,7 +133,7 @@ test('each species has a complete, consistent flower', () => {
       assert.ok([0, null].includes(f[w].n) || Number.isInteger(f[w].n), `${e.id} ${w}.n`);
     }
     assert.ok(['actinomorphic', 'zygomorphic'].includes(f.symmetry), `${e.id} symmetry`);
-    assert.ok(['superior', 'inferior'].includes(f.ovary), `${e.id} ovary`);
+    assert.ok(['superior', 'inferior', 'naked'].includes(f.ovary), `${e.id} ovary`);
     assert.ok(['bisexual', 'monoecious', 'dioecious'].includes(f.sex), `${e.id} sex`);
     assert.ok(f.formula && f.formula.length, `${e.id} formula`);
     assert.ok(e.phyllotaxy?.en && e.phyllotaxy?.fr, `${e.id} phyllotaxy`);
@@ -145,30 +172,45 @@ test('search reaches species by Latin, common and German name', () => {
 test('counts below each node match the displayed numbers', () => {
   const count = (id) => descendantCount(index, id, (e) => e.rank === 'species');
   assert.equal(count('poales'), 1);
-  assert.equal(count('caryophyllales'), 4);
-  assert.equal(count('lamiales'), 1);
-  assert.equal(count('rosales'), 5);
-  assert.equal(count('ericales'), 1);
+  assert.equal(count('caryophyllales'), 7);
+  assert.equal(count('lamiales'), 3);
+  assert.equal(count('rosales'), 12);
+  assert.equal(count('ericales'), 3);
   assert.equal(count('saxifragales'), 3);
   assert.equal(count('fagales'), 1);
+  assert.equal(count('fabales'), 1);
+  assert.equal(count('sapindales'), 3);
+  assert.equal(count('myrtales'), 1);
+  assert.equal(count('pinales'), 1);
+  assert.equal(count('austrobaileyales'), 1);
   assert.equal(count('juglandaceae'), 1);
   assert.equal(count('juglans'), 1);
   assert.equal(count('amaranthaceae'), 2);
   assert.equal(count('amaranthoideae'), 1);
   assert.equal(count('chenopodioideae'), 1);
-  assert.equal(count('rosaceae'), 4);
+  assert.equal(count('rosaceae'), 10);
   assert.equal(count('dryadoideae'), 0);
   assert.equal(count('rosoideae'), 2);
-  assert.equal(count('amygdaloideae'), 2);
-  assert.equal(count('amygdaleae'), 1);
+  assert.equal(count('amygdaloideae'), 8);
+  assert.equal(count('amygdaleae'), 7);
   assert.equal(count('rubeae'), 2);
   assert.equal(count('maleae'), 1);
   assert.equal(count('malus'), 1);
-  assert.equal(count('prunus'), 1);
+  assert.equal(count('prunus'), 7);
   assert.equal(count('rubus'), 2);
   assert.equal(count('poaceae'), 1);
+  assert.equal(count('cactaceae'), 4);
+  assert.equal(count('grossulariaceae'), 3);
+  assert.equal(count('actinidiaceae'), 3);
+  assert.equal(count('rutaceae'), 2);
+  assert.equal(count('anacardiaceae'), 1);
+  assert.equal(count('myrtaceae'), 1);
+  assert.equal(count('oleaceae'), 2);
+  assert.equal(count('pinaceae'), 1);
+  assert.equal(count('schisandraceae'), 1);
+  assert.equal(count('fabaceae'), 1);
   // A species node shows the number of taxa directly under it.
   assert.equal(countBelow(index, 'prunus-dulcis'), 2);
   assert.equal(countBelow(index, 'actinidia-deliciosa'), 2);
-  assert.equal(countBelow(index, 'rosales'), 5);
+  assert.equal(countBelow(index, 'rosales'), 12);
 });

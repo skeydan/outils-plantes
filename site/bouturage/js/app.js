@@ -5,6 +5,7 @@
 // section lists what the PDF got wrong. Route: #bouturage[/<species>].
 import { lang } from '../../assets/site.js';
 import { routeHref } from '../../assets/route.js';
+import { taxonomyId } from '../../assets/species-links.js';
 import { h, citer } from '../../assets/ui.js';
 import { CUT_TYPES, FACTORS, LAYERS, SPECIES, STEPS, CONFUSIONS, CORRECTIONS } from './data.js';
 import { SOURCES } from './sources.js';
@@ -41,6 +42,7 @@ const STR = {
   seeGerm: { en: 'germination', fr: 'la germination' },
   seeFruits: { en: 'fruit types', fr: 'les types de fruits' },
   seeTaxo: { en: 'the species in taxonomy', fr: 'les espèces en taxonomie' },
+  inTaxo: { en: 'in Taxonomy', fr: 'dans Taxonomie' },
   figures: { en: 'Three drawings to start with', fr: 'Trois dessins pour commencer' },
   figCut: { en: 'A prepared cutting', fr: 'Une bouture préparée' },
   figCutCap: {
@@ -249,6 +251,7 @@ function layerBlock(s) {
 }
 
 function speciesCard(s) {
+  const taxId = taxonomyId('bouturage', s.id);
   return h('details', { class: 'card bt-sp', id: `sp-${s.id}`, 'data-diff': s.difficulty },
     h('summary', { class: 'bt-sp-sum' },
       h('span', { class: 'bt-sp-title' }, sci(s, { author: true }),
@@ -259,7 +262,8 @@ function speciesCard(s) {
       namesLine(s),
       h('p', { class: 'bt-sp-meta' },
         h('strong', { text: L(STR.family) }), ' ', s.family, ' · ',
-        h('strong', { text: L(STR.filter) }), ' ', L(DIFF[s.difficulty])),
+        h('strong', { text: L(STR.filter) }), ' ', L(DIFF[s.difficulty]),
+        taxId ? [' · ', h('a', { class: 'bt-chip bt-sp-tax', href: routeHref('taxonomy', taxId) }, L(STR.inTaxo))] : null),
       cutBlock(s),
       layerBlock(s),
       s.graft ? h('div', { class: 'bt-graft' },

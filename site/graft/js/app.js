@@ -5,6 +5,7 @@
 // on. Plants that are not grafted say so, and how they are propagated.
 import { lang } from '../../assets/site.js';
 import { routeHref } from '../../assets/route.js';
+import { taxonomyId } from '../../assets/species-links.js';
 import { h, citer } from '../../assets/ui.js';
 import { renderTree as drawTree, wireSearch } from '../../assets/tree-ui.js';
 import { pathTo, search } from '../../assets/tree.js';
@@ -86,6 +87,18 @@ const { cite, list } = citer(SOURCES);
 const DEFAULT_ID = 'prunus-amygdalus';
 const S = { id: DEFAULT_ID, open: new Set() };
 const link = (id) => routeHref('graft', id);
+
+/** The taxonomy species for a breeding-tab entry, climbing from a cultivar to
+ *  its species or aggregate; null when that entry has no taxonomy counterpart. */
+function taxonomyFor(id) {
+  let cur = index.byId.get(id);
+  while (cur) {
+    const hit = taxonomyId('seeds', cur.id);
+    if (hit) return hit;
+    cur = cur.parent ? index.byId.get(cur.parent) : null;
+  }
+  return null;
+}
 const valid = (id) => (id && index.byId.has(id) ? id : null);
 
 const srcRefs = (items) => {
@@ -298,6 +311,8 @@ function taxonEntry(n) {
       h('p', { class: 'hint' }, T('Open a rootstock for what it is chosen for. ', 'Ouvrez un porte-greffe pour savoir pourquoi on le choisit. '), h('a', { href: '#criteria', text: T('How to choose', 'Comment choisir') }))) : null,
     inherited && SCIONS[srcId]?.stocks?.length ? h('p', { class: 'small' }, T('Rootstocks: see ', 'Porte-greffes : voir '), h('a', { href: link(groupId(srcId)) }, sciName(index.byId.get(srcId).taxon)), '.') : null,
     h('p', { class: 'small' }, T('Pollination, crosses and seeds: ', 'Fécondation, croisements et graines : '), h('a', { href: routeHref('seeds', t.id), text: T('breeding tab', 'onglet Hybridation') }), '.'),
+    taxonomyFor(t.id) ? h('p', { class: 'small gf-taxlink' }, T('Flower and fruit: ', 'Fleur et fruit : '),
+      h('a', { href: routeHref('taxonomy', taxonomyFor(t.id)) }, T('the species in Taxonomy', 'l’espèce dans Taxonomie')), '.') : null,
     kids.length ? h('div', { class: 'a-rel' }, h('div', {}, h('h3', { text: T(`Below (${kids.length})`, `En dessous (${kids.length})`) }),
       h('div', { class: 'a-chips' }, ...kids.map((k) => h('a', { href: link(k), class: 'a-chip' }, sciName(index.byId.get(k).taxon)))))) : null,
   ];

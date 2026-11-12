@@ -69,6 +69,8 @@ test('the starter species are present under their genus', () => {
     'actinidia-deliciosa': 'actinidia',
     'selenicereus-undatus': 'selenicereus',
     'hippophae-rhamnoides': 'hippophae',
+    'malus-domestica': 'malus',
+    'juglans-regia': 'juglans',
   };
   for (const [sp, gen] of Object.entries(species)) under(sp, gen);
   // Each species sits under family and order too: four levels, five when its
@@ -78,7 +80,8 @@ test('the starter species are present under their genus', () => {
     const path = pathTo(index, sp);
     assert.ok([4, 5, 6].includes(path.length), `${sp} depth ${path.length}`);
     assert.ok(path.includes('rosales') || path.includes('poales') || path.includes('caryophyllales')
-      || path.includes('lamiales') || path.includes('ericales'), `${sp} under an order`);
+      || path.includes('lamiales') || path.includes('ericales') || path.includes('saxifragales')
+      || path.includes('fagales'), `${sp} under an order`);
   }
   for (const sp of ['prunus-dulcis', 'rubus-fruticosus', 'rubus-idaeus']) {
     const path = pathTo(index, sp);
@@ -144,24 +147,28 @@ test('counts below each node match the displayed numbers', () => {
   assert.equal(count('poales'), 1);
   assert.equal(count('caryophyllales'), 4);
   assert.equal(count('lamiales'), 1);
-  assert.equal(count('rosales'), 4);
+  assert.equal(count('rosales'), 5);
   assert.equal(count('ericales'), 1);
   assert.equal(count('saxifragales'), 3);
+  assert.equal(count('fagales'), 1);
+  assert.equal(count('juglandaceae'), 1);
+  assert.equal(count('juglans'), 1);
   assert.equal(count('amaranthaceae'), 2);
   assert.equal(count('amaranthoideae'), 1);
   assert.equal(count('chenopodioideae'), 1);
-  assert.equal(count('rosaceae'), 3);
+  assert.equal(count('rosaceae'), 4);
   assert.equal(count('dryadoideae'), 0);
   assert.equal(count('rosoideae'), 2);
-  assert.equal(count('amygdaloideae'), 1);
+  assert.equal(count('amygdaloideae'), 2);
   assert.equal(count('amygdaleae'), 1);
   assert.equal(count('rubeae'), 2);
-  assert.equal(count('maleae'), 0);
+  assert.equal(count('maleae'), 1);
+  assert.equal(count('malus'), 1);
   assert.equal(count('prunus'), 1);
   assert.equal(count('rubus'), 2);
   assert.equal(count('poaceae'), 1);
   // A species node shows the number of taxa directly under it.
   assert.equal(countBelow(index, 'prunus-dulcis'), 2);
   assert.equal(countBelow(index, 'actinidia-deliciosa'), 2);
-  assert.equal(countBelow(index, 'rosales'), 4);
+  assert.equal(countBelow(index, 'rosales'), 5);
 });

@@ -512,16 +512,35 @@ for (const device of Object.keys(devices)) {
   const { ctx, page } = await newPage('desktop', 'light', 'en');
   await page.goto(`${BASE}/#fruits`, { waitUntil: 'networkidle' });
   await opened(page, 'fruits');
-  // The master table with its five categories, and a section per category.
+  // The master table with its seven categories, and a section per category.
   ok(await page.isVisible('.fv-table'), 'fruits: the category table is drawn');
-  ok((await page.locator('.fv-cat').count()) === 5, 'fruits: one section per category (5)');
-  ok(await page.isVisible('.fv-cat svg'), 'fruits: each category has a drawing');
+  ok((await page.locator('.fv-cat').count()) === 7, 'fruits: one section per category (7)');
+  ok((await page.locator('.fv-cat svg').count()) === 7, 'fruits: each category has a drawing');
+  ok((await page.locator('.fv-terms tbody tr').count()) === 11, 'fruits: the eleven-term vocabulary table');
   await page.evaluate(() => { location.hash = 'fruits/drupe'; });
   await page.waitForFunction(() => document.getElementById('drupe')?.getBoundingClientRect().top < window.innerHeight);
   // Chips from the category to Anatomy and Development.
   ok((await page.getAttribute('#drupe .fv-chip[href^="#anatomy"]', 'href')) === '#anatomy/drupe', 'fruits: chip to the drupe entry');
   ok((await page.getAttribute('#drupe .fv-chip[href^="#development"]', 'href')) === '#development/drupe', 'fruits: chip to the drupe process');
   ok(/Prunus dulcis/.test(await page.textContent('#drupe')), 'fruits: the almond is a drupe example');
+  // The Steinkern correction: the stone is the endocarp, the almond is the seed.
+  ok(await page.isVisible('#steinkern'), 'fruits: the Steinkern note is shown');
+  const steinkern = await page.textContent('#steinkern');
+  ok(/endosperm/i.test(steinkern) && /cotyledon/i.test(steinkern), 'fruits: the note explains endosperm and cotyledons');
+  ok(/not .*endosperm \+ seed/i.test(steinkern), 'fruits: the note rejects “endosperm + seed”');
+  // Pome and nut, with their own corrections and links to Anatomy.
+  await page.evaluate(() => { location.hash = 'fruits/pome'; });
+  await page.waitForFunction(() => document.getElementById('pome')?.getBoundingClientRect().top < window.innerHeight);
+  ok(/Malus domestica/.test(await page.textContent('#pome')), 'fruits: the apple is a pome example');
+  ok(/Samenobst/.test(await page.textContent('#pome')), 'fruits: the pome note names Samenobst');
+  ok((await page.getAttribute('#pome .fv-chip[href^="#anatomy"]', 'href')) === '#anatomy/pome', 'fruits: chip to the pome entry');
+  await page.evaluate(() => { location.hash = 'fruits/nut'; });
+  await page.waitForFunction(() => document.getElementById('nut')?.getBoundingClientRect().top < window.innerHeight);
+  ok(/Juglans regia/.test(await page.textContent('#nut')), 'fruits: the walnut is a nut example');
+  ok(/juglone/i.test(await page.textContent('#nut')), 'fruits: the nut note explains juglone');
+  ok(/cupule/i.test(await page.textContent('#nut')), 'fruits: the nut note explains the cupule');
+  ok((await page.getAttribute('#nut .fv-chip[href^="#anatomy"]', 'href')) === '#anatomy/nut', 'fruits: chip to the nut entry');
+  await page.screenshot({ path: `${SHOTS}/interact-4b-fruits-nut.png`, fullPage: true });
   // Development: a slider and four stage buttons per process; a stage switch rebuilds the box.
   await page.evaluate(() => { location.hash = 'development/drupe'; });
   await opened(page, 'development');

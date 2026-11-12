@@ -9,6 +9,15 @@
 .fv-table tbody th { text-align: left; font-weight: 600; white-space: nowrap; }
 .fv-table td { font-size: .92rem; line-height: 1.45; }
 
+/* The five-column vocabulary table is wide: scroll it on a phone rather than
+   squeezing the German terms into unreadable columns. */
+.fv-table-wrap { margin: 0 0 2rem; overflow-x: auto; overscroll-behavior-x: contain; }
+.fv-terms { min-width: 620px; margin-bottom: 0; }
+.fv-terms tbody th { white-space: normal; }
+.fv-terms td:first-of-type, .fv-terms td:nth-of-type(2) { white-space: normal; }
+.fv-term-src { white-space: nowrap; font-size: .8rem; }
+.fv-terms-lead { max-width: 52rem; margin-bottom: .7rem; }
+
 .fv-cat { margin: 2.5rem 0; padding-top: 1rem; border-top: 1px solid var(--hairline); scroll-margin-top: 5rem; }
 .fv-cat-title { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; margin-bottom: 1rem; }
 .fv-cat-grid { display: grid; grid-template-columns: minmax(320px, 26rem) 1fr; gap: 1.5rem; align-items: start; }
@@ -28,7 +37,16 @@
 .fv-meso { fill: var(--clay); fill-opacity: .55; stroke: var(--clay); stroke-width: 1.4; }
 .fv-stone { fill: var(--silt); stroke: var(--sand); stroke-width: 1.4; }
 .fv-core { fill: var(--sand); fill-opacity: .8; stroke: var(--sand); stroke-width: 1.2; }
+.fv-core-line { fill: var(--surface); fill-opacity: .65; stroke: var(--sand); stroke-width: 1.5; }
+.fv-calyx { fill: var(--green); fill-opacity: .35; stroke: var(--green); stroke-width: 1; }
+.fv-husk { fill: var(--green); fill-opacity: .3; stroke: var(--green); stroke-width: 1.5; }
+.fv-shell { fill: var(--silt); stroke: var(--sand); stroke-width: 2; }
 .fv-thin { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+
+.fv-note { margin: .9rem 0; padding: .7rem .9rem; border-left: 3px solid var(--yellow); background: var(--yellow-wash); border-radius: 0 var(--radius) var(--radius) 0; }
+.fv-note h3 { margin: 0 0 .35rem; font-size: 1rem; }
+.fv-note p { margin: .3rem 0; font-size: .92rem; line-height: 1.5; }
+.fv-note .fv-src { margin-bottom: 0; }
 
 .fv-examples { list-style: none; margin: .6rem 0 0; padding: 0; display: grid; gap: .9rem; }
 .fv-example { border-left: 3px solid var(--cyan-wash); padding: .4rem .8rem; display: flex; flex-direction: column; gap: .2rem; }

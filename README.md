@@ -89,16 +89,36 @@ a cited source, listed at the bottom of each tab.
 - **Taxonomy** (`#taxonomy`, code in `site/taxonomy/`): a small, growing
   classification from order to family (with, where useful, subfamily and
   tribe) to genus to species (starters: bread wheat, buckwheat, quinoa,
-  amaranth, white horehound, almond, blackberry, kiwifruit). For each species
+  amaranth, white horehound, almond, blackberry, kiwifruit, apple, walnut).
+  For each species
   a schematic flower of our own showing the
   sepals, petals, stamens and carpels and their count (∞ for "many", 0 for
   "absent"), the floral formula, symmetry, ovary position, sexuality, leaf
   arrangement (phyllotaxy), inflorescence and fruit; the author of each
   name. Names and placement follow POWO/WCVP and WFO; the Rosaceae
-  subfamilies and tribes follow APweb and Flora of North America, and the
-  Amaranthaceae subfamilies follow Burnett (1835) and APweb; the flower
+  subfamilies and tribes follow APweb and Flora of North America, the
+  Amaranthaceae subfamilies follow Burnett (1835) and APweb, and the
+  Juglandaceae sit in Fagales following APweb; the flower
   facts are per-species from regional floras. Search on Latin, common and German
   names; a link per node (`#taxonomy/prunus-dulcis`).
+- **Fruits** (`#fruits`, code in `site/fruits/`): seven fruit types found
+  among our species — drupe, berry, aggregate (Sammelfrucht), pome, nut,
+  accessory and dry — each with an original section drawing and a link to
+  the matching Anatomy entry and, where one exists, the Development
+  process. An eleven-row German/English/French vocabulary table covers
+  Steinfrucht, Steinkern, Nuss, Beere, Sammelfrucht with its four subtypes
+  (Sammelbeere, Sammelsteinfrucht, Sammelbalgfrucht, Sammelnussfrucht),
+  Apfelfrucht and Samenobst. Two sourced corrections: the almond
+  Steinkern is the lignified endocarp around the seed, not “endosperm +
+  seed” (the edible almond is the seed, mostly two cotyledons, with a thin
+  endosperm remnant), and Samenobst is a food category, not the pome. The
+  walnut entry explains the husk (involucre and calyx), the cupule and
+  juglone allelopathy; the pome entry the hypanthium and core. A link per
+  type (`#fruits/nut`).
+- **Development** (`#development`, code in `site/development/`): from
+  flower to fruit and seed, stage by stage, for the drupe (almond), the
+  berry (kiwifruit) and the aggregate (blackberry), with a slider and one
+  drawing per stage.
 - **Microscope** (`#microscope`, code in `site/microscope/`): a simulated
   student microscope (the objectives, eyepieces and Barlow lens of the
   Bresser Biorit SE 1600x: 4x, 10x, 40x; WF10x, WF20x; 40× to 1600×) on
@@ -215,6 +235,11 @@ npm i && npm run e2e   # browser checks with Playwright, BASE=http://localhost:9
   and consistent flower (parts per whorl, symmetry, ovary, sexuality,
   formula, phyllotaxy, inflorescence, fruit), and search reaches them by
   Latin, common and German name.
+- `tests/fruits.test.mjs`: the seven fruit types are bilingual, sourced and
+  matched to species with the same Anatomy entry, every example is a
+  species of the taxonomy, the eleven German/English/French terms are
+  present and sourced, and the Steinkern, Samenobst, cupule and juglone
+  corrections are checked.
 - `tests/route.test.mjs`: parsing and writing the routes.
 - `tests/microscope.test.mjs`: resolution and useful magnification against
   the MicroscopyU tables and Bresser's 650× example, the screen scale, every
@@ -321,6 +346,8 @@ site/
   bouturage/              cuttings and layering tab (js/data.js, sources.js, draw.js)
   graft/                  grafting tab (js/graft.js data, grafting.js logic, sources.js; reuses seeds/js/taxa.js)
   taxonomy/               taxonomy tab (js/taxa.js, flower.js, sources.js)
+  fruits/                 fruit types, terminology and corrections (js/sources.js, css/fruits.css)
+  development/            flower-to-fruit stages (js/app.js, sources.js)
   microscope/             microscope tab (js/optics.js, specimens.js, structures.js, sources.js; img/)
   */index.html            redirects from the old addresses
 deploy/default.conf.template   nginx config
